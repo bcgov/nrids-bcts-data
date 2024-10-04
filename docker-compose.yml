@@ -1,36 +1,25 @@
-version: '3.8'
-
+version: '3'
 services:
   postgres:
     image: postgres:13
     container_name: postgres_db
-    ports:
-      - "${POSTGRES_PORT}:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data  # Data persistence
-      - ./init-scripts/init_postgres.sql:/docker-entrypoint-initdb.d/init_postgres.sql # Optional initialization script
-    networks:
-      - db-network
+      - ./init/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh 
 
   oracle:
-    image: gvenzl/oracle-xe  # Oracle XE (small footprint, for dev/test purposes)
+    build:
+      context: .
+      dockerfile: Dockerfile.oracle
     container_name: oracle_db
-    ports:
-      - "${ORACLE_PORT}:1521"
     environment:
       ORACLE_PASSWORD: ${ORACLE_PASSWORD}
-      ORACLE_SID: ${ORACLE_SID}
-      ORACLE_PDB: ${ORACLE_PDB}
+    ports:
+      - "1521:1521"
     volumes:
-      - ./data/oracle:/opt/oracle/oradata  # Data persistence
-      - ./init-scripts/init_oracle.sql:/opt/oracle/scripts/setup/init_oracle.sql  # Optional initialization script
-    networks:
-      - db-network
-
-networks:
-  db-network:
-    driver: bridge
+      - ./init-scripts:/init-scripts 
