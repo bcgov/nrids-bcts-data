@@ -1,23 +1,41 @@
 #!/bin/bash
 
-# Wait for the Oracle database to start up (adjust time as needed)
-sleep 60
+# Start the database
+sqlplus / as sysdba <<EOF
+STARTUP;
+EXIT;
+EOF
+
+lsnrctl start
+
+# # Wait for the Oracle database to start up (adjust time as needed)
+# sleep 60
 
 # Create directory for Data Pump import/export
-sqlplus sys/${ORACLE_PASSWORD}@localhost as sysdba <<EOF
-CREATE DIRECTORY dp_dir AS '/u01/app/oracle/oradata/';
+sqlplus / as sysdba <<EOF
+CREATE OR REPLACE DIRECTORY dp_dir AS '/u01/app/oracle/oradata/';
 GRANT READ, WRITE ON DIRECTORY dp_dir TO system;
 EXIT;
 EOF
+
 
 # Call the Python script to handle data export/import
 # python3 /init-scripts/export_import.py
 
 # Optional: Any other Oracle initialization, such as creating users or schemas
-sqlplus sys/${ORACLE_PASSWORD}@localhost as sysdba <<EOF
-CREATE USER myuser IDENTIFIED BY mypassword;
-GRANT ALL PRIVILEGES TO myuser;
-EXIT;
+sqlplus / as sysdba <<EOF
+-- Switch to the container database 
+ALTER SESSION SET CONTAINER = CDB$ROOT;
+-- Create the pluggable database LRM
+CREATE PLUGGABLE DATABASE LRM 
+ADMIN USER lrm_admin IDENTIFIED BY admin_password 
+FILE_NAME_CONVERT = ('/opt/oracle/oradata/XE/pdbseed/', '/opt/oracle/oradata/LRM/');
+-- Open the newly created PDB LRM
+ALTER PLUGGABLE DATABASE LRM OPEN;
+-- Switch to the new PDB LRM
+ALTER SESSION SET CONTAINER = LRM;
+-- Create the LRM FOREST schema
+CREATE USER FOREST IDENTIFIED BY admin_password;
 EOF
 
 # Keep the container running
