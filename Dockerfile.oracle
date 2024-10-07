@@ -1,5 +1,20 @@
 FROM container-registry.oracle.com/database/express:latest
 
+# Switch to root user to install Python packages
+USER root
+
+# Install Python 3 and pip using Oracle's yum package manager
+RUN yum -y install python3 python3-pip && \
+    yum clean all
+
+# Copy requirements.txt into the container
+COPY requirements.txt .
+# Install any additional Python packages 
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Switch back to the Oracle user 
+USER oracle
+
 # Copy initialization scripts into the container
 COPY ./init-scripts ./init-scripts
 

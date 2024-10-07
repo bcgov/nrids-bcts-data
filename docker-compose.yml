@@ -2,6 +2,8 @@ services:
   postgres:
     image: postgres:13
     container_name: postgres_db
+    env_file:
+      - ./.env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -18,6 +20,8 @@ services:
       context: .
       dockerfile: Dockerfile.oracle
     container_name: oracle_db
+    env_file:
+      - ./.env
     environment:
       ORACLE_PASSWORD: ${ORACLE_PASSWORD}
     ports:
