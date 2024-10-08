@@ -1,0 +1,23 @@
+# Use the official Airflow image as the base image
+FROM apache/airflow:2.7.1
+
+# Set the working directory
+WORKDIR /opt/airflow
+
+# Copy requirements.txt if you have any dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entrypoint scripts into the image
+COPY ./init-scripts/entrypoint_webserver.sh /usr/local/bin/entrypoint_webserver.sh
+COPY ./init-scripts/entrypoint_scheduler.sh /usr/local/bin/entrypoint_scheduler.sh
+
+# Make the entrypoint scripts executable
+# RUN chmod +x /usr/local/bin/entrypoint_webserver.sh
+# RUN chmod +x /usr/local/bin/entrypoint_scheduler.sh
+
+# Optionally, you can install other dependencies here
+# RUN pip install <other-dependencies>
+
+# Specify the default command to run (this can be overridden in docker-compose)
+CMD ["bash"]
