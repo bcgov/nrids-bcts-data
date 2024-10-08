@@ -19,6 +19,8 @@ local_service_name='LRM'
 
 remote_dsn = cx_Oracle.makedsn(remote_host, 1521, service_name=remote_service_name)
 remote_conn = cx_Oracle.connect(remote_user, remote_password, dsn=remote_dsn)
+# Set the tracing metadata
+remote_conn.client_identifier = "BCTS-Python"
 
 local_dsn = cx_Oracle.makedsn(local_host, 1521, service_name=local_service_name)
 local_conn = cx_Oracle.connect(local_user, local_password, dsn=local_dsn)

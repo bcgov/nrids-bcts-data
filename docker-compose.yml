@@ -1,17 +1,17 @@
 services:
   postgres:
-    image: postgres:13
-    container_name: postgres_db
+    build: 
+      context: .
+      dockerfile: Dockerfile.postgres
+    container_name: postgres_ods
     env_file:
       - ./.env
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
-      - ./init/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh 
+      - ./init-scripts/init_postgres.sh:/docker-entrypoint-initdb.d/init_postgres.sh
+      # SQL file to create schema and tables
+      - ./init-scripts/init_schema.sql:/docker-entrypoint-initdb.d/init_schema.sql
     profiles:
       - postgres_ods
 
@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.oracle
-    container_name: oracle_db
+    container_name: oracle_lrm
     env_file:
       - ./.env
     environment:
