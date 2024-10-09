@@ -76,6 +76,7 @@ Ensure permission from the data custodian to pull the required data into ODS. Re
 Ensure that the PIA documents are updated
 
 ***Masking of the sensitive attributes***:
+
 Ensure that the sensitive attributes which are not required for reporting are masked before pulling into ODS
 
 ***Update the BCTS DAP Access Tracker***:
@@ -88,11 +89,11 @@ Ensure that DAP proxy user has the permissions to read access the required table
 
 ***Update the DAP Repository***:
 
-Add the Docker image and DDL scripts to the ![nr-dap-ods](https://github.com/bcgov/nr-dap-ods) repository and create a pull request.
+Add the Docker image and DDL scripts to the [nr-dap-ods](https://github.com/bcgov/nr-dap-ods) repository and create a pull request.
 
 ***Update the DAG Repository***:
 
-Add the DAG to the ![nr-airflow](https://github.com/bcgov/nr-airflow) repository and create a pull request.
+Add the DAG to the [nr-airflow](https://github.com/bcgov/nr-airflow) repository and create a pull request.
 
 ***Test in DEV Environment***:
 
