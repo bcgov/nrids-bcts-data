@@ -1,5 +1,4 @@
 #!/bin/bash
-# entrypoint_webserver.sh
 
 # Initialize the Airflow database
 airflow db init

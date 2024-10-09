@@ -20,7 +20,6 @@ The architecture consists of the following components:
 ### Prerequisites
 
 - Docker Desktop installed with Kubernetes enabled.
-- Docker Compose.
 
 ### Setup
 
@@ -29,25 +28,41 @@ The architecture consists of the following components:
 git clone https://github.com/smunthik/nrids-bcts-data
 cd nrids-bcts-data
 
+# Start Docker Desktop
+# Ensure that the K8s cluster in Docker desktop is up and running
+
 # Start the Services: Use the following command to spin up the Oracle database, PostgreSQL database, and Airflow:
 docker-compose up --profile airflow
+
+# Wait for the services to initialize
+
+# Services:
+    Airflow: localhost:8080 usename:admin, password: admin
+    Postgres: localhost:5432 username: ods_proxy_user_lrm, password: ods_proxy_user_lrm, database: ods
+    Oracle: localhost:1521 username: FOREST password: admin_password database: LRM
+
+# Run the `test_dag`
 ```
 
 During the initialization of the databases, a Python script will pull the required tables from LRMDBQ06 into the local Oracle database.
+Currently, the connection from docker to LRM Test database is not working because of challenges in whitelisting the application on the database side due to dynamic container names. Hence, as a temporary workaround, the Python script is run on the host if db initialization is required. 
 
-### Development Workflow
+### Steps to add a new ETL task
 1. **Create DAGs**:
 
     Define the ETL tasks in DAGs.
     Use the Kubernetes Pod Operator to run tasks on the local Kubernetes cluster.
 
 2. **Generate DDL**:
-
-    Use DDL scripts generated from the local source database, converting them to PostgreSQL syntax to create the required target tables in the ODS.
+    Initialize the local Oracle database with the required source tables by running the python script, init-scripts\init_oracle_import.py
+    Generate DDL scripts from local FOREST schema. Convert to PostgreSQL syntax.
+    Use DDL scripts generated to create the required target tables in the local ODS.
 
 3. **Trigger DAGs**:
 
+    Ensure K8s cluster is running on Docker desktop
     Trigger the DAGs to replicate the data from Oracle to ODS.
+    Add DAGS or downstream tasks to implement transformations if any.
 
 4. **Connect to Power BI**:
 
@@ -55,23 +70,33 @@ During the initialization of the databases, a Python script will pull the requir
 
 ### Test and Deployment Process
 
-**Deployment to Repositories**:
+***Permission from the data custodian and PIA***:
 
-***Update the DAP Repository***:
+Ensure permission from the data custodian to pull the required data into ODS. Record the permission. 
+Ensure that the PIA documents are updated
 
-If everything works as expected, add the Docker image and DDL scripts to the nr-dap-ods repository and create a pull request.
-
-***Update the DAG Repository***:
-
-Add the DAG to the nr-airflow repository and create a pull request.
-
-***Test in DEV Environment***:
-
-Conduct thorough tests in the DEV environment.
+***Masking of the sensitive attributes***:
+Ensure that the sensitive attributes which are not required for reporting are masked before pulling into ODS
 
 ***Update the BCTS DAP Access Tracker***:
 
 Ensure that all changes are reflected in the BCTS DAP access tracker.
+
+***Create SD ticket to grant access to the required tables to DAP proxy user***:
+
+Ensure that DAP proxy user has the permissions to read access the required tables from the source system.
+
+***Update the DAP Repository***:
+
+Add the Docker image and DDL scripts to the ![nr-dap-ods](https://github.com/bcgov/nr-dap-ods) repository and create a pull request.
+
+***Update the DAG Repository***:
+
+Add the DAG to the ![nr-airflow](https://github.com/bcgov/nr-airflow) repository and create a pull request.
+
+***Test in DEV Environment***:
+
+Conduct thorough tests in the DEV environment.
 
 ### Production Deployment:
 

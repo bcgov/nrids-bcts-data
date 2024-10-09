@@ -1,3 +1,5 @@
+version: '3.9'  # Specify version as needed
+
 services:
   postgres:
     build: 
@@ -16,6 +18,7 @@ services:
       - ./init-scripts/init_postgres_schema.sql:/docker-entrypoint-initdb.d/init_postgres_schema.sql
       - postgres_data:/var/lib/postgresql/data  # Volume for data persistence
     profiles:
+      - airflow  # Include in airflow profile
       - postgres_ods
     networks:
       - ods_network  # Use the shared network
@@ -34,6 +37,7 @@ services:
     volumes:
       - ./init-scripts:/init-scripts 
     profiles:
+      - airflow  # Include in airflow profile
       - oracle_lrm
     networks:
       - ods_network  # Use the shared network
@@ -62,8 +66,10 @@ services:
       - ~/.kube/config:/home/airflow/.kube/config
     depends_on:
       - postgres
-      - oracle
+      - oracle  # Ensure both services are running
     entrypoint: /usr/local/bin/entrypoint_webserver.sh  # Use the webserver entry point
+    profiles:
+      - airflow  # Include in airflow profile
     networks:
       - ods_network  # Use the shared network
 
@@ -85,14 +91,14 @@ services:
       - ./logs:/opt/airflow/logs  # Mount for logs
       - ./plugins:/opt/airflow/plugins  # Mount for plugins
       - ~/.kube/config:/home/airflow/.kube/config
-
     entrypoint: /usr/local/bin/entrypoint_scheduler.sh  # Use the scheduler entry point
     depends_on:
       - postgres
-      - oracle
+      - oracle  # Ensure both services are running
+    profiles:
+      - airflow  # Include in airflow profile
     networks:
       - ods_network  # Use the shared network
-
 
 volumes:
   postgres_data:  # Named volume for Postgres
@@ -100,6 +106,3 @@ volumes:
 networks:
   ods_network:  # Define the shared network
     driver: bridge
-
-
-

@@ -1,15 +1,37 @@
 #!/bin/bash
-
-# Start the database
+sleep 10
+# Start Oracle instance
 sqlplus / as sysdba <<EOF
 STARTUP;
 EXIT;
 EOF
 
+sleep 10
+
+# Start the Oracle listener
+echo "Starting Oracle listener..."
 lsnrctl start
 
-# # Wait for the Oracle database to start up (adjust time as needed)
-# sleep 60
+# Function to check Oracle listener status
+check_oracle_status() {
+    lsnrctl status | grep "READY" >/dev/null 2>&1
+    return $?
+}
+
+while true; do
+    echo "Checking Oracle listener status..."
+    
+    if check_oracle_status; then
+        echo "Oracle listener is up and running!"
+        break
+    else
+        echo "Oracle listener is not ready yet. Waiting 5 seconds..."
+    fi
+
+    sleep 5
+done
+
+
 
 # Create directory for Data Pump import/export
 sqlplus / as sysdba <<EOF
@@ -56,3 +78,6 @@ EOF
 
 # Keep the container running
 tail -f /dev/null
+
+
+

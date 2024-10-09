@@ -3,8 +3,10 @@ import os
 import sys
 
 # List of tables to initialize in the local Oracle LRm db
-tables = ['DIVISION']  # Fetch first 100 rows
-owner = 'FOREST'
+tables = ['DIVISION','BLOCK_ALLOCATION','MANAGEMENT_UNIT','LICENCE','BLOCK_ADMIN_ZONE','DIVISION_CODE_LOOKUP','CODE_LOOKUP','TENURE_TYPE','CUT_PERMIT','MARK','CUT_BLOCK','ACTIVITY_CLASS','ACTIVITY_TYPE','ACTIVITY']
+owner = 'FOREST' 
+# Fetch first N rows
+N = 1000
 
 # Access the environment variables
 remote_user = os.getenv('lrmq06_username')
@@ -31,14 +33,28 @@ def create_local_table(table_name, owner, columns):
         # Construct column definitions from the source types
         column_defs = ', '.join([f"{col['name']} {col['type'].split('DB_TYPE_')[1]}"  if not col['type'].startswith('VARCHAR2') else f"{col['name']} {col['type']}" for col in columns])
         create_table_sql = f"CREATE TABLE {owner}.{table_name} ({column_defs})"
+        drop_table_sql = f"""
+                            BEGIN
+                                EXECUTE IMMEDIATE 'DROP TABLE {owner}.{table_name}';
+                            EXCEPTION
+                                WHEN OTHERS THEN
+                                    IF SQLCODE != -942 THEN  -- If the error is not "table does not exist"
+                                        RAISE;  -- Raise the error for any other exceptions
+                                    END IF;
+                            END;
+                        """
+
         try:
+            # Drop the table if it exists
+            # TODO:Gives table locked error if the table already exists but empty.
+            cursor.execute(drop_table_sql)
+            
+            # Create the new table
             cursor.execute(create_table_sql)
             local_conn.commit()
-            print(f"Table {owner}.{table_name} created successfully.")
         except cx_Oracle.DatabaseError as e:
+            local_conn.rollback()  # Rollback on error to maintain database integrity
             print(f"Error creating table {table_name}: {e}")
-            remote_conn.close()
-            local_conn.close()
             sys.exit(1)
             
 def ingest_data(table_name, owner, columns, data):
@@ -57,7 +73,7 @@ def fetch_remote_data(table_name, owner_name):
         columns = [{'name': desc[0], 'type': f"VARCHAR2({desc[2]})" if desc[1].name == 'DB_TYPE_VARCHAR' else desc[1].name} for desc in cursor.description]  # Get data type names
         
         # Now fetch actual data
-        cursor.execute(f"SELECT * FROM {owner_name}.{table_name} WHERE ROWNUM <= 100")
+        cursor.execute(f"SELECT * FROM {owner_name}.{table_name} WHERE ROWNUM <= {N}")
         data = cursor.fetchall()
         return columns, data
 
