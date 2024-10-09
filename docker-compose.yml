@@ -60,6 +60,7 @@ services:
       - ./dags:/opt/airflow/dags  # Mount for your DAGs
       - ./logs:/opt/airflow/logs  # Mount for logs
       - ./plugins:/opt/airflow/plugins  # Mount for plugins
+      - ~/.kube/config:/home/airflow/.kube/config
     depends_on:
       - postgres
     entrypoint: /usr/local/bin/entrypoint_webserver.sh  # Use the webserver entry point
@@ -83,6 +84,7 @@ services:
       - ./dags:/opt/airflow/dags  # Mount for your DAGs
       - ./logs:/opt/airflow/logs  # Mount for logs
       - ./plugins:/opt/airflow/plugins  # Mount for plugins
+      - ~/.kube/config:/home/airflow/.kube/config
     depends_on:
       - postgres
     entrypoint: /usr/local/bin/entrypoint_scheduler.sh  # Use the scheduler entry point

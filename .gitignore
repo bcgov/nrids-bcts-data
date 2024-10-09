@@ -1,3 +1,8 @@
 .env
+# Ignore logs
 ./logs
 logs/*
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+
