@@ -50,9 +50,9 @@ ALTER USER FOREST DEFAULT TABLESPACE lrm_tablespace;
 EOF
 
 # Call the Python script to handle data export/import
-echo Initializing FOREST schema. Fetching data from LRM Test source...
-python3 /init-scripts/init_oracle_import.py
-echo FOREST schema init completed!
+# echo Initializing FOREST schema. Fetching data from LRM Test source...
+# python3 /init-scripts/init_oracle_import.py
+# echo FOREST schema init completed!
 
 # Keep the container running
 tail -f /dev/null

@@ -17,7 +17,6 @@ services:
       - postgres_data:/var/lib/postgresql/data  # Volume for data persistence
     profiles:
       - postgres_ods
-      - airflow
     networks:
       - ods_network  # Use the shared network
 
@@ -63,6 +62,7 @@ services:
       - ~/.kube/config:/home/airflow/.kube/config
     depends_on:
       - postgres
+      - oracle
     entrypoint: /usr/local/bin/entrypoint_webserver.sh  # Use the webserver entry point
     networks:
       - ods_network  # Use the shared network
@@ -85,9 +85,11 @@ services:
       - ./logs:/opt/airflow/logs  # Mount for logs
       - ./plugins:/opt/airflow/plugins  # Mount for plugins
       - ~/.kube/config:/home/airflow/.kube/config
+
+    entrypoint: /usr/local/bin/entrypoint_scheduler.sh  # Use the scheduler entry point
     depends_on:
       - postgres
-    entrypoint: /usr/local/bin/entrypoint_scheduler.sh  # Use the scheduler entry point
+      - oracle
     networks:
       - ods_network  # Use the shared network
 
