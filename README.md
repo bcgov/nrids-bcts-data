@@ -32,7 +32,7 @@ cd nrids-bcts-data
 # Ensure that the K8s cluster in Docker desktop is up and running
 
 # Start the Services: Use the following command to spin up the Oracle database, PostgreSQL database, and Airflow:
-docker-compose up --profile airflow
+docker-compose --profile airflow up
 
 # Wait for the services to initialize
 
