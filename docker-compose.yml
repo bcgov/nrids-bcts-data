@@ -21,7 +21,8 @@ services:
       - airflow  # Include in airflow profile
       - postgres_ods
     networks:
-      - ods_network  # Use the shared network
+      ods_network:
+        ipv4_address: 172.28.0.10  # Specify a static IP address
 
   oracle:
     build:
@@ -40,7 +41,8 @@ services:
       - airflow  # Include in airflow profile
       - oracle_lrm
     networks:
-      - ods_network  # Use the shared network
+      ods_network:
+        ipv4_address: 172.28.0.11  # Static IP for Oracle
 
   airflow-webserver:
     build:
@@ -104,5 +106,8 @@ volumes:
   postgres_data:  # Named volume for Postgres
 
 networks:
-  ods_network:  # Define the shared network
+  ods_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16  # Define the subnet for the network

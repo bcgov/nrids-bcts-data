@@ -6,4 +6,4 @@ logs/*
 __pycache__/
 *.pyc
 
-K8s_secrets/
+
