@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS FOREST.division;
 CREATE TABLE FOREST.division (
     divi_div_nbr NUMERIC(2) NOT NULL,
     divi_country_code VARCHAR(40) NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE FOREST.division (
     PRIMARY KEY (divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.block_allocation;
 CREATE TABLE FOREST.block_allocation (
     cutb_seq_nbr NUMERIC(15) NOT NULL,
     blal_seq_nbr NUMERIC(15) NOT NULL,
@@ -63,6 +65,7 @@ CREATE TABLE FOREST.block_allocation (
     PRIMARY KEY (blal_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.management_unit;
 CREATE TABLE FOREST.management_unit (
     manu_seq_nbr NUMERIC(15) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -90,6 +93,7 @@ CREATE TABLE FOREST.management_unit (
     PRIMARY KEY (manu_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.licence;
 CREATE TABLE FOREST.licence (
     licn_seq_nbr NUMERIC(15) NOT NULL,
     licn_licence_id VARCHAR(15) NOT NULL,
@@ -135,6 +139,7 @@ CREATE TABLE FOREST.licence (
     PRIMARY KEY (licn_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.block_admin_zone;
 CREATE TABLE FOREST.block_admin_zone (
     blaz_admin_zone_id VARCHAR(40) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -149,6 +154,7 @@ CREATE TABLE FOREST.block_admin_zone (
     PRIMARY KEY (blaz_admin_zone_id, divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.division_code_lookup;
 CREATE TABLE FOREST.division_code_lookup (
     colu_lookup_type VARCHAR(4) NOT NULL,
     colu_lookup_id VARCHAR(120) NOT NULL,
@@ -162,6 +168,7 @@ CREATE TABLE FOREST.division_code_lookup (
     PRIMARY KEY (colu_lookup_type, colu_lookup_id, divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.code_lookup;
 CREATE TABLE FOREST.code_lookup (
     colu_lookup_type VARCHAR(4) NOT NULL,
     colu_lookup_id VARCHAR(30) NOT NULL,
@@ -180,6 +187,7 @@ CREATE TABLE FOREST.code_lookup (
     PRIMARY KEY (colu_lookup_type, colu_lookup_id)
 );
 
+DROP TABLE IF EXISTS FOREST.tenure_type;
 CREATE TABLE FOREST.tenure_type (
     tent_seq_nbr NUMERIC(15) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -196,6 +204,7 @@ CREATE TABLE FOREST.tenure_type (
     PRIMARY KEY (tent_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.cut_permit;
 CREATE TABLE FOREST.cut_permit (
     perm_seq_nbr NUMERIC(15) NOT NULL,
     regn_region_id VARCHAR(10) NULL,
@@ -267,6 +276,7 @@ CREATE TABLE FOREST.cut_permit (
     PRIMARY KEY (perm_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.mark;
 CREATE TABLE FOREST.mark (
     mark_seq_nbr NUMERIC(15) NOT NULL,
     mark_mark_id VARCHAR(15) NULL,
@@ -288,6 +298,7 @@ CREATE TABLE FOREST.mark (
     PRIMARY KEY (mark_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.cut_block;
 CREATE TABLE FOREST.cut_block (
     cutb_seq_nbr NUMERIC(15) NOT NULL,
     cutb_block_id VARCHAR(20) NOT NULL,
@@ -420,6 +431,7 @@ CREATE TABLE FOREST.cut_block (
     PRIMARY KEY (cutb_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.activity_class;
 CREATE TABLE FOREST.activity_class (
     accl_seq_nbr NUMERIC(15) NOT NULL,
     accl_description VARCHAR(40) NULL,
@@ -436,6 +448,7 @@ CREATE TABLE FOREST.activity_class (
     PRIMARY KEY (accl_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.activity_type;
 CREATE TABLE FOREST.activity_type (
     actt_seq_nbr NUMERIC(15) NOT NULL,
     accl_seq_nbr NUMERIC(15) NOT NULL,
@@ -467,6 +480,7 @@ CREATE TABLE FOREST.activity_type (
     PRIMARY KEY (actt_seq_nbr)
 );
 
+DROP TABLE IF EXISTS FOREST.activity;
 CREATE TABLE FOREST.activity (
     acti_seq_nbr NUMERIC(15) NOT NULL,
     cutb_seq_nbr NUMERIC(15) NULL,
