@@ -13,14 +13,14 @@ GRANT USAGE ON SCHEMA public TO ods_proxy_user_lrm;
 \c ods ods_proxy_user_lrm
 
 -- Create schema
-CREATE SCHEMA IF NOT EXISTS FOREST;
+CREATE SCHEMA IF NOT EXISTS lrm_replication;
 
 
 -- Metadata table for ODS
 
-DROP TABLE IF EXISTS FOREST.cdc_master_table_list;
+DROP TABLE IF EXISTS lrm_replication.cdc_master_table_list;
 
-CREATE TABLE FOREST.cdc_master_table_list (
+CREATE TABLE lrm_replication.cdc_master_table_list (
     application_name VARCHAR(255) NOT NULL,  -- Name of the application
     source_schema_name VARCHAR(255) NOT NULL,  -- Source schema name
     source_table_name VARCHAR(255) NOT NULL,  -- Source table name
@@ -37,9 +37,9 @@ CREATE TABLE FOREST.cdc_master_table_list (
     PRIMARY KEY (application_name, source_schema_name, source_table_name, target_schema_name, target_table_name)
 );
 
-DROP TABLE IF EXISTS FOREST.audit_batch_status;
+DROP TABLE IF EXISTS lrm_replication.audit_batch_status;
 
-CREATE TABLE FOREST.audit_batch_status (
+CREATE TABLE lrm_replication.audit_batch_status (
     table_name VARCHAR(255) NOT NULL,       -- Name of the table
     application_name VARCHAR(255) NOT NULL, -- Name of the application
     operation_type VARCHAR(50) NOT NULL,    -- Type of operation (e.g., 'replication')
@@ -49,7 +49,7 @@ CREATE TABLE FOREST.audit_batch_status (
 );
 
 
--- Initialize FOREST.cdc_master_table_list
+-- Initialize lrm_replication.cdc_master_table_list
 DO $$
 DECLARE
     tables text[] := ARRAY['DIVISION','BLOCK_ALLOCATION','MANAGEMENT_UNIT','LICENCE','BLOCK_ADMIN_ZONE','DIVISION_CODE_LOOKUP','CODE_LOOKUP','TENURE_TYPE','CUT_PERMIT','MARK','CUT_BLOCK','ACTIVITY_CLASS','ACTIVITY_TYPE','ACTIVITY'];  
@@ -59,7 +59,7 @@ BEGIN
     FOREACH table_name IN ARRAY tables
     LOOP
         -- Insert into the table for each table in the list
-        INSERT INTO forest.cdc_master_table_list (
+        INSERT INTO lrm_replication.cdc_master_table_list (
             application_name,
             source_schema_name,
             source_table_name,
@@ -74,9 +74,9 @@ BEGIN
             customsql_query)
         VALUES (
             'bcts_replication',
-            'forest',
+            'lrm_replication',
             table_name,               -- Source table name
-            'forest',
+            'lrm_replication',
             table_name,               -- Target table name
             'Y',
             'N',

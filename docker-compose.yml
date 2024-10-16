@@ -21,7 +21,6 @@ services:
     profiles:
       - airflow  # Include in airflow profile
       - postgres_ods
-    command: ["postgres", "-c", "max_connections=200"]
     networks:
       ods_network:
         ipv4_address: 172.28.0.10  # Specify a static IP address
