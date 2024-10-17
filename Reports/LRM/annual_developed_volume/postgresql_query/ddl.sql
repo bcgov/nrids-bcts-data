@@ -1,5 +1,26 @@
 CREATE SCHEMA IF NOT EXISTS lrm_replication;
 
+-- Create lrm_replication.cdc_master_table_list
+DROP TABLE IF EXISTS lrm_replication.cdc_master_table_list;
+
+CREATE TABLE lrm_replication.cdc_master_table_list (
+    application_name VARCHAR(255) NOT NULL,  -- Name of the application
+    source_schema_name VARCHAR(255) NOT NULL,  -- Source schema name
+    source_table_name VARCHAR(255) NOT NULL,  -- Source table name
+    target_schema_name VARCHAR(255) NOT NULL,  -- Target schema name
+    target_table_name VARCHAR(255) NOT NULL,  -- Target table name
+    truncate_flag BOOLEAN DEFAULT FALSE,  -- Indicates if the target table should be truncated
+    cdc_flag BOOLEAN DEFAULT FALSE,  -- Indicates if CDC (Change Data Capture) is enabled
+    full_inc_flag BOOLEAN DEFAULT FALSE,  -- Full or Incremental data load flag
+    cdc_column VARCHAR(255),  -- Column used for CDC tracking
+    replication_order INT,  -- Order of replication
+    customsql_ind BOOLEAN DEFAULT FALSE,  -- Indicates if custom SQL is used
+    customsql_query TEXT,  -- Custom SQL query
+    active_ind CHAR(1) NOT NULL DEFAULT 'Y',  -- Active indicator, 'Y' or 'N'
+    PRIMARY KEY (application_name, source_schema_name, source_table_name, target_schema_name, target_table_name)
+);
+
+
 -- Initialize lrm_replication.cdc_master_table_list
 DO $$
 DECLARE
