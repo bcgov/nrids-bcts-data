@@ -1,3 +1,59 @@
+CREATE SCHEMA IF NOT EXISTS lrm_replication;
+
+-- Initialize lrm_replication.cdc_master_table_list
+DO $$
+DECLARE
+    tables text[] := ARRAY['DIVISION','BLOCK_ALLOCATION','MANAGEMENT_UNIT','LICENCE','BLOCK_ADMIN_ZONE','DIVISION_CODE_LOOKUP','CODE_LOOKUP','TENURE_TYPE','CUT_PERMIT','MARK','CUT_BLOCK','ACTIVITY_CLASS','ACTIVITY_TYPE','ACTIVITY'];  
+    table_name text;
+BEGIN
+    -- Loop through the list of table names
+    FOREACH table_name IN ARRAY tables
+    LOOP
+        -- Insert into the table for each table in the list
+        INSERT INTO lrm_replication.cdc_master_table_list (
+            application_name,
+            source_schema_name,
+            source_table_name,
+            target_schema_name,
+            target_table_name,
+            truncate_flag,
+            cdc_flag,
+            full_inc_flag,
+            cdc_column,
+            replication_order,
+            customsql_ind,
+            customsql_query)
+        VALUES (
+            'bcts_replication',
+            'forest',
+            table_name,               -- Source table name
+            'lrm_replication',
+            table_name,               -- Target table name
+            'Y',
+            'N',
+            'N',
+            '',
+            1,
+            'N',
+            ''
+        );
+    END LOOP;
+END $$;
+
+-- Create audit_batch_status table
+DROP TABLE IF EXISTS lrm_replication.audit_batch_status;
+
+CREATE TABLE lrm_replication.audit_batch_status (
+    table_name VARCHAR(255) NOT NULL,       -- Name of the table
+    application_name VARCHAR(255) NOT NULL, -- Name of the application
+    operation_type VARCHAR(50) NOT NULL,    -- Type of operation (e.g., 'replication')
+    status VARCHAR(50) NOT NULL,            -- Status of the operation
+    batch_run_date DATE NOT NULL DEFAULT CURRENT_DATE, -- Date of the operation
+    PRIMARY KEY (table_name, application_name, batch_run_date)
+);
+
+
+-- Create target tables
 CREATE TABLE lrm_replication.division (
     divi_div_nbr NUMERIC(2) NOT NULL,
     divi_country_code VARCHAR(40) NOT NULL,

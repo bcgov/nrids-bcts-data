@@ -74,7 +74,7 @@ BEGIN
             customsql_query)
         VALUES (
             'bcts_replication',
-            'lrm_replication',
+            'forest',
             table_name,               -- Source table name
             'lrm_replication',
             table_name,               -- Target table name

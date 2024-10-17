@@ -7,6 +7,7 @@ from datetime import timedelta
 import os
 
 LOB = 'lrm'
+# For local development environment only.
 ENV = os.getenv("AIRFLOW_ENV")
 
 ods_secrets = Secret("env", None, f"{LOB}-ods-database")
@@ -18,7 +19,7 @@ if ENV == 'LOCAL':
         "email": ["NRM.DataFoundations@gov.bc.ca"],
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
-        "email_on_failure": False,
+        "email_on_failure": False, # No alerts in local environment
         "email_on_retry": False,
     }
 else:
@@ -45,6 +46,7 @@ with DAG(
         run_replication = KubernetesPodOperator(
             task_id="run_replication",
             image="nrids-bcts-data-ora2pg:main",
+            # Following configs are different in the local development environment
             # image_pull_policy="Always",
             # in_cluster=True,
             # service_account_name="airflow-admin",
