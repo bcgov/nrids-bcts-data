@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS ods_data_management.audit_batch_status
     etl_layer character varying(100) COLLATE pg_catalog."default",
     object_execution_status character varying(100) COLLATE pg_catalog."default",
     batch_run_date character varying(100) COLLATE pg_catalog."default"
-)
+);
+
 COMMENT ON TABLE ods_data_management.audit_batch_status IS 'Table to track the execution status of ELT process by batch.';
 COMMENT ON COLUMN ods_data_management.audit_batch_status.object_name IS 'Name of the object, usually a table or view, being processed in batch.';
 COMMENT ON COLUMN ods_data_management.audit_batch_status.application_name IS 'Name of the application associated with the object. This value should match the IRS/CMDB acronym.';
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS ods_data_management.cdc_master_table_list
     customsql_ind character varying(1) COLLATE pg_catalog."default",
     customsql_query character varying(64000) COLLATE pg_catalog."default",
     replication_source character varying(100) COLLATE pg_catalog."default"
-)
+);
 
 COMMENT ON TABLE ods_data_management.cdc_master_table_list IS 'Table providing an overview/summary of all replication processes, change data capture (CDC), and custom SQL.';
 COMMENT ON COLUMN ods_data_management.cdc_master_table_list.business IS 'Business domain associated with the data source.'; -- Note: Not in use currently.
