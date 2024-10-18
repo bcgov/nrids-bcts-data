@@ -15,6 +15,7 @@ GRANT USAGE ON SCHEMA public TO ods_proxy_user_lrm;
 -- Create schema
 CREATE SCHEMA IF NOT EXISTS lrm_replication;
 CREATE SCHEMA IF NOT EXISTS ods_data_management;
+CREATE SCHEMA IF NOT EXISTS bcts_reporting;
 
 
 -- Metadata table for ODS
