@@ -1,124 +1,111 @@
-select distinct
-    case
-        when
-            D.DIVI_SHORT_CODE in ('TBA', 'TPL', 'TPG', 'TSK', 'TSN', 'TCC', 'TKA', 'TKO', 'TOC')
-        then
-            'Interior'
-        when
-            D.DIVI_SHORT_CODE in ('TCH', 'TST', 'TSG')
-        then
-            'Coast'
-        end as BUSINESS_AREA_REGION_CATEGORY,
-    case
-        when
-            D.DIVI_SHORT_CODE in ('TBA', 'TPL', 'TPG', 'TSK', 'TSN')
-        then
-            'North Interior'
-        when
-            D.DIVI_SHORT_CODE in ('TCC', 'TKA', 'TKO', 'TOC')
-        then
-            'South Interior'
-        when
-            D.DIVI_SHORT_CODE in ('TCH', 'TST', 'TSG')
-        then
-            'Coast'
-        end as BUSINESS_AREA_REGION,
-    decode(
-        D.DIVI_DIVISION_NAME,
-        'Seaward',
-        'Seaward-Tlasta',
-        D.DIVI_DIVISION_NAME
-    ) || ' (' || D.DIVI_SHORT_CODE || ')' AS BUSINESS_AREA,
-    D.DIVI_SHORT_CODE as BUSINESS_AREA_CODE,
-    cl.COLU_LOOKUP_DESC AS "Field Team",
-    mu.MANU_ID,
-    l.LICN_LICENCE_ID AS LICENCE, tn.TENT_TENURE_ID AS "File Type",
-    l.BLAZ_ADMIN_ZONE_ID AS Agreement_Type_Code,
-    z.BLAZ_ADMIN_ZONE_DESC AS Agreement_Type,
-    cp.PERM_PERMIT_ID AS PERMIT,
-    m.MARK_MARK_ID AS MARK,
-    b.CUTB_BLOCK_ID AS BLOCK,
-    b.CUTB_SYSTEM_ID AS UBI,
-    b.cutb_block_state AS block_state,
-    ba.BLAL_CRUISE_M3_VOL AS cruise_volume,
-    ba.BLAL_RW_VOL AS rw_volume,
-    actb.RC_Done,
-    Extract(Year From Add_months(actb.RC_Done, 9)) as RC_Done_Fiscal,
-    actb.DR_Done,
-    Extract(Year From Add_months(actb.DR_Done, 9)) as DR_Done_Fiscal,
-    actb.DVS_DONE,
-    Extract(Year From Add_months(actb.DVS_DONE, 9)) as DVS_Done_Fiscal,
-    actb.DVC_DONE,
-    Extract(Year From Add_months(actb.DVC_DONE, 9)) as DVC_Done_Fiscal,
-    b.CUTB_SEQ_NBR
-FROM
-    FOREST.DIVISION d,
-    FOREST.BLOCK_ALLOCATION ba,
-    FOREST.MANAGEMENT_UNIT mu,
-    FOREST.LICENCE l,
-    FOREST.BLOCK_ADMIN_ZONE z,
-    FOREST.DIVISION_CODE_LOOKUP dcl,
-    FOREST.CODE_LOOKUP cl,
-    FOREST.TENURE_TYPE tn,
-    FOREST.CUT_PERMIT cp,
-    FOREST.MARK m,
-    FOREST.CUT_BLOCK b,
-    (
-        SELECT *
-        FROM
-            (
-                SELECT
+WITH annual_developed_volume AS
+(
+    SELECT DISTINCT
+        CASE
+            WHEN d.divi_short_code IN ( 'TBA', 'TPL', 'TPG', 'TSK', 'TSN',
+                                        'TCC', 'TKA', 'TKO', 'TOC' ) THEN
+                'Interior'
+            WHEN d.divi_short_code IN ( 'TCH', 'TST', 'TSG' ) THEN
+                'Coast'
+        END                                             AS business_area_region_category,
+        CASE
+            WHEN d.divi_short_code IN ( 'TBA', 'TPL', 'TPG', 'TSK', 'TSN' ) THEN
+                'North Interior'
+            WHEN d.divi_short_code IN ( 'TCC', 'TKA', 'TKO', 'TOC' ) THEN
+                'South Interior'
+            WHEN d.divi_short_code IN ( 'TCH', 'TST', 'TSG' ) THEN
+                'Coast'
+        END                                             AS business_area_region,
+        CASE WHEN d.divi_division_name = 'Seaward' THEN 'Seaward-Tlasta' ELSE d.divi_division_name END
+        || ' ('
+        || d.divi_short_code
+        || ')'                                          AS business_area,
+        d.divi_short_code                               AS business_area_code,
+        cl.colu_lookup_desc                             AS "Field Team",
+        mu.manu_id,
+        l.licn_licence_id                               AS licence,
+        tn.tent_tenure_id                               AS "File Type",
+        l.blaz_admin_zone_id                            AS agreement_type_code,
+        z.blaz_admin_zone_desc                          AS agreement_type,
+        cp.perm_permit_id                               AS permit,
+        m.mark_mark_id                                  AS mark,
+        b.cutb_block_id                                 AS block,
+        b.cutb_system_id                                AS ubi,
+        b.cutb_block_state                              AS block_state,
+        ba.blal_cruise_m3_vol                           AS cruise_volume,
+        ba.blal_rw_vol                                  AS rw_volume,
+        actb.rc_done,
+        EXTRACT(YEAR FROM (actb.rc_done + INTERVAL '9 months'))  AS rc_done_fiscal,
+        actb.dr_done,
+        EXTRACT(YEAR FROM (actb.dr_done + INTERVAL '9 months'))  AS dr_done_fiscal,
+        actb.dvs_done,
+        EXTRACT(YEAR FROM (actb.dvs_done + INTERVAL '9 months')) AS dvs_done_fiscal,
+        actb.dvc_done,
+        EXTRACT(YEAR FROM (actb.dvc_done + INTERVAL '9 months')) AS dvc_done_fiscal,
+        b.cutb_seq_nbr
+    FROM
+        lrm_replication.division             d
+        INNER JOIN lrm_replication.block_allocation     ba
+            ON d.divi_div_nbr = ba.divi_div_nbr
+        INNER JOIN lrm_replication.management_unit      mu
+            ON ba.manu_seq_nbr = mu.manu_seq_nbr
+        INNER JOIN lrm_replication.licence              l
+            ON ba.licn_seq_nbr = l.licn_seq_nbr
+        LEFT OUTER JOIN lrm_replication.block_admin_zone     z
+            ON l.divi_div_nbr = z.divi_div_nbr 
+            AND l.blaz_admin_zone_id = z.blaz_admin_zone_id 
+            AND ba.licn_seq_nbr = l.licn_seq_nbr
+            AND l.divi_div_nbr = z.divi_div_nbr 
+            AND l.blaz_admin_zone_id = z.blaz_admin_zone_id 
+        LEFT OUTER JOIN lrm_replication.division_code_lookup dcl
+            ON l.licn_field_team_id = dcl.colu_lookup_id 
+            AND l.divi_div_nbr = dcl.divi_div_nbr 
+        LEFT OUTER JOIN lrm_replication.code_lookup          cl
+            ON  dcl.colu_lookup_type = cl.colu_lookup_type 
+            AND dcl.colu_lookup_id = cl.colu_lookup_id 
+        LEFT JOIN lrm_replication.tenure_type tn
+            ON l.tent_seq_nbr = tn.tent_seq_nbr
+        LEFT OUTER JOIN lrm_replication.cut_permit           cp
+            ON ba.perm_seq_nbr = cp.perm_seq_nbr 
+        LEFT JOIN lrm_replication.mark                 m
+            ON ba.mark_seq_nbr = m.mark_seq_nbr 
+        INNER JOIN  lrm_replication.cut_block            b
+            ON ba.cutb_seq_nbr = b.cutb_seq_nbr
+        INNER JOIN
+        (
+            SELECT
                     A.CUTB_SEQ_NBR,
-                    T.ACTT_KEY_IND,
-                    A.ACTI_STATUS_DATE
-            FROM
-                FOREST.ACTIVITY_CLASS C,
-                FOREST.ACTIVITY_TYPE T,
-                FOREST.ACTIVITY A
-            WHERE
-                C.ACCL_SEQ_NBR = T.ACCL_SEQ_NBR
-                AND T.ACTT_SEQ_NBR = A.ACTT_SEQ_NBR
-                AND C.ACCL_DESCRIPTION = 'CMB'
-                AND T.ACTT_KEY_IND In ('RC', 'DR', 'DVS', 'DVC')
-                AND A.ACTI_STATUS_IND = 'D'
-            )
-            Pivot(
-                Max(Trunc(ACTI_STATUS_DATE))
-                FOR ACTT_KEY_IND In (
-                    'RC' AS RC_Done,
-                    'DR' AS DR_Done,
-                    'DVS' AS DVS_Done,
-                    'DVC' AS DVC_Done)
-                )
-    ) ACTB
-WHERE
-    d.DIVI_DIV_NBR = ba.DIVI_DIV_NBR
-    AND ba.MANU_SEQ_NBR = mu.MANU_SEQ_NBR
-    AND ba.LICN_SEQ_NBR = l.LICN_SEQ_NBR
-    AND l.DIVI_DIV_NBR = z.DIVI_DIV_NBR (+)
-    AND l.BLAZ_ADMIN_ZONE_ID = z.BLAZ_ADMIN_ZONE_ID (+)
-    AND l.LICN_FIELD_TEAM_ID = dcl.COLU_LOOKUP_ID (+)
-    AND l.DIVI_DIV_NBR = dcl.DIVI_DIV_NBR (+)
-    AND dcl.COLU_LOOKUP_TYPE = cl.COLU_LOOKUP_TYPE (+)
-    AND dcl.COLU_LOOKUP_ID = cl.COLU_LOOKUP_ID (+)
-    AND l.TENT_SEQ_NBR = tn.TENT_SEQ_NBR (+)
-    AND ba.PERM_SEQ_NBR = cp.PERM_SEQ_NBR (+)
-    AND ba.MARK_SEQ_NBR = m.MARK_SEQ_NBR (+)
-    AND ba.CUTB_SEQ_NBR = b.CUTB_SEQ_NBR
-    AND ba.CUTB_SEQ_NBR = actb.CUTB_SEQ_NBR
-    AND actb.DVC_DONE
-        BETWEEN TO_DATE('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of current fiscal
-        AND TO_DATE('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+                    MAX(CASE WHEN ACTT_KEY_IND = 'RC' THEN DATE_TRUNC('DAY', ACTI_STATUS_DATE) END)::DATE AS RC_Done,
+                    MAX(CASE WHEN ACTT_KEY_IND = 'DR' THEN DATE_TRUNC('DAY',ACTI_STATUS_DATE) END)::DATE AS DR_Done,
+                    MAX(CASE WHEN ACTT_KEY_IND = 'DVS' THEN DATE_TRUNC('DAY',ACTI_STATUS_DATE) END)::DATE AS DVS_Done,
+                    MAX(CASE WHEN ACTT_KEY_IND = 'DVC' THEN DATE_TRUNC('DAY',ACTI_STATUS_DATE) END)::DATE AS DVC_Done
+                FROM
+                    lrm_replication.ACTIVITY_CLASS C,
+                    lrm_replication.ACTIVITY_TYPE T,
+                    lrm_replication.ACTIVITY A
+                WHERE
+                    C.ACCL_SEQ_NBR = T.ACCL_SEQ_NBR
+                    AND T.ACTT_SEQ_NBR = A.ACTT_SEQ_NBR
+                    AND C.ACCL_DESCRIPTION = 'CMB'
+                    AND T.ACTT_KEY_IND In ('RC', 'DR', 'DVS', 'DVC')
+                    AND A.ACTI_STATUS_IND = 'D'
+                GROUP BY  A.CUTB_SEQ_NBR, T.ACTT_KEY_IND
+        ) ACTB
+        ON ba.cutb_seq_nbr = actb.cutb_seq_nbr
+            AND actb.dvc_done BETWEEN TO_DATE('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of current fiscal
+            AND TO_DATE('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+)
 
-
+SELECT *
+FROM annual_developed_volume
 ORDER BY
     length(business_area_region) desc,
     business_area_region,
     business_area,
-    cl.COLU_LOOKUP_DESC,
-    mu.MANU_ID,
-    l.LICN_LICENCE_ID,
-    cp.PERM_PERMIT_ID,
-    m.MARK_MARK_ID,
-    b.CUTB_BLOCK_ID
+    "Field Team",
+    MANU_ID,
+    licence,
+    permit,
+    mark,
+    block
 ;

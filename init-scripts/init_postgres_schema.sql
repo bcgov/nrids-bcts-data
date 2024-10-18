@@ -14,39 +14,67 @@ GRANT USAGE ON SCHEMA public TO ods_proxy_user_lrm;
 
 -- Create schema
 CREATE SCHEMA IF NOT EXISTS lrm_replication;
+CREATE SCHEMA IF NOT EXISTS ods_data_management;
 
 
 -- Metadata table for ODS
 
-DROP TABLE IF EXISTS lrm_replication.cdc_master_table_list;
+DROP TABLE IF EXISTS ods_data_management.audit_batch_status;
 
-CREATE TABLE lrm_replication.cdc_master_table_list (
-    application_name VARCHAR(255) NOT NULL,  -- Name of the application
-    source_schema_name VARCHAR(255) NOT NULL,  -- Source schema name
-    source_table_name VARCHAR(255) NOT NULL,  -- Source table name
-    target_schema_name VARCHAR(255) NOT NULL,  -- Target schema name
-    target_table_name VARCHAR(255) NOT NULL,  -- Target table name
-    truncate_flag BOOLEAN DEFAULT FALSE,  -- Indicates if the target table should be truncated
-    cdc_flag BOOLEAN DEFAULT FALSE,  -- Indicates if CDC (Change Data Capture) is enabled
-    full_inc_flag BOOLEAN DEFAULT FALSE,  -- Full or Incremental data load flag
-    cdc_column VARCHAR(255),  -- Column used for CDC tracking
-    replication_order INT,  -- Order of replication
-    customsql_ind BOOLEAN DEFAULT FALSE,  -- Indicates if custom SQL is used
-    customsql_query TEXT,  -- Custom SQL query
-    active_ind CHAR(1) NOT NULL DEFAULT 'Y',  -- Active indicator, 'Y' or 'N'
-    PRIMARY KEY (application_name, source_schema_name, source_table_name, target_schema_name, target_table_name)
-);
+CREATE TABLE IF NOT EXISTS ods_data_management.audit_batch_status
+(
+    object_name character varying(100) COLLATE pg_catalog."default",
+    application_name character varying(100) COLLATE pg_catalog."default",
+    etl_layer character varying(100) COLLATE pg_catalog."default",
+    object_execution_status character varying(100) COLLATE pg_catalog."default",
+    batch_run_date character varying(100) COLLATE pg_catalog."default"
+)
+COMMENT ON TABLE ods_data_management.audit_batch_status IS 'Table to track the execution status of ELT process by batch.';
+COMMENT ON COLUMN ods_data_management.audit_batch_status.object_name IS 'Name of the object, usually a table or view, being processed in batch.';
+COMMENT ON COLUMN ods_data_management.audit_batch_status.application_name IS 'Name of the application associated with the object. This value should match the IRS/CMDB acronym.';
+COMMENT ON COLUMN ods_data_management.audit_batch_status.etl_layer IS 'Layer of the ELT process (e.g., replication, transformation).';
+COMMENT ON COLUMN ods_data_management.audit_batch_status.object_execution_status IS 'Status of the ELT execution (e.g., success, failure).';
+COMMENT ON COLUMN ods_data_management.audit_batch_status.batch_run_date IS 'Most recent date that the batch ELT process took place.';
 
-DROP TABLE IF EXISTS lrm_replication.audit_batch_status;
+CREATE TABLE IF NOT EXISTS ods_data_management.cdc_master_table_list
+(
+    business character varying(100) COLLATE pg_catalog."default",
+    application_name character varying(100) COLLATE pg_catalog."default",
+    custodian character varying(100) COLLATE pg_catalog."default",
+    source_schema_name character varying(100) COLLATE pg_catalog."default",
+    source_table_name character varying(100) COLLATE pg_catalog."default",
+    target_schema_name character varying(100) COLLATE pg_catalog."default",
+    target_table_name character varying(100) COLLATE pg_catalog."default",
+    truncate_flag character varying(1) COLLATE pg_catalog."default",
+    cdc_flag character varying(1) COLLATE pg_catalog."default",
+    full_inc_flag character varying(1) COLLATE pg_catalog."default",
+    cdc_column character varying(50) COLLATE pg_catalog."default",
+    active_ind character varying(1) COLLATE pg_catalog."default",
+    replication_order integer,
+    where_clause character varying(1000) COLLATE pg_catalog."default",
+    customsql_ind character varying(1) COLLATE pg_catalog."default",
+    customsql_query character varying(64000) COLLATE pg_catalog."default",
+    replication_source character varying(100) COLLATE pg_catalog."default"
+)
 
-CREATE TABLE lrm_replication.audit_batch_status (
-    table_name VARCHAR(255) NOT NULL,       -- Name of the table
-    application_name VARCHAR(255) NOT NULL, -- Name of the application
-    operation_type VARCHAR(50) NOT NULL,    -- Type of operation (e.g., 'replication')
-    status VARCHAR(50) NOT NULL,            -- Status of the operation
-    batch_run_date DATE NOT NULL DEFAULT CURRENT_DATE, -- Date of the operation
-    PRIMARY KEY (table_name, application_name, batch_run_date)
-);
+COMMENT ON TABLE ods_data_management.cdc_master_table_list IS 'Table providing an overview/summary of all replication processes, change data capture (CDC), and custom SQL.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.business IS 'Business domain associated with the data source.'; -- Note: Not in use currently.
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.application_name IS 'Name of the application associated with the source system. This value should match the IRS/CMDB acronym. If there is no application, it is the name of the replication process.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.custodian IS 'Data custodian responsible for the data source.'; -- Note: Not in use currently.
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.source_schema_name IS 'Schema name of the source data.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.source_table_name IS 'Table name of the source data.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.target_schema_name IS 'Schema name of the target replication. This will follow the format: [source system acronym]_replication.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.target_table_name IS 'Table name of the target replication. This will match the name of the source ';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.truncate_flag IS 'Flag indicating whether a truncate operation is occuring before loading (Y/N).';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.cdc_flag IS 'Flag indicating if CDC (Change Data Capture) is enabled (Y/N).'; -- Note: Not in use currently.
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.full_inc_flag IS 'Flag indicating if full incremental load is enabled (Y/N).'; -- Note: Not in use currently.
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.cdc_column IS 'Date column used for CDC tracking in the source table. '; -- Note: Not in use currently.
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.active_ind IS 'Indicator of whether the entry is active (Y/N). If Y, the replication will run when the Airflow job is triggered.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.replication_order IS 'Order of replication in processing sequences within a specific replication job.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.where_clause IS 'Optional WHERE clause to filter data during replication.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.customsql_ind IS 'Flag indicating if a custom SQL query is used (Y/N). If Y, then the customsql will be applied.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.customsql_query IS 'Custom SQL query to use for replication, if applicable. This is required for geospatial conversion and keeping history tables.';
+COMMENT ON COLUMN ods_data_management.cdc_master_table_list.replication_source IS 'Source system for replication data (e.g. Oracle, PostgreSQL)'; -- Note: Values should be standardized.
 
 
 -- Initialize lrm_replication.cdc_master_table_list
@@ -59,32 +87,24 @@ BEGIN
     FOREACH table_name IN ARRAY tables
     LOOP
         -- Insert into the table for each table in the list
-        INSERT INTO lrm_replication.cdc_master_table_list (
-            application_name,
-            source_schema_name,
-            source_table_name,
-            target_schema_name,
-            target_table_name,
-            truncate_flag,
-            cdc_flag,
-            full_inc_flag,
-            cdc_column,
-            replication_order,
-            customsql_ind,
-            customsql_query)
+        INSERT INTO ods_data_management.cdc_master_table_list 
         VALUES (
-            'bcts_replication',
+            NULL,
+            'lrm',
+            NULL,               
             'forest',
-            table_name,               -- Source table name
+            table_name,               
             'lrm_replication',
-            table_name,               -- Target table name
+            table_name,
             'Y',
-            'N',
-            'N',
-            '',
+            NULL,
+            NULL,
+            NULL,
+            'Y',
             1,
             'N',
-            ''
+            NULL,
+            'Oracle'
         );
     END LOOP;
 END $$;
