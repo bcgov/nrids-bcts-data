@@ -13,7 +13,7 @@ psql -U "$POSTGRES_USER" -d postgres -tc "SELECT 1 FROM pg_database WHERE datnam
 psql -U "$POSTGRES_USER" -d postgres -c "CREATE DATABASE ods;"
 
 # Execute the SQL script to create schema and users
-psql -U "$POSTGRES_USER" -d "ods" -f /docker-entrypoint-initdb.d/init_postgres_schema.sql
+psql -U "$POSTGRES_USER" -d "ods" -f /init-scripts/init_postgres_schema.sql
 
 echo "Database setup complete."
 

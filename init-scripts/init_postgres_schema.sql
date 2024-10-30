@@ -1,17 +1,13 @@
 -- Connect to ODS database
 \connect ods
 
--- Create schema
-CREATE SCHEMA IF NOT EXISTS lrm_replication;
-
 -- Create user
 CREATE USER ods_proxy_user_lrm WITH PASSWORD 'ods_proxy_user_lrm';
 
-<<<<<<< Updated upstream
 -- Grant privileges
 GRANT USAGE ON SCHEMA lrm_replication TO ods_proxy_user_lrm;
 GRANT SELECT ON ALL TABLES IN SCHEMA lrm_replication TO ods_proxy_user_lrm;
-=======
+
 -- Grant privileges to the user
 GRANT CONNECT ON DATABASE ods TO ods_proxy_user_lrm;
 GRANT CREATE ON DATABASE ods TO ods_proxy_user_lrm;
@@ -35,6 +31,7 @@ CREATE SCHEMA IF NOT EXISTS lrm_replication;
 CREATE SCHEMA IF NOT EXISTS ods_data_management;
 CREATE SCHEMA IF NOT EXISTS bcts_reporting;
 CREATE SCHEMA IF NOT EXISTS bcts_staging;
+
 
 -- Metadata table for ODS
 
@@ -131,8 +128,5 @@ END $$;
 
 -- Create target tables
 \i '/init-scripts/annual_developed_volume_ddl.sql'
->>>>>>> Stashed changes
 
--- Ensure future tables in the schema also have SELECT permission
-ALTER DEFAULT PRIVILEGES IN SCHEMA lrm_replication
-    GRANT SELECT ON TABLES TO ods_proxy_user_lrm;
+

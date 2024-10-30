@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS bcts_reporting.annual_developed_volume;
+
+CREATE TABLE bcts_reporting.annual_developed_volume AS
 WITH annual_developed_volume AS
 (
     SELECT DISTINCT
