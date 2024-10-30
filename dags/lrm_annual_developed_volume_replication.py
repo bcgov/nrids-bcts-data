@@ -15,7 +15,7 @@ lob_secrets = Secret("env", None, f"{LOB}-database")
 
 if ENV == 'LOCAL':
     default_args = {
-        'owner': 'PMT',
+        'owner': 'BCTS',
         "email": ["NRM.DataFoundations@gov.bc.ca"],
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
@@ -24,7 +24,7 @@ if ENV == 'LOCAL':
     }
 else:
     default_args = {
-        'owner': 'PMT',
+        'owner': 'BCTS',
         "email": ["NRM.DataFoundations@gov.bc.ca"],
         'retries': 1,
         'retry_delay': timedelta(minutes=5),

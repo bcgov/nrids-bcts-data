@@ -1,51 +1,77 @@
-import pandas as pd
-from sqlalchemy import create_engine, text
+from airflow import DAG
+from pendulum import datetime
+from kubernetes import client
+from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
+from airflow.providers.cncf.kubernetes.secret import Secret
+from datetime import timedelta
+import os
 
-# Database connection details
-DATABASE_URI = f'postgresql+psycopg2://{ODS_USERNAME}:{ODS_PASSWORD}@{ODS_HOST}:{ODS_PORT}/{ODS_DATABASE}'
+LOB = 'lrm'
+# For local development environment only.
+ENV = os.getenv("AIRFLOW_ENV")
 
-# Connect to the database
-engine = create_engine(DATABASE_URI)
+ods_secrets = Secret("env", None, f"{LOB}-ods-database")
 
-# Query the master_access table and load data into a DataFrame
-query = f"SELECT * FROM lrm_replication.master_access"
-df = pd.read_sql(query, engine)
-
-# Function to generate grant statements based on role permissions
-def generate_grant_statements(row):
-    statements = []
-    schema = row['SCHEMA']
-    table_name = row['TABLE_NAME']
-    
-    # List of roles and their permissions in the DataFrame
-    role_permissions = {
-        'BCTS_ETL_ROLE': row['BCTS_ETL_ROLE'],
-        'BCTS_DEV_ROLE': row['BCTS_DEV_ROLE'],
-        'BCTS_STAGE_ANALYST_ROLE': row['BCTS_STAGE_ANALYST_ROLE'],
-        'BCTS_STAGE_ANALYST_PI_ROLE': row['BCTS_STAGE_ANALYST_PI_ROLE'],
-        'BCTS_ANALYST_ROLE': row['BCTS_ANALYST_ROLE'],
-        'BCTS_ANALYST_PI_ROLE': row['BCTS_ANALYST_PI_ROLE']
+if ENV == 'LOCAL':
+    default_args = {
+        'owner': 'BCTS',
+        "email": ["sreejith.munthikodu@gov.bc.ca"],
+        'retries': 2,
+        'retry_delay': timedelta(minutes=5),
+        "email_on_failure": False, # No alerts in local environment
+        "email_on_retry": False,
     }
+else:
+    default_args = {
+        'owner': 'BCTS',
+        "email": ["sreejith.munthikodu@gov.bc.ca"],
+        'retries': 2,
+        'retry_delay': timedelta(minutes=5),
+        "email_on_failure": True,
+        "email_on_retry": False,
+    }
+
+with DAG(
+    start_date=datetime(2023, 11, 23),
+    catchup=False,
+    schedule='0 1 * * *',
+    dag_id=f"apply-grants-{LOB}",
+    default_args=default_args,
+    description='DAG to apply grants to BCTS data in ODS',
+) as dag:
     
-    # Generate grant statements based on role permissions
-    for role, permission in role_permissions.items():
-        if permission == "Read":
-            statements.append(f"GRANT SELECT ON {schema}.{table_name} TO {role};")
-        elif permission == "Read/Write":
-            statements.append(f"GRANT SELECT, INSERT, UPDATE, DELETE ON {schema}.{table_name} TO {role};")
-        # Ignore 'Deny' permissions
+    if ENV == 'LOCAL':
 
-    return statements
-
-# Generate all grant statements for each row in the DataFrame
-all_statements = []
-for _, row in df.iterrows():
-    all_statements.extend(generate_grant_statements(row))
-
-# Execute the grant statements in PostgreSQL
-with engine.begin() as connection:
-    for statement in all_statements:
-        print(statement)
-        connection.execute(text(statement))
-
-print("Grant statements executed successfully.")
+        run_replication = KubernetesPodOperator(
+            task_id=f"apply_{LOB}_grants",
+            image="nrids-bcts-data-pg-access:main",
+            cmds=["python3", "./bcts_acces_apply_grants.py"],
+            # Following configs are different in the local development environment
+            # image_pull_policy="Always",
+            # in_cluster=True,
+            # service_account_name="airflow-admin",
+            name=f"apply_{LOB}_access_grants",
+            labels={"DataClass": "Medium", "ConnectionType": "database",  "Release": "airflow"},
+            is_delete_operator_pod=True,
+            secrets=[ods_secrets],
+            container_resources= client.V1ResourceRequirements(
+            requests={"cpu": "50m", "memory": "512Mi"},
+            limits={"cpu": "100m", "memory": "1024Mi"})
+        )
+    else:
+        # In Dev, Test, and Prod Environments
+        run_replication = KubernetesPodOperator(
+            task_id=f"export_{LOB}_grants",
+            image="ghcr.io/bcgov/nr-dap-ods-bcts-pg-access:main",
+            cmds=["python3", "./bcts_acces_apply_grants.py"],
+            image_pull_policy="Always",
+            in_cluster=True,
+            service_account_name="airflow-admin",
+            name=f"apply_{LOB}_access_grants",
+            labels={"DataClass": "Medium", "ConnectionType": "database",  "Release": "airflow"},
+            is_delete_operator_pod=True,
+            secrets=[ods_secrets],
+            container_resources= client.V1ResourceRequirements(
+            requests={"cpu": "50m", "memory": "512Mi"},
+            limits={"cpu": "100m", "memory": "1024Mi"})
+        )
