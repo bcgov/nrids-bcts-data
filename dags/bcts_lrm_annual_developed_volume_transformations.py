@@ -7,6 +7,7 @@ from datetime import timedelta
 import os
 
 LOB = 'lrm'
+sql_file_path = './Annual_Developed_Volume_Query.sql'
 # For local development environment only.
 ENV = os.getenv("AIRFLOW_ENV")
 
@@ -34,23 +35,24 @@ else:
 with DAG(
     start_date=datetime(2023, 11, 23),
     catchup=False,
-    schedule='0 1 * * *',
-    dag_id=f"apply-grants-{LOB}",
+    schedule='0 5 * * MON-FRI',
+    dag_id=f"transformations-{LOB}",
     default_args=default_args,
-    description='DAG to apply grants to BCTS data in ODS',
+    description='DAG to run the transformations in ODS for BCTS Annual Developed Volume Dashboard',
 ) as dag:
     
     if ENV == 'LOCAL':
 
         run_replication = KubernetesPodOperator(
-            task_id=f"apply_{LOB}_grants",
-            image="nrids-bcts-data-pg-access:main",
-            cmds=["python3", "./bcts_acces_apply_grants.py"],
+            task_id="run_transformation",
+            image="nrids-bcts-data-pg-transformations:main",
+            cmds=["python3", "./bcts_etl.py"],
+            arguments=[sql_file_path],
             # Following configs are different in the local development environment
             # image_pull_policy="Always",
             # in_cluster=True,
             # service_account_name="airflow-admin",
-            name=f"apply_{LOB}_access_grants",
+            name=f"run_{LOB}_transformation_annual_developed_volume",
             labels={"DataClass": "Medium", "ConnectionType": "database",  "Release": "airflow"},
             is_delete_operator_pod=True,
             secrets=[ods_secrets],
@@ -61,13 +63,14 @@ with DAG(
     else:
         # In Dev, Test, and Prod Environments
         run_replication = KubernetesPodOperator(
-            task_id=f"export_{LOB}_grants",
-            image="ghcr.io/bcgov/nr-dap-ods-bcts-pg-access:main",
-            cmds=["python3", "./bcts_acces_apply_grants.py"],
+            task_id="run_replication",
+            image="ghcr.io/bcgov/nr-dap-ods-pg-transformations:main",
+            cmds=["python3", "./bcts_etl.py"],
+            arguments=[sql_file_path],
             image_pull_policy="Always",
             in_cluster=True,
             service_account_name="airflow-admin",
-            name=f"apply_{LOB}_access_grants",
+            name=f"run_{LOB}_transformation_annual_developed_volume",
             labels={"DataClass": "Medium", "ConnectionType": "database",  "Release": "airflow"},
             is_delete_operator_pod=True,
             secrets=[ods_secrets],
