@@ -33,7 +33,7 @@ else:
     }
 
 with DAG(
-    start_date=datetime(2023, 11, 23),
+    start_date=datetime(2024, 11, 23),
     catchup=False,
     schedule='0 4 * * MON-FRI',
     dag_id=f"replication-pipeline-{LOB}",
