@@ -34,7 +34,7 @@ else:
 with DAG(
     start_date=datetime(2023, 11, 23),
     catchup=False,
-    schedule='None',
+    schedule=None,
     dag_id=f"export-grants-{LOB}",
     default_args=default_args,
     description='DAG to export the grants master file to ODS',
