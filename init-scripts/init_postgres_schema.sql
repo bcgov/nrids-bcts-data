@@ -2,16 +2,16 @@
 \connect ods
 
 -- Create user
-CREATE USER ods_proxy_user_lrm WITH PASSWORD 'ods_proxy_user_lrm';
+CREATE USER bcts_etl_user WITH PASSWORD '<place_holder>';
 
 -- Grant privileges
-GRANT USAGE ON SCHEMA lrm_replication TO ods_proxy_user_lrm;
-GRANT SELECT ON ALL TABLES IN SCHEMA lrm_replication TO ods_proxy_user_lrm;
+GRANT USAGE ON SCHEMA lrm_replication TO bcts_etl_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA lrm_replication TO bcts_etl_user;
 
 -- Grant privileges to the user
-GRANT CONNECT ON DATABASE ods TO ods_proxy_user_lrm;
-GRANT CREATE ON DATABASE ods TO ods_proxy_user_lrm;
-GRANT USAGE ON SCHEMA public TO ods_proxy_user_lrm; 
+GRANT CONNECT ON DATABASE ods TO bcts_etl_user;
+GRANT CREATE ON DATABASE ods TO bcts_etl_user;
+GRANT USAGE ON SCHEMA public TO bcts_etl_user; 
 
 
 -- Create roles for ETL and data consumption
@@ -24,7 +24,7 @@ CREATE ROLE BCTS_ANALYST_ROLE;
 CREATE ROLE BCTS_ANALYST_PI_ROLE;
 
 -- Switch to the new user
-\c ods ods_proxy_user_lrm
+\c ods bcts_etl_user
 
 -- Create schema
 CREATE SCHEMA IF NOT EXISTS lrm_replication;

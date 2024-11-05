@@ -32,7 +32,7 @@ else:
     }
 
 with DAG(
-    start_date=datetime(2024, 11, 23),
+    start_date=datetime(2024, 10, 23),
     catchup=False,
     schedule=None,
     dag_id=f"export-grants-BCTS",
