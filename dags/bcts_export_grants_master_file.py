@@ -35,7 +35,7 @@ with DAG(
     start_date=datetime(2024, 10, 23),
     catchup=False,
     schedule=None,
-    dag_id=f"export-grants-BCTS",
+    dag_id=f"bcts_export-grants-{LOB}",
     default_args=default_args,
     description='DAG to export the grants master file to ODS',
 ) as dag:
@@ -43,7 +43,7 @@ with DAG(
     if ENV == 'LOCAL':
 
         run_replication = KubernetesPodOperator(
-            task_id=f"export_BCTS_grants",
+            task_id=f"export_{LOB}_grants",
             image="nrids-bcts-data-pg-access:main",
             cmds=["python3", "./bcts_access_export_master_file.py"],
             # Following configs are different in the local development environment
@@ -61,13 +61,13 @@ with DAG(
     else:
         # In Dev, Test, and Prod Environments
         run_replication = KubernetesPodOperator(
-            task_id=f"export_BCTS_grants",
+            task_id=f"export_{LOB}_grants",
             image="ghcr.io/bcgov/nr-dap-ods-bcts-pg-access:main",
             cmds=["python3", "./bcts_access_export_master_file.py"],
             image_pull_policy="Always",
             in_cluster=True,
             service_account_name="airflow-admin",
-            name=f"export_BCTS_access_grants",
+            name=f"export_{LOB}_access_grants",
             labels={"DataClass": "Medium", "ConnectionType": "database",  "Release": "airflow"},
             is_delete_operator_pod=True,
             secrets=[ods_secrets],
