@@ -1,0 +1,1 @@
+-- Add the sql files here and pass the list of file names while triggering the DAG manually
