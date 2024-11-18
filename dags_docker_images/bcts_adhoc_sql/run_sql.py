@@ -45,10 +45,10 @@ def run_sql_script(script_path):
     try:
         with open(script_path, 'r') as file:
             sql_script = file.read()
-            sql_statements = sql_script.split(';')
-            for statement in sql_statements:
-                if statement.strip():
-                    cursor.execute(statement.strip())
+        
+        # Execute the SQL script
+        logging.info(sql_script)
+        cursor.execute(sql_script)
         connection.commit()
         logging.info(f"SQL script executed successfully from {script_path}.")
     except psycopg2.Error as e:
