@@ -40,8 +40,14 @@ def apply_grants():
     all_statements = []
     for _, row in df.iterrows():
         all_statements.extend(generate_grant_statements(row))
-
+    
     # Execute the grant statements in PostgreSQL
+    schema_roles_list = list(set([(x.split(' ON ')[1].split('.')[0], x.split(' TO ')[1].split(';')[0]) for x in all_statements]))
+    usage_statements = []
+    for (schema, role) in schema_roles_list:
+        usage_statement = f"GRANT USAGE ON SCHEMA {schema} TO {role};"
+        usage_statements.append(usage_statement)
+    all_statements.extend(usage_statements)
     with engine.begin() as connection:
         for statement in all_statements:
             logging.info(statement)
@@ -57,7 +63,6 @@ def generate_grant_statements(row):
     
     # List of roles and their permissions in the DataFrame
     role_permissions = {
-        'BCTS_ETL_ROLE': row['BCTS_ETL_ROLE'],
         'BCTS_DEV_ROLE': row['BCTS_DEV_ROLE'],
         'BCTS_STAGE_ANALYST_ROLE': row['BCTS_STAGE_ANALYST_ROLE'],
         'BCTS_STAGE_ANALYST_PI_ROLE': row['BCTS_STAGE_ANALYST_PI_ROLE'],
