@@ -1,80 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS lrm_replication;
-
--- Create lrm_replication.cdc_master_table_list
-DROP TABLE IF EXISTS lrm_replication.cdc_master_table_list;
-
-CREATE TABLE lrm_replication.cdc_master_table_list (
-    application_name VARCHAR(255) NOT NULL,  -- Name of the application
-    source_schema_name VARCHAR(255) NOT NULL,  -- Source schema name
-    source_table_name VARCHAR(255) NOT NULL,  -- Source table name
-    target_schema_name VARCHAR(255) NOT NULL,  -- Target schema name
-    target_table_name VARCHAR(255) NOT NULL,  -- Target table name
-    truncate_flag BOOLEAN DEFAULT FALSE,  -- Indicates if the target table should be truncated
-    cdc_flag BOOLEAN DEFAULT FALSE,  -- Indicates if CDC (Change Data Capture) is enabled
-    full_inc_flag BOOLEAN DEFAULT FALSE,  -- Full or Incremental data load flag
-    cdc_column VARCHAR(255),  -- Column used for CDC tracking
-    replication_order INT,  -- Order of replication
-    customsql_ind BOOLEAN DEFAULT FALSE,  -- Indicates if custom SQL is used
-    customsql_query TEXT,  -- Custom SQL query
-    active_ind CHAR(1) NOT NULL DEFAULT 'Y',  -- Active indicator, 'Y' or 'N'
-    PRIMARY KEY (application_name, source_schema_name, source_table_name, target_schema_name, target_table_name)
-);
-
-
--- Initialize lrm_replication.cdc_master_table_list
-DO $$
-DECLARE
-    tables text[] := ARRAY['DIVISION','BLOCK_ALLOCATION','MANAGEMENT_UNIT','LICENCE','BLOCK_ADMIN_ZONE','DIVISION_CODE_LOOKUP','CODE_LOOKUP','TENURE_TYPE','CUT_PERMIT','MARK','CUT_BLOCK','ACTIVITY_CLASS','ACTIVITY_TYPE','ACTIVITY'];  
-    table_name text;
-BEGIN
-    -- Loop through the list of table names
-    FOREACH table_name IN ARRAY tables
-    LOOP
-        -- Insert into the table for each table in the list
-        INSERT INTO lrm_replication.cdc_master_table_list (
-            application_name,
-            source_schema_name,
-            source_table_name,
-            target_schema_name,
-            target_table_name,
-            truncate_flag,
-            cdc_flag,
-            full_inc_flag,
-            cdc_column,
-            replication_order,
-            customsql_ind,
-            customsql_query)
-        VALUES (
-            'bcts_replication',
-            'forest',
-            table_name,               -- Source table name
-            'lrm_replication',
-            table_name,               -- Target table name
-            'Y',
-            'N',
-            'N',
-            '',
-            1,
-            'N',
-            ''
-        );
-    END LOOP;
-END $$;
-
--- Create audit_batch_status table
-DROP TABLE IF EXISTS lrm_replication.audit_batch_status;
-
-CREATE TABLE lrm_replication.audit_batch_status (
-    table_name VARCHAR(255) NOT NULL,       -- Name of the table
-    application_name VARCHAR(255) NOT NULL, -- Name of the application
-    operation_type VARCHAR(50) NOT NULL,    -- Type of operation (e.g., 'replication')
-    status VARCHAR(50) NOT NULL,            -- Status of the operation
-    batch_run_date DATE NOT NULL DEFAULT CURRENT_DATE, -- Date of the operation
-    PRIMARY KEY (table_name, application_name, batch_run_date)
-);
-
-
--- Create target tables
+DROP TABLE IF EXISTS lrm_replication.division;
 CREATE TABLE lrm_replication.division (
     divi_div_nbr NUMERIC(2) NOT NULL,
     divi_country_code VARCHAR(40) NOT NULL,
@@ -108,6 +32,7 @@ CREATE TABLE lrm_replication.division (
     PRIMARY KEY (divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.block_allocation;
 CREATE TABLE lrm_replication.block_allocation (
     cutb_seq_nbr NUMERIC(15) NOT NULL,
     blal_seq_nbr NUMERIC(15) NOT NULL,
@@ -140,6 +65,7 @@ CREATE TABLE lrm_replication.block_allocation (
     PRIMARY KEY (blal_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.management_unit;
 CREATE TABLE lrm_replication.management_unit (
     manu_seq_nbr NUMERIC(15) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -167,6 +93,7 @@ CREATE TABLE lrm_replication.management_unit (
     PRIMARY KEY (manu_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.licence;
 CREATE TABLE lrm_replication.licence (
     licn_seq_nbr NUMERIC(15) NOT NULL,
     licn_licence_id VARCHAR(15) NOT NULL,
@@ -212,6 +139,7 @@ CREATE TABLE lrm_replication.licence (
     PRIMARY KEY (licn_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.block_admin_zone;
 CREATE TABLE lrm_replication.block_admin_zone (
     blaz_admin_zone_id VARCHAR(40) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -226,6 +154,7 @@ CREATE TABLE lrm_replication.block_admin_zone (
     PRIMARY KEY (blaz_admin_zone_id, divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.division_code_lookup;
 CREATE TABLE lrm_replication.division_code_lookup (
     colu_lookup_type VARCHAR(4) NOT NULL,
     colu_lookup_id VARCHAR(120) NOT NULL,
@@ -239,6 +168,7 @@ CREATE TABLE lrm_replication.division_code_lookup (
     PRIMARY KEY (colu_lookup_type, colu_lookup_id, divi_div_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.code_lookup;
 CREATE TABLE lrm_replication.code_lookup (
     colu_lookup_type VARCHAR(4) NOT NULL,
     colu_lookup_id VARCHAR(30) NOT NULL,
@@ -257,6 +187,7 @@ CREATE TABLE lrm_replication.code_lookup (
     PRIMARY KEY (colu_lookup_type, colu_lookup_id)
 );
 
+DROP TABLE IF EXISTS lrm_replication.tenure_type;
 CREATE TABLE lrm_replication.tenure_type (
     tent_seq_nbr NUMERIC(15) NOT NULL,
     divi_div_nbr NUMERIC(2) NOT NULL,
@@ -273,6 +204,7 @@ CREATE TABLE lrm_replication.tenure_type (
     PRIMARY KEY (tent_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.cut_permit;
 CREATE TABLE lrm_replication.cut_permit (
     perm_seq_nbr NUMERIC(15) NOT NULL,
     regn_region_id VARCHAR(10) NULL,
@@ -344,6 +276,7 @@ CREATE TABLE lrm_replication.cut_permit (
     PRIMARY KEY (perm_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.mark;
 CREATE TABLE lrm_replication.mark (
     mark_seq_nbr NUMERIC(15) NOT NULL,
     mark_mark_id VARCHAR(15) NULL,
@@ -365,6 +298,7 @@ CREATE TABLE lrm_replication.mark (
     PRIMARY KEY (mark_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.cut_block;
 CREATE TABLE lrm_replication.cut_block (
     cutb_seq_nbr NUMERIC(15) NOT NULL,
     cutb_block_id VARCHAR(20) NOT NULL,
@@ -497,6 +431,7 @@ CREATE TABLE lrm_replication.cut_block (
     PRIMARY KEY (cutb_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.activity_class;
 CREATE TABLE lrm_replication.activity_class (
     accl_seq_nbr NUMERIC(15) NOT NULL,
     accl_description VARCHAR(40) NULL,
@@ -513,6 +448,7 @@ CREATE TABLE lrm_replication.activity_class (
     PRIMARY KEY (accl_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.activity_type;
 CREATE TABLE lrm_replication.activity_type (
     actt_seq_nbr NUMERIC(15) NOT NULL,
     accl_seq_nbr NUMERIC(15) NOT NULL,
@@ -544,6 +480,7 @@ CREATE TABLE lrm_replication.activity_type (
     PRIMARY KEY (actt_seq_nbr)
 );
 
+DROP TABLE IF EXISTS lrm_replication.activity;
 CREATE TABLE lrm_replication.activity (
     acti_seq_nbr NUMERIC(15) NOT NULL,
     cutb_seq_nbr NUMERIC(15) NULL,

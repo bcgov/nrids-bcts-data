@@ -38,7 +38,7 @@ docker-compose --profile airflow up
 
 # Services:
     Airflow: localhost:8080 usename:admin, password: admin
-    Postgres: localhost:5432 username: ods_proxy_user_lrm, password: ods_proxy_user_lrm, database: ods
+    Postgres: localhost:5432 username: bcts_etl_user, password: bcts_etl_user, database: ods
     Oracle: localhost:1521 username: FOREST password: admin_password database: LRM
 
 # Run the `test_dag`
