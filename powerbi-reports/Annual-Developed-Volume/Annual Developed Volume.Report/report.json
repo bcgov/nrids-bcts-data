@@ -114,6 +114,36 @@
         }
       ],
       "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Report 2",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "98f6544111895db890bd",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"2a8260ed062338104083\",\"layouts\":[{\"id\":0,\"position\":{\"x\":187.0935960591133,\"y\":128.57142857142858,\"z\":1,\"width\":986.0098522167488,\"height\":272.2167487684729,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"bcts_reporting annual_developed_volume.user\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"bcts_reporting annual_developed_volume\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"user\"},\"Name\":\"bcts_reporting annual_developed_volume.user\",\"NativeReferenceName\":\"user\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 272.22,
+          "width": 986.01,
+          "x": 187.09,
+          "y": 128.57,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"924a9b63b6e8f400b48d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10,\"y\":0,\"width\":280,\"height\":280,\"z\":0,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"bcts_reporting annual_developed_volume.business_area_region\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"bcts_reporting annual_developed_volume\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"business_area_region\"},\"Name\":\"bcts_reporting annual_developed_volume.business_area_region\",\"NativeReferenceName\":\"business_area_region\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 280.00,
+          "width": 280.00,
+          "x": 10.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
     }
   ]
 }
