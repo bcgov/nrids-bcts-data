@@ -282,7 +282,7 @@ FROM
             the.bcts_tenure_bidder tb,
             the.prov_forest_use pfu,
             the.tenure_term tt,
-            the.forest_client fc
+            the.v_client_public fc
 
         where
             pfu.forest_file_id = ts0.forest_file_id
