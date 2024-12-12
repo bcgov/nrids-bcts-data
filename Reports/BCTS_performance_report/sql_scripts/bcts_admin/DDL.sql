@@ -1,4 +1,4 @@
-CREATE TABLE bcts_tenure_bidder (
+CREATE TABLE bctsadmin_replication.bcts_tenure_bidder (
     client_number VARCHAR(8) NOT NULL,
     forest_file_id VARCHAR(10) NOT NULL,
     auction_date TIMESTAMP NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE bcts_tenure_bidder (
     PRIMARY KEY (client_number, forest_file_id, auction_date)
 );
 
-CREATE TABLE bcts_timber_sale (
+CREATE TABLE bctsadmin_replication.bcts_timber_sale (
     forest_file_id VARCHAR(10) NOT NULL,
     auction_date TIMESTAMP NOT NULL,
     bcts_category_code VARCHAR(1) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE bcts_timber_sale (
     PRIMARY KEY (forest_file_id, auction_date)
 );
 
-CREATE TABLE no_sale_rationale_code (
+CREATE TABLE bctsadmin_replication.no_sale_rationale_code (
     no_sale_rationale_code VARCHAR(2) NOT NULL,
     description VARCHAR(120) NOT NULL,
     effective_date TIMESTAMP NOT NULL,
