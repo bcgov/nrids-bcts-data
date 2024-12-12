@@ -7,7 +7,7 @@ from airflow.operators.dummy import DummyOperator
 from datetime import timedelta
 import os
 
-LOB = 'bctsadmin'
+LOB = 'client'
 # For local development environment only.
 ENV = os.getenv("AIRFLOW_ENV")
 
@@ -27,12 +27,12 @@ default_args = {
 with DAG(
     start_date=datetime(2024, 10, 23),
     catchup=False,
-    schedule='5 12 * * MON-FRI', # 4:05 AM PST
-    dag_id=f"bcts-replication-bctsadmin",
+    schedule='10 12 * * MON-FRI', # 4:10 AM PST
+    dag_id=f"bcts-replication-client",
     default_args=default_args,
-    description='DAG to replicate BCTSADMIN data to ODS for BCTS Performance Report',
+    description='DAG to replicate Timber Pricing CLIENT data to ODS for BCTS Performance Report',
 ) as dag:
-    
+        
     run_replication = KubernetesPodOperator(
         task_id="run_replication",
         image="ghcr.io/bcgov/nr-dap-ods-ora2pg:main",
