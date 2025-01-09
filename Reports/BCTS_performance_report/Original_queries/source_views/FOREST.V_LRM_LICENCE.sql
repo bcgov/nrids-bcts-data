@@ -1,0 +1,305 @@
+--------------------------------------------------------
+--  File created - Tuesday-January-07-2025   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for View V_LRM_LICENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "FOREST"."V_LRM_LICENCE" ("MANU_SEQ_NBR", "DIVI_DIV_NBR", "LICN_SEQ_NBR", "LICN_DIGI_IND", "LICN_LICENCE_ID", "LICN_CATEGORY_ID", "LICN_CROWN_LAND", "LICN_CROWN_GRANTED_IND", "BLAZ_ADMIN_ZONE_ID", "LICL_LICENCE_CLASS", "LICN_PARENT_LICENCE", "LICN_LICENCE_DESC", "LICN_LICENCE_TO_CUT_CODE", "LICN_PERMIT_EXISTS_IND", "LICN_LICENCE_STATE", "LICN_ANNUAL_ALLOWABLE_CUT", "LSEE_LICENSEE_ID", "LSEE_CLIENT_CODE", "GROSS_AREA", "LICN_CLIENT_LOCATION_CODE", "LICN_SALVAGE_IND", "LICN_APPORTION_TENURE_TYPE", "CTOR_SEQ_NBR", "TENT_SEQ_NBR", "LINC_CERT_LEVEL_ID", "LICN_FIELD_TEAM_ID", "LICN_HAMMERMARK", "MODIFIEDBY", "MODIFIEDON", "MODIFIEDUSING", "CREATEDBY", "CREATEDON", "CREATEDUSING", "MERCHANTABLE_AREA", "HARVESTED_AREA", "STANDING_AREA", "CRUISE_VOLUME", "HARVESTED_VOLUME", "STANDING_VOLUME", "CRUISE_VARIANCE", "V_LOCK_FIELD", "NO_SHAPE", "LICN_ARCHIVE_IND", "LICN_ARCHIVE_DATE") AS 
+  SELECT                                                           --DISTINCT
+         FOREST.LICENCE_ALLOCATION.MANU_SEQ_NBR,
+          FOREST.LICENCE.DIVI_DIV_NBR,
+          FOREST.LICENCE.LICN_SEQ_NBR,
+          FOREST.LICENCE.LICN_DIGI_IND,
+          FOREST.LICENCE.LICN_LICENCE_ID,
+          FOREST.LICENCE.LICN_CATEGORY_ID,
+          CAST (FOREST.LICENCE.LICN_CROWN_LAND AS VARCHAR2 (3))
+             AS LICN_CROWN_LAND,
+          FOREST.LICENCE.LICN_CROWN_GRANTED_IND,
+          FOREST.LICENCE.BLAZ_ADMIN_ZONE_ID,
+          FOREST.LICENCE.LICL_LICENCE_CLASS,
+          FOREST.LICENCE.LICN_PARENT_LICENCE,
+          FOREST.LICENCE.LICN_LICENCE_DESC,
+          FOREST.LICENCE.LICN_LICENCE_TO_CUT_CODE,
+          FOREST.LICENCE.LICN_PERMIT_EXISTS_IND,
+          FOREST.LICENCE.LICN_LICENCE_STATE,
+          FOREST.LICENCE.LICN_ANNUAL_ALLOWABLE_CUT,
+          FOREST.LICENCE.LSEE_LICENSEE_ID,
+          FOREST.LICENSEE.LSEE_CLIENT_CODE,
+          --BLAL_CALC.GROSS_AREA,
+          --sq18542 get from cut_block
+          --(SELECT NVL (SUM (V.CUTB_GROSS_HA_AREA), 0)
+          --   FROM FOREST.V_LRM_CUT_BLOCK V
+          -- WHERE V.LICN_SEQ_NBR = FOREST.LICENCE.LICN_SEQ_NBR)
+          --   AS GROSS_AREA,
+          --sq18780 get from licence shape record
+          (SELECT ROUND (NVL (SUM (SDE.ST_AREA (V.SHAPE)) / 10000, 0), 1)
+             FROM FOREST.V_LRM_LICENCE_SHAPE V
+            WHERE V.LICN_SEQ_NBR = FOREST.LICENCE.LICN_SEQ_NBR)
+             AS GROSS_AREA,                    --Rounding added in 18901 fixes
+          CAST (FOREST.LICENCE.LICN_CLIENT_LOCATION_CODE AS VARCHAR2 (5))
+             AS LICN_CLIENT_LOCATION_CODE,
+          FOREST.LICENCE.LICN_SALVAGE_IND,
+          FOREST.LICENCE.LICN_APPORTION_TENURE_TYPE,
+          FOREST.LICENCE.CTOR_SEQ_NBR,
+          FOREST.LICENCE.TENT_SEQ_NBR,
+          FOREST.LICENCE.LINC_CERT_LEVEL_ID,
+          FOREST.LICENCE.LICN_FIELD_TEAM_ID,
+          FOREST.LICENCE.LICN_HAMMERMARK,
+          FOREST.LICENCE.MODIFIEDBY,
+          FOREST.LICENCE.MODIFIEDON,
+          FOREST.LICENCE.MODIFIEDUSING,
+          FOREST.LICENCE.CREATEDBY,
+          FOREST.LICENCE.CREATEDON,
+          FOREST.LICENCE.CREATEDUSING,
+          ROUND (BLAL_CALC.MERCHANTABLE_AREA, 1) AS MERCHANTABLE_AREA, --Rounding added in 18901 fixes
+          ROUND (
+             FOREST.SF_CALC_LICENCE_HARV_AREA (
+                LICENCE_ALLOCATION.LICN_SEQ_NBR,
+                LICENCE_ALLOCATION.MANU_SEQ_NBR),
+             1)
+             AS HARVESTED_AREA,                --Rounding added in 18901 fixes
+          ROUND (
+             FOREST.SF_CALC_LICENCE_STANDING_AREA (
+                LICENCE_ALLOCATION.LICN_SEQ_NBR,
+                LICENCE_ALLOCATION.MANU_SEQ_NBR),
+             1)
+             AS STANDING_AREA,                 --Rounding added in 18901 fixes
+          ROUND (BLAL_CALC.CRUISE_VOLUME, 0) AS CRUISE_VOLUME, --Rounding added in 18901 fixes
+          ROUND (BLAL_CALC.HARVESTED_VOLUME, 0) AS HARVESTED_VOLUME, --Rounding added in 18901 fixes
+          ROUND (BLAL_CALC.STANDING_VOLUME, 0) AS STANDING_VOLUME, --Rounding added in 18901 fixes
+          ROUND ( (BLAL_CALC.CRUISE_VOLUME - BLAL_CALC.HARVESTED_VOLUME), 0)
+             AS CRUISE_VARIANCE,               --Rounding added in 18901 fixes
+          CASE
+             WHEN (SELECT COUNT (*)
+                     FROM FOREST.LICENCE_ALLOCATION
+                    WHERE FOREST.LICENCE_ALLOCATION.LICN_SEQ_NBR =
+                             FOREST.LICENCE.LICN_SEQ_NBR) > 0
+             THEN
+                'Y'
+             ELSE
+                'N'
+          END
+             V_LOCK_FIELD,
+          NVL (CS.NO_SHAPE, 1) AS NO_SHAPE,
+          FOREST.LICENCE.LICN_ARCHIVE_IND,
+          FOREST.LICENCE.LICN_ARCHIVE_DATE
+     FROM FOREST.LICENSEE
+          RIGHT JOIN FOREST.LICENCE
+             ON (FOREST.LICENCE.LSEE_LICENSEE_ID =
+                    FOREST.LICENSEE.LSEE_LICENSEE_ID)
+          JOIN FOREST.LICENCE_ALLOCATION
+             ON (FOREST.LICENCE.LICN_SEQ_NBR =
+                    FOREST.LICENCE_ALLOCATION.LICN_SEQ_NBR)
+          LEFT JOIN
+          (  SELECT LICN_SEQ_NBR,
+                    SUM (NVL (BLAL_GROSS_HA_AREA, 0)) GROSS_AREA,
+                    SUM (NVL (BLAL_MERCH_HA_AREA, 0)) MERCHANTABLE_AREA,
+                    SUM (NVL (BLAL_CRUISE_M3_VOL, 0)) CRUISE_VOLUME,
+                    SUM (NVL (BLAL_HARVESTED_M3_VOL, 0)) HARVESTED_VOLUME,
+                    SUM (
+                       CASE
+                          WHEN BLAL_MERCH_HA_AREA = BLAL_HARVESTED_HA_AREA
+                          THEN
+                             0
+                          ELSE
+                               BLAL_CRUISE_M3_VOL
+                             - NVL (BLAL_HARVESTED_M3_VOL, 0)
+                       END)
+                       STANDING_VOLUME
+               FROM FOREST.BLOCK_ALLOCATION
+           GROUP BY LICN_SEQ_NBR) BLAL_CALC
+             ON (BLAL_CALC.LICN_SEQ_NBR = LICENCE.LICN_SEQ_NBR)
+          LEFT JOIN
+          (  SELECT LICN_SEQ_NBR,
+                    SUM (NVL (sde.st_isempty (SHAPE), 1)) AS NO_SHAPE
+               FROM FOREST.LICENCE_SHAPE_EVW
+           GROUP BY LICN_SEQ_NBR) CS
+             ON (CS.LICN_SEQ_NBR = FOREST.LICENCE.LICN_SEQ_NBR)
+    WHERE (   EXISTS
+                 (SELECT 1
+                    FROM lrm.tfm_sys_user_data_priv
+                   WHERE username = USER AND unitcode = LICENCE.divi_div_nbr)
+           OR NOT EXISTS
+                 (SELECT 1
+                    FROM lrm.tfm_sys_user_data_priv
+                   WHERE username = USER))
+
+
+;
+  GRANT SELECT ON "FOREST"."V_LRM_LICENCE" TO "TFM_VIEW_ROLE";
+  GRANT DELETE ON "FOREST"."V_LRM_LICENCE" TO "TFM_MODIFY_ROLE";
+  GRANT INSERT ON "FOREST"."V_LRM_LICENCE" TO "TFM_MODIFY_ROLE";
+  GRANT UPDATE ON "FOREST"."V_LRM_LICENCE" TO "TFM_MODIFY_ROLE";
+  GRANT SELECT ON "FOREST"."V_LRM_LICENCE" TO "BCTS_RO";
+--------------------------------------------------------
+--  DDL for Trigger TD_V_LRM_LICENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "FOREST"."TD_V_LRM_LICENCE" 
+--Created by Create_Insteadof_Trigger_Contextid  FOREST Jul 08 2015
+INSTEAD OF DELETE ON FOREST.V_LRM_LICENCE
+FOR EACH ROW
+BEGIN
+     DELETE FROM LICENCE
+      WHERE LICN_SEQ_NBR = :OLD.LICN_SEQ_NBR;
+END;
+
+
+/
+ALTER TRIGGER "FOREST"."TD_V_LRM_LICENCE" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TI_V_LRM_LICENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "FOREST"."TI_V_LRM_LICENCE" 
+--Created by Create_Insteadof_Trigger_Contextid  FOREST Jul 08 2015
+INSTEAD OF INSERT ON FOREST.V_LRM_LICENCE
+FOR EACH ROW
+BEGIN
+      INSERT INTO LICENCE (
+             LICN_SEQ_NBR,
+             LICN_LICENCE_ID,
+             LICN_LICENCE_DESC,
+             DIVI_DIV_NBR,
+             LICN_CROWN_LAND,
+             LICN_ANNUAL_ALLOWABLE_CUT,
+             LSEE_LICENSEE_ID,
+             TENT_SEQ_NBR,
+             LICN_LICENCE_STATE,
+             LICN_PERMIT_EXISTS_IND,
+             LICN_SALVAGE_IND,
+             LICN_CATEGORY_ID,
+             LICN_FIELD_TEAM_ID,
+             CTOR_SEQ_NBR,
+             BLAZ_ADMIN_ZONE_ID,
+             LICN_DIGI_IND,
+             LICL_LICENCE_CLASS,
+             LICN_PARENT_LICENCE,
+             LICN_CROWN_GRANTED_IND,
+             LICN_LICENCE_TO_CUT_CODE,
+             LINC_CERT_LEVEL_ID,
+             LICN_APPORTION_TENURE_TYPE,
+             LICN_HAMMERMARK,
+             LICN_CLIENT_LOCATION_CODE,
+             MODIFIEDBY,
+             MODIFIEDON,
+             MODIFIEDUSING,
+             CREATEDBY,
+             CREATEDON,
+             CREATEDUSING )
+      VALUES (
+             :NEW.LICN_SEQ_NBR,
+             :NEW.LICN_LICENCE_ID,
+             :NEW.LICN_LICENCE_DESC,
+             :NEW.DIVI_DIV_NBR,
+             :NEW.LICN_CROWN_LAND,
+             :NEW.LICN_ANNUAL_ALLOWABLE_CUT,
+             :NEW.LSEE_LICENSEE_ID,
+             :NEW.TENT_SEQ_NBR,
+             :NEW.LICN_LICENCE_STATE,
+             :NEW.LICN_PERMIT_EXISTS_IND,
+             :NEW.LICN_SALVAGE_IND,
+             :NEW.LICN_CATEGORY_ID,
+             :NEW.LICN_FIELD_TEAM_ID,
+             :NEW.CTOR_SEQ_NBR,
+             :NEW.BLAZ_ADMIN_ZONE_ID,
+             :NEW.LICN_DIGI_IND,
+             :NEW.LICL_LICENCE_CLASS,
+             :NEW.LICN_PARENT_LICENCE,
+             :NEW.LICN_CROWN_GRANTED_IND,
+             :NEW.LICN_LICENCE_TO_CUT_CODE,
+             :NEW.LINC_CERT_LEVEL_ID,
+             :NEW.LICN_APPORTION_TENURE_TYPE,
+             :NEW.LICN_HAMMERMARK,
+             :NEW.LICN_CLIENT_LOCATION_CODE,
+             :NEW.MODIFIEDBY,
+             :NEW.MODIFIEDON,
+             :NEW.MODIFIEDUSING,
+             :NEW.CREATEDBY,
+             :NEW.CREATEDON,
+             :NEW.CREATEDUSING );
+ INSERT
+INTO LICENCE_ALLOCATION
+(
+LICN_SEQ_NBR,
+MANU_SEQ_NBR,
+DIVI_DIV_NBR,
+MODIFIEDBY,
+MODIFIEDON,
+MODIFIEDUSING,
+CREATEDBY,
+CREATEDON,
+CREATEDUSING
+)
+VALUES
+(
+:NEW.LICN_SEQ_NBR,
+:NEW.MANU_SEQ_NBR,
+:NEW.DIVI_DIV_NBR,
+:NEW.MODIFIEDBY,
+:NEW.MODIFIEDON,
+:NEW.MODIFIEDUSING,
+:NEW.CREATEDBY,
+:NEW.CREATEDON,
+:NEW.CREATEDUSING
+) ;
+
+        LRM_PRC_NEW_LICENCE_ACT (:NEW.LICN_SEQ_NBR);
+
+        IF :NEW.LICN_PERMIT_EXISTS_IND = 'N'
+        THEN
+         LRM_PRC_LICN_AUTO_CUTPERMIT(:NEW.LICN_SEQ_NBR, :NEW.DIVI_DIV_NBR);
+        END IF;
+END;
+
+
+/
+ALTER TRIGGER "FOREST"."TI_V_LRM_LICENCE" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TU_V_LRM_LICENCE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "FOREST"."TU_V_LRM_LICENCE" 
+--Created by Create_Insteadof_Trigger_Contextid  FOREST Jul 08 2015
+INSTEAD OF UPDATE ON FOREST.V_LRM_LICENCE
+FOR EACH ROW
+BEGIN
+     UPDATE LICENCE
+     SET
+             LICN_SEQ_NBR = :NEW.LICN_SEQ_NBR,
+             LICN_LICENCE_ID = :NEW.LICN_LICENCE_ID,
+             LICN_LICENCE_DESC = :NEW.LICN_LICENCE_DESC,
+             DIVI_DIV_NBR = :NEW.DIVI_DIV_NBR,
+             LICN_CROWN_LAND = :NEW.LICN_CROWN_LAND,
+             LICN_ANNUAL_ALLOWABLE_CUT = :NEW.LICN_ANNUAL_ALLOWABLE_CUT,
+             LSEE_LICENSEE_ID = :NEW.LSEE_LICENSEE_ID,
+             TENT_SEQ_NBR = :NEW.TENT_SEQ_NBR,
+             LICN_LICENCE_STATE = :NEW.LICN_LICENCE_STATE,
+             LICN_PERMIT_EXISTS_IND = :NEW.LICN_PERMIT_EXISTS_IND,
+             LICN_SALVAGE_IND = :NEW.LICN_SALVAGE_IND,
+             LICN_CATEGORY_ID = :NEW.LICN_CATEGORY_ID,
+             LICN_FIELD_TEAM_ID = :NEW.LICN_FIELD_TEAM_ID,
+             CTOR_SEQ_NBR = :NEW.CTOR_SEQ_NBR,
+             BLAZ_ADMIN_ZONE_ID = :NEW.BLAZ_ADMIN_ZONE_ID,
+             LICN_DIGI_IND = :NEW.LICN_DIGI_IND,
+             LICL_LICENCE_CLASS = :NEW.LICL_LICENCE_CLASS,
+             LICN_PARENT_LICENCE = :NEW.LICN_PARENT_LICENCE,
+             LICN_CROWN_GRANTED_IND = :NEW.LICN_CROWN_GRANTED_IND,
+             LICN_LICENCE_TO_CUT_CODE = :NEW.LICN_LICENCE_TO_CUT_CODE,
+             LINC_CERT_LEVEL_ID = :NEW.LINC_CERT_LEVEL_ID,
+             LICN_APPORTION_TENURE_TYPE = :NEW.LICN_APPORTION_TENURE_TYPE,
+             LICN_HAMMERMARK = :NEW.LICN_HAMMERMARK,
+             LICN_CLIENT_LOCATION_CODE = :NEW.LICN_CLIENT_LOCATION_CODE,
+             MODIFIEDBY = :NEW.MODIFIEDBY,
+             MODIFIEDON = :NEW.MODIFIEDON,
+             MODIFIEDUSING = :NEW.MODIFIEDUSING,
+             CREATEDBY = :NEW.CREATEDBY,
+             CREATEDON = :NEW.CREATEDON,
+             CREATEDUSING = :NEW.CREATEDUSING
+      WHERE LICN_SEQ_NBR = :OLD.LICN_SEQ_NBR;
+END;
+
+
+/
+ALTER TRIGGER "FOREST"."TU_V_LRM_LICENCE" ENABLE;
