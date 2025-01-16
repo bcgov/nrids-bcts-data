@@ -296,7 +296,8 @@ def get_currently_in_market(end_date):
     null as Include_in_Currently_in_Market_report,  -- Populate this column manually with 'Include' or 'Exclude' based on validation with BC Bid website
     'Y' as In_CurrentlyInMarket_query,
     null as On_BC_Bid,  -- Populate this column manually, according to what is open on BC Bid at the time of interest.
-    null as Data_Error  -- Populate this column manually if there are data errors that cause licences to be incorrectly included or excluded in the query results.
+    null as Data_Error,  -- Populate this column manually if there are data errors that cause licences to be incorrectly included or excluded in the query results.
+    {end_date} as report_end_date
 
     from
         lrm_replication.division d
@@ -381,7 +382,8 @@ def get_currently_in_market(end_date):
         'Include' as Include_in_Currently_in_Market_report,  -- Include all the blank rows from this UNION SELECT in the pivot table
         'Y' as In_CurrentlyInMarket_query,
         'Not applicable' as On_BC_Bid,  -- n/a for these blank rows in the UNION SELECT
-        'Not applicable' as Data_Error  -- n/a for these blank rows in the UNION SELECT
+        'Not applicable' as Data_Error,  -- n/a for these blank rows in the UNION SELECT
+        {end_date} as report_end_date
 
     from
         lrm_replication.division d
