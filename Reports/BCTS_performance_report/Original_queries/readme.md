@@ -36,3 +36,15 @@
 
 - The main information that is important for this report is in the qLicenceIssuedAdvertised_Official (DBP01) query. There would be value in getting this query into the ODS ahead of the components from LRM, for us to work on automating that piece of it, if the LRM components are more complex.
 
+
+
+
+
+**qLicenceIssuedAdvertised_Official**
+- Contains date parameters that is manually updated at runtime.
+1. Fiscal year (April 1) to 15th of month
+2. Fiscal year (April 1) to end of month
+3. Most recent half month
+4. Last finished 3 months
+5. Last finished 6 months
+

@@ -1,7 +1,7 @@
 /* qLicenceIssuedAdvertised_LRM */
 
  /* Licence Info */
-with licence as
+with licene as
     (
         select
             licn_seq_nbr,
