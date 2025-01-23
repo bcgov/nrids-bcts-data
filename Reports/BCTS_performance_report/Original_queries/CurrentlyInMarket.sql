@@ -257,12 +257,11 @@ union select
         then
             'Coast'
         end as BUSINESS_AREA_REGION,
-    decode(
-        D.DIVI_DIVISION_NAME,
-        'Seaward',
-        'Seaward-Tlasta',
-        D.DIVI_DIVISION_NAME
-    ) || ' (' || D.DIVI_SHORT_CODE || ')' AS BUSINESS_AREA,
+    CASE 
+    WHEN D.DIVI_DIVISION_NAME = 'Seaward' THEN 'Seaward-Tlasta'
+    ELSE D.DIVI_DIVISION_NAME
+END || ' (' || D.DIVI_SHORT_CODE || ')' AS BUSINESS_AREA,
+
     D.DIVI_SHORT_CODE as business_area_code,
     null as nav_name,
     null as FIELD_TEAM,
