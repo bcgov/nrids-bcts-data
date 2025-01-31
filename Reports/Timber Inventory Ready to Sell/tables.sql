@@ -1,0 +1,63 @@
+
+-- Existing
+FORESTVIEW.V_BLOCK 
+FORESTVIEW.V_BLOCK_ACTIVITY_ALL
+-- New
+FORESTVIEW.V_BLOCK_SPATIAL 
+FORESTVIEW.V_LICENCE
+FORESTVIEW.V_LICENCE_ACTIVITY_ALL 
+
+
+
+V_BLOCK_SPATIAL (FOREST)
+--------------
+'CUT_BLOCK_SHAPE_EVW',
+ 'MANAGEMENT_UNIT',
+ 'LICENCE',
+ 'MARK',
+ 'CUT_PERMIT',
+ 'BLOCK_ALLOCATION',
+ 'DIVISION',
+ 'CUT_BLOCK'
+
+V_LICENCE_ACTIVITY_ALL  (FOREST)
+-------------------------
+
+'activity',
+ 'division',
+ 'licence_allocation',
+ 'licence',
+ 'activity_type',
+ 'management_unit',
+ 'tenure_type',
+ 'CODE_LOOKUP',
+ 'ctor_contractor',
+ 'activity_class'       
+   
+V_LICENCE  (FOREST)
+----------
+'COMMITMENTS',
+ 'PERMIT_ALLOCATION',
+ 'DIVISION',
+ 'COMMITMENT_PARTITION',
+ 'LICENCE_ALLOCATION',
+ 'CODE_LOOKUP',
+ 'CTOR_CONTRACTOR',
+ 'APPORTIONMENT',
+ 'MARK',
+ 'TENURE_TYPE',
+ 'V_LRM_COMMITMENTS',
+ 'BLOCK_ADMIN_ZONE',
+ 'MANAGEMENT_UNIT',
+ 'LICENCE',
+ 'BLOCK_ALLOCATION',
+ 'CUT_PERMIT',
+ 'BCTS_HARVEST_HISTORY',
+ 'LRM_VT_COMMIT_LIC_TYPE',
+ 'MARK_ALLOCATION',
+ 'CTOR_CONTRACTOR_LOCATION'
+
+
+ New LRM Tables (38 tables required. 35 already in ODS)
+ --------------
+ 'V_LRM_COMMITMENTS', 'CUT_BLOCK_SHAPE_EVW', 'CUT_BLOC'
