@@ -61,6 +61,12 @@ V_LICENCE  (FOREST)
  'CTOR_CONTRACTOR_LOCATION'
 
 
+ FOREST.CUT_BLOCK_SHAPE_EVW
+ --------------------------
+'FOREST.CUT_BLOCK_SHAPE'
+'FOREST.D29082'
+'FOREST.A29082'
+
  New LRM Tables (38 tables required. 35 already in ODS)
  --------------
  '', 'CUT_BLOC'
