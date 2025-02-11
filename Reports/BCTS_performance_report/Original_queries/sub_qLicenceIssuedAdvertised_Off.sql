@@ -79,7 +79,7 @@ select distinct
         when
             advertised.first_auction_date
                 between to_date('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of report period
-                and to_date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of report period
+                and to_date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of report period
         then
             advertised.first_auction_volume
         end as first_auction_volume_is_in_report_period,
@@ -87,7 +87,7 @@ select distinct
         when
             advertised.first_auction_date
                 between to_date('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of report period
-                and to_date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of report period
+                and to_date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of report period
         then
             advertised.first_auction_category_A_and_1_volume
         end as first_auction_category_A_and_1_volume_is_in_report_period,
@@ -95,7 +95,7 @@ select distinct
         when
             advertised.first_auction_date
                 between to_date('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of report period
-                and to_date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of report period
+                and to_date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of report period
         then
             advertised.first_auction_category_2_and_4_volume
         end as first_auction_category_2_and_4_volume_is_in_report_period,
@@ -305,7 +305,7 @@ FROM
             /* Tenure term legal effective date in reporting period*/
             AND tt.legal_effective_dt
                 between To_Date('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of reporting period
-                and To_Date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+                and To_Date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
     ) issued,
 
     /* Advertised Licence Details */
@@ -440,7 +440,7 @@ FROM
                     the.bcts_timber_sale ts
                 where
                     Nvl(no_sale_rationale_code, ' ') <> 'TB'
-                    and ts.auction_date <= To_Date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+                    and ts.auction_date <= To_Date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
                 group by
                     ts.forest_file_id
             ) all_auctions_to_date,
@@ -470,7 +470,7 @@ FROM
         where
             auction_date
                 between to_date('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of reporting period
-                and to_date('2024-08-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+                and to_date('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
     ) advertised_in_report_period
 
 
