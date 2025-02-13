@@ -364,36 +364,30 @@ select distinct
     A_D.OGS_Reactivated_Minor,
     A_D.OGS_Reactivated_Road,
     A_D.OGS_Reactivated_Re_Engineered,
-    -- decode(
-    --     SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr,
-    --     null,
-    --     'N',
-    --     'Y'
-    -- ) SALVAGE_ANY_FIRE_YEAR,
-    -- decode(
-    --     salvage21.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')'
-    -- ) as salvage_2021_fire,
-    -- decode(
-    --     salvage22.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')'
-    -- ) as salvage_2022_fire,
-    -- decode(
-    --     salvage23.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')'
-    -- ) as salvage_2023_fire,
-    -- decode(
-    --     salvage24.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')'
-    -- ) as salvage_2024_fire,
+    -- CASE 
+	--     WHEN SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr IS NULL THEN 'N' 
+	--     ELSE 'Y' 
+	-- END AS SALVAGE_ANY_FIRE_YEAR,
+	
+	-- CASE 
+	--     WHEN salvage21.actt_key_ind IS NULL THEN NULL 
+	--     ELSE salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')' 
+	-- END AS salvage_2021_fire,
+	
+	-- CASE 
+	--     WHEN salvage22.actt_key_ind IS NULL THEN NULL 
+	--     ELSE salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')' 
+	-- END AS salvage_2022_fire,
+	
+	-- CASE 
+	--     WHEN salvage23.actt_key_ind IS NULL THEN NULL 
+	--     ELSE salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')' 
+	-- END AS salvage_2023_fire,
+	
+	-- CASE 
+	--     WHEN salvage24.actt_key_ind IS NULL THEN NULL 
+	--     ELSE salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')' 
+	-- END AS salvage_2024_fire,
     B.CUTB_SEQ_NBR
 
 FROM
