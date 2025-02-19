@@ -1,0 +1,23 @@
+SOURCE: DBP01
+OWNER: THE
+
+APPLICATION: BCTSADMIN
+--------------------
+bcts_tenure_bidder  
+bcts_timber_sale 
+no_sale_rationale_code 
+
+ 
+APPLICATION: FTA
+--------------------
+prov_forest_use 
+tenure_file_status_code
+tenure_term 
+
+ 
+APPLICATION: CLIENT
+--------------------
+v_client_public  
+org_unit 
+
+
