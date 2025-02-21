@@ -136,7 +136,30 @@ FROM
     BCTS_STAGING.FORESTVIEW_V_BLOCK_SPATIAL BS,
     BCTS_STAGING.FORESTVIEW_V_LICENCE LICENCE,
     (
-        Select *
+        SELECT CUTB_SEQ_NBR,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DEL' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS Deletion_Approval_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DVC' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DVC_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DVS' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DVS_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RC' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS RC_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DR' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DR_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'WO' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS Write_Off_Date,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DCP' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Change_of_Op_Plan,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DFN' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_First_Nations,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DLA' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Loss_of_Access,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DOR' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Other,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DPC' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Planning_Constraint,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DRB' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Returned_to_BCTS,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DSD' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Stale_dated_Fieldwork,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DSI' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Stakeholder_Issue,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DESI' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_Environmental_Stewardship_Initiative,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DRD' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS DEF_REACTIVATED,
+            MAX(CASE WHEN ACTT_KEY_IND = 'DOG' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS Old_Growth_Strategy,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RFH' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_Forest_Health,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RFN' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_FN_Proceed,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RFV' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_Field_Verified,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RMN' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_Minor,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RRD' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_Road,
+            MAX(CASE WHEN ACTT_KEY_IND = 'RRE' THEN ACTIVITY_DATE ELSE NULL END)::DATE AS OGS_Reactivated_Re_Engineered
         From
             (
                 SELECT
@@ -164,38 +187,9 @@ FROM
                                 'DESI', 'DRD', 'RFH', 'RFN', 'RFV', 'RMN', 'RRD', 'RRE'
                             ) AND ac.accl_key_ind = 'CSB'
                         )
-        ) Pivot (
-            Max(acti_status_date)
-            FOR ACTT_KEY_IND In (
-                'DEL' AS DEL_DATE,
-                'DSC' AS DSC_DATE,
-                'DVC' AS DVC_DATE,
-                'DVS' AS DVS_DATE,
-                'FG' AS FG_DATE,
-                'HVC' AS HVC_DATE,
-                'HVS' AS HVS_DATE,
-                'RC' AS RC_DATE,
-                'DR' AS DR_DATE,
-                'WO' As WOFF_DATE,
-                'DCP' AS DEF_Change_of_Op_Plan,
-                'DFN' AS DEF_First_Nations,
-                'DLA' AS DEF_Loss_of_Access,
-                'DOR' AS DEF_Other,
-                'DPC' AS DEF_Planning_Constraint,
-                'DRB' AS DEF_Returned_to_BCTS,
-                'DSD' AS DEF_Stale_dated_Fieldwork,
-                'DSI' As DEF_Stakeholder_Issue,
-                'DESI' AS DEF_Environmental_Stewardship_Initiative,
-                'DRD' AS DEF_REACTIVATED,
-                'DOG' AS Old_Growth_Strategy,
-                'RFH' AS OGS_Reactivated_Forest_Health,
-                'RFN' AS OGS_Reactivated_FN_Proceed,
-                'RFV' AS OGS_Reactivated_Field_Verified,
-                'RMN' AS OGS_Reactivated_Minor,
-                'RRD' AS OGS_Reactivated_Road,
-                'RRE' AS OGS_Reactivated_Re_Engineered)
-        )
-    ) ACTB,
+        ) TEMP
+        GROUP BY CUTB_SEQ_NBR
+        ),
     (
         Select *
         From
