@@ -69,7 +69,7 @@ WITH A_D AS
                             )
                         )
                     ) AND A0.ACTI_STATUS_IND = 'D'  -- Done (D)
-                    AND A0.ACTIVITY_DATE <= To_Date('2024-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+                    AND A0.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
             ) TEMP
 
             GROUP BY CUTB_SEQ_NBR
@@ -97,7 +97,7 @@ WITH A_D AS
                 'DESI'  -- Deferred - Environmental Stewardship Initiative
             )
             AND A2.ACTI_STATUS_IND = 'D'  -- Done (D)
-            AND A2.ACTIVITY_DATE <= To_Date('2024-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A2.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
 
         GROUP BY
             A2.CUTB_SEQ_NBR
@@ -122,7 +122,7 @@ WITH A_D AS
                 'RRE'  -- Deferred - Reactivated(OGS-Re-Engineered)
             )
             AND A4.ACTI_STATUS_IND = 'D'  -- Done (D)
-            AND A4.ACTIVITY_DATE <= To_Date('2024-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A4.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
         GROUP BY
             A4.CUTB_SEQ_NBR,
             A4.ACTI_STATUS_IND
@@ -153,7 +153,7 @@ WITH A_D AS
         WHERE
             LA2.ACTIVITY_CLASS = 'CML'  -- Corporate Mandatory Licence (CML) activity class
             AND LA2.ACTT_KEY_IND = 'HI'  -- Licence Issued
-            AND LA2.ACTIVITY_DATE <= To_Date('2024-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND LA2.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
             AND LA2.ACTI_STATUS_IND = 'D'  -- Done
     ),
 

@@ -54,9 +54,6 @@ WITH annual_developed_volume AS
         LEFT OUTER JOIN lrm_replication.block_admin_zone     z
             ON l.divi_div_nbr = z.divi_div_nbr 
             AND l.blaz_admin_zone_id = z.blaz_admin_zone_id 
-            AND ba.licn_seq_nbr = l.licn_seq_nbr
-            AND l.divi_div_nbr = z.divi_div_nbr 
-            AND l.blaz_admin_zone_id = z.blaz_admin_zone_id 
         LEFT OUTER JOIN lrm_replication.division_code_lookup dcl
             ON l.licn_field_team_id = dcl.colu_lookup_id 
             AND l.divi_div_nbr = dcl.divi_div_nbr 
@@ -89,11 +86,11 @@ WITH annual_developed_volume AS
                     AND C.ACCL_DESCRIPTION = 'CMB'
                     AND T.ACTT_KEY_IND In ('RC', 'DR', 'DVS', 'DVC')
                     AND A.ACTI_STATUS_IND = 'D'
-                GROUP BY  A.CUTB_SEQ_NBR, T.ACTT_KEY_IND
+                GROUP BY  A.CUTB_SEQ_NBR
         ) ACTB
         ON ba.cutb_seq_nbr = actb.cutb_seq_nbr
             AND actb.dvc_done BETWEEN TO_DATE('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of current fiscal
-            AND TO_DATE('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND TO_DATE('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
 )
 
 SELECT *
