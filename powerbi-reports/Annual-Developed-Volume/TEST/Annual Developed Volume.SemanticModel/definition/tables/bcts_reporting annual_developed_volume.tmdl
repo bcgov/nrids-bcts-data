@@ -1,8 +1,16 @@
 table 'bcts_reporting annual_developed_volume'
 	lineageTag: ba589eb9-89d3-4f7d-9b52-e6f241049354
 
-	measure user = USERPRINCIPALNAME()
-		lineageTag: 15956d38-ce71-4983-8f97-588eb12da11f
+	measure 'Fiscal Period Info' = ```
+			
+			"Data shown reflects the DVC done period from " & 
+			FORMAT(MAX('bcts_reporting annual_developed_volume'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
+			" to " & 
+			FORMAT(MAX('bcts_reporting annual_developed_volume'[report_end_date]), "MMMM DD, YYYY")
+			
+			
+			```
+		lineageTag: 635ad91f-f06f-4ffc-bb3c-13427892160b
 
 	column business_area_region_category
 		dataType: string
@@ -126,13 +134,12 @@ table 'bcts_reporting annual_developed_volume'
 
 	column cruise_volume
 		dataType: double
+		formatString: 0.00
 		lineageTag: ab6ba7e7-5b59-4066-969b-dec2a494bfbe
 		summarizeBy: sum
 		sourceColumn: cruise_volume
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column rw_volume
 		dataType: double
@@ -146,7 +153,7 @@ table 'bcts_reporting annual_developed_volume'
 
 	column rc_done
 		dataType: dateTime
-		formatString: Long Date
+		formatString: yyyy-mm-dd
 		lineageTag: 0320f7f1-a374-4462-a2a0-5003ee886c51
 		summarizeBy: none
 		sourceColumn: rc_done
@@ -160,11 +167,15 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column rc_done_fiscal
-		dataType: double
+		dataType: int64
 		lineageTag: 72ae3f00-b30b-4361-bc35-36111ba557d9
 		summarizeBy: sum
 		sourceColumn: rc_done_fiscal
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
@@ -172,7 +183,7 @@ table 'bcts_reporting annual_developed_volume'
 
 	column dr_done
 		dataType: dateTime
-		formatString: Long Date
+		formatString: yyyy-mm-dd
 		lineageTag: e9f59633-f079-438d-8b28-0cecc2542b94
 		summarizeBy: none
 		sourceColumn: dr_done
@@ -186,11 +197,15 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column dr_done_fiscal
-		dataType: double
+		dataType: int64
 		lineageTag: 9c00d91a-138c-4d50-96fa-0632a9ac3b6c
 		summarizeBy: sum
 		sourceColumn: dr_done_fiscal
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
@@ -198,7 +213,7 @@ table 'bcts_reporting annual_developed_volume'
 
 	column dvs_done
 		dataType: dateTime
-		formatString: Long Date
+		formatString: yyyy-mm-dd
 		lineageTag: 984715ee-75ea-4245-8f83-a373cf31a0f5
 		summarizeBy: none
 		sourceColumn: dvs_done
@@ -212,11 +227,15 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column dvs_done_fiscal
-		dataType: double
+		dataType: int64
 		lineageTag: 6a648778-d6d7-489a-8845-02dce0e1db3d
 		summarizeBy: sum
 		sourceColumn: dvs_done_fiscal
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
@@ -224,7 +243,7 @@ table 'bcts_reporting annual_developed_volume'
 
 	column dvc_done
 		dataType: dateTime
-		formatString: Long Date
+		formatString: yyyy-mm-dd
 		lineageTag: bf97efd1-8eb1-4be5-9956-6586d371a4d0
 		summarizeBy: none
 		sourceColumn: dvc_done
@@ -238,11 +257,15 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
 	column dvc_done_fiscal
-		dataType: double
+		dataType: int64
 		lineageTag: 22645833-b739-4385-84d0-8073add9a3b1
 		summarizeBy: sum
 		sourceColumn: dvc_done_fiscal
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
