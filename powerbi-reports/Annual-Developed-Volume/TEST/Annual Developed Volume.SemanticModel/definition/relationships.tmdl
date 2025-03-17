@@ -1,0 +1,30 @@
+relationship ff2ffb46-d1b6-4ee4-935d-3e5220de6075
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.rc_done
+	toColumn: LocalDateTable_ffce4112-63e5-4a35-81e5-978e94435281.Date
+
+relationship 3f74eeb0-2cbf-40dc-a8ff-69819a2418b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.dr_done
+	toColumn: LocalDateTable_40794307-b177-43b5-9553-81a47f5e9d8c.Date
+
+relationship ea2df4e6-f1bc-4850-843d-5f46fc88ffc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.dvs_done
+	toColumn: LocalDateTable_2c977bf5-5547-4449-843b-3006879ff8b1.Date
+
+relationship 2930526e-251c-4c03-9018-51651c199d1c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.dvc_done
+	toColumn: LocalDateTable_72fa1ce0-a056-4a0e-81f6-d966a61ef476.Date
+
+relationship 85ccc2cc-8d4d-466b-97dd-f81765748f24
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.fiscal_year_start_date
+	toColumn: LocalDateTable_4b7fa8b5-6176-4f97-a732-5de16563ebcb.Date
+
+relationship 9abca0cd-3632-484a-9720-de4dd3ef4089
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.report_end_date
+	toColumn: LocalDateTable_f0aec6af-3d9e-40df-9da4-60c0852725bd.Date
+

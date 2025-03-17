@@ -1,0 +1,27 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting annual_developed_volume"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting annual_developed_volume'
+ref table DateTableTemplate_e70876aa-b67c-47b5-aedb-10e6276329ab
+ref table LocalDateTable_ffce4112-63e5-4a35-81e5-978e94435281
+ref table LocalDateTable_40794307-b177-43b5-9553-81a47f5e9d8c
+ref table LocalDateTable_2c977bf5-5547-4449-843b-3006879ff8b1
+ref table LocalDateTable_72fa1ce0-a056-4a0e-81f6-d966a61ef476
+ref table LocalDateTable_4b7fa8b5-6176-4f97-a732-5de16563ebcb
+ref table LocalDateTable_f0aec6af-3d9e-40df-9da4-60c0852725bd
+
+ref cultureInfo en-CA
+
