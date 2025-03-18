@@ -1,0 +1,44 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_ready_to_sell"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting timber_inventory_ready_to_sell'
+ref table DateTableTemplate_3f554d80-53e6-405c-819a-db106d4e7f9b
+ref table LocalDateTable_ce4d372f-24d8-42b0-ab03-d5d16df7b209
+ref table LocalDateTable_f2439d4d-0514-4dca-83c7-a2d4489d2383
+ref table LocalDateTable_34064fc8-2d3b-41da-9b92-bbedc2994442
+ref table LocalDateTable_79b54b5d-0313-4b6f-97d4-13231bd5f3c3
+ref table LocalDateTable_7a499653-b159-4542-bc7e-260fcc471b66
+ref table LocalDateTable_120eb882-9b79-4aaf-af25-84c56b0916f4
+ref table LocalDateTable_a3c1aaab-64d6-465d-bc68-15d39d330aa4
+ref table LocalDateTable_8ae70314-07ad-4cf7-9f87-d08650c18a3d
+ref table LocalDateTable_3a764568-bcc5-4869-aaad-5c9d004b1e32
+ref table LocalDateTable_8d2df1e9-e620-44ba-a027-9e2044bc604b
+ref table LocalDateTable_cd962dc4-926d-4a07-8a2c-60f579d4183a
+ref table LocalDateTable_4cd12edc-54a4-436e-b75a-bbe92a5755e0
+ref table LocalDateTable_3af723bd-a878-47b4-8ab8-bfe929627c41
+ref table LocalDateTable_cb7fce0b-3949-491c-a0ba-6774d5f3dda6
+ref table LocalDateTable_c9fe9943-543e-44d4-bfc6-603c61753cf4
+ref table LocalDateTable_586e44d0-c4df-4ea5-99b6-7e499cecdecc
+ref table LocalDateTable_b4aad5f3-8d7f-47d0-9629-827ade5346ab
+ref table LocalDateTable_18396c34-1ee0-4ee5-8ede-ab4cee302b29
+ref table LocalDateTable_dd50b138-2fad-4113-871a-3096dba445a2
+ref table LocalDateTable_dc442d6d-610b-43c9-ac71-7d8030e8e44d
+ref table LocalDateTable_a1ee62b5-530d-4783-960a-6c475f12aaaa
+ref table LocalDateTable_eae5e07c-21d3-41a9-8723-2e0c839082a3
+ref table LocalDateTable_8ac51d9b-d062-438f-9a75-2665553a61f0
+
+ref cultureInfo en-CA
+

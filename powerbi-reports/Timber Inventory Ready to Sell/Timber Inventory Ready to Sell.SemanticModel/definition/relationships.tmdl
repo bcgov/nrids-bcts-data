@@ -1,0 +1,115 @@
+relationship e7f960ef-c4b8-4078-9c69-c801bc4a4595
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.rc_date
+	toColumn: LocalDateTable_ce4d372f-24d8-42b0-ab03-d5d16df7b209.Date
+
+relationship a891df4f-dbc8-42d4-923c-f6f4154ca89b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.dr_date
+	toColumn: LocalDateTable_f2439d4d-0514-4dca-83c7-a2d4489d2383.Date
+
+relationship 5a594b0e-bb91-4bea-9b8b-dcd755829d0a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.dvs_date
+	toColumn: LocalDateTable_34064fc8-2d3b-41da-9b92-bbedc2994442.Date
+
+relationship 30484442-671f-48cd-816c-5e507b7af8da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.dvc_date
+	toColumn: LocalDateTable_79b54b5d-0313-4b6f-97d4-13231bd5f3c3.Date
+
+relationship 556efd42-b42b-41fe-a9f2-a1acaa0d7a60
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.auc_date
+	toColumn: LocalDateTable_7a499653-b159-4542-bc7e-260fcc471b66.Date
+
+relationship c4bc0100-ce82-41cf-8ceb-eba820276152
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_change_of_op_plan
+	toColumn: LocalDateTable_120eb882-9b79-4aaf-af25-84c56b0916f4.Date
+
+relationship 48d784c7-a509-48ca-a94d-3763bc1c5469
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_first_nations
+	toColumn: LocalDateTable_a3c1aaab-64d6-465d-bc68-15d39d330aa4.Date
+
+relationship a709c3dd-9412-43bc-b4f6-c7bc9fd158a0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_loss_of_access
+	toColumn: LocalDateTable_8ae70314-07ad-4cf7-9f87-d08650c18a3d.Date
+
+relationship 2dfe188d-efcb-4f68-9595-01ab72aecf98
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_other
+	toColumn: LocalDateTable_3a764568-bcc5-4869-aaad-5c9d004b1e32.Date
+
+relationship f9aaf8e4-d22f-42c0-bbaa-cd1c9840d215
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_planning_constraint
+	toColumn: LocalDateTable_8d2df1e9-e620-44ba-a027-9e2044bc604b.Date
+
+relationship 36cf6774-69dc-4ff6-96b7-4dc9ba1ddb10
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_returned_to_bcts
+	toColumn: LocalDateTable_cd962dc4-926d-4a07-8a2c-60f579d4183a.Date
+
+relationship 7fd4dda9-b740-4d58-bf29-a00c53b3dd37
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_stale_dated_fieldwork
+	toColumn: LocalDateTable_4cd12edc-54a4-436e-b75a-bbe92a5755e0.Date
+
+relationship 1c221ca3-f57c-4808-a502-96e33aeb86c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_stakeholder_issue
+	toColumn: LocalDateTable_3af723bd-a878-47b4-8ab8-bfe929627c41.Date
+
+relationship d39b15e4-c311-4ab6-aa3d-4801754599a9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_environmental_stewardship_initiative
+	toColumn: LocalDateTable_cb7fce0b-3949-491c-a0ba-6774d5f3dda6.Date
+
+relationship 2254b35e-ea3e-4b44-975e-1a5baac2c96f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.def_reactivated
+	toColumn: LocalDateTable_c9fe9943-543e-44d4-bfc6-603c61753cf4.Date
+
+relationship fbf945ce-890d-4438-ba18-aefc1b5ae45f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.old_growth_strategy
+	toColumn: LocalDateTable_586e44d0-c4df-4ea5-99b6-7e499cecdecc.Date
+
+relationship f9280034-ebdf-4b1f-b329-52b0183d48f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_forest_health
+	toColumn: LocalDateTable_b4aad5f3-8d7f-47d0-9629-827ade5346ab.Date
+
+relationship 654ccb21-f813-4ddd-bcfc-c81ab0da24ea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_fn_proceed
+	toColumn: LocalDateTable_18396c34-1ee0-4ee5-8ede-ab4cee302b29.Date
+
+relationship 62c51a86-c87b-4845-a4b9-52067273292a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_field_verified
+	toColumn: LocalDateTable_dd50b138-2fad-4113-871a-3096dba445a2.Date
+
+relationship 218fa819-e668-4929-89c4-d65d49f76083
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_minor
+	toColumn: LocalDateTable_dc442d6d-610b-43c9-ac71-7d8030e8e44d.Date
+
+relationship 5bf4ec9c-5b9b-4524-b25d-86e22d06ac79
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_road
+	toColumn: LocalDateTable_a1ee62b5-530d-4783-960a-6c475f12aaaa.Date
+
+relationship a981bc64-0260-4923-8e97-6c725fb742db
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.ogs_reactivated_re_engineered
+	toColumn: LocalDateTable_eae5e07c-21d3-41a9-8723-2e0c839082a3.Date
+
+relationship 108364c3-3a1f-43e8-9194-f6cbd9c514e4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting timber_inventory_ready_to_sell'.report_end_date
+	toColumn: LocalDateTable_8ac51d9b-d062-438f-9a75-2665553a61f0.Date
+
