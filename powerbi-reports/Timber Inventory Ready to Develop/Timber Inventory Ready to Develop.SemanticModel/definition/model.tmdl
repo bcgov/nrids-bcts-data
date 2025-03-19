@@ -1,0 +1,43 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_ready_to_develop"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting timber_inventory_ready_to_develop'
+ref table DateTableTemplate_4bd4aa9f-569b-42bd-a2b8-84179bedba80
+ref table LocalDateTable_78385d88-3c35-4001-8e41-33f52ce8afaf
+ref table LocalDateTable_b3a97ca3-ef83-4c9a-ba7d-91b2f80e7478
+ref table LocalDateTable_4f0b19f7-3287-4a31-b199-4ff41cc7ff72
+ref table LocalDateTable_ae98ea5a-4101-445e-af85-9f5fb657d052
+ref table LocalDateTable_08aab0de-f76c-4089-87c7-8383a70ed8f0
+ref table LocalDateTable_8fbac508-6073-43c7-9027-15538f4f74b5
+ref table LocalDateTable_d3381ce0-6250-4033-b67d-8e5a79842484
+ref table LocalDateTable_1cdf5a7b-a5a1-43fb-9088-b387c750517f
+ref table LocalDateTable_05d4f8a4-8bff-42a5-8cc5-251a89660e8d
+ref table LocalDateTable_1d87ab19-0f51-4a64-9d47-f74332f94104
+ref table LocalDateTable_ea5bcc73-6731-4d08-ae42-1061802033c5
+ref table LocalDateTable_96463c34-c9d3-402d-94e5-3ed5c64ba4d3
+ref table LocalDateTable_62c11594-57b0-4043-a441-f80e67e9aba6
+ref table LocalDateTable_40d4ac60-7a0a-40e5-8961-05a04fdb9d6b
+ref table LocalDateTable_f00ef25a-d38d-41d3-978a-e5f8d5de80fc
+ref table LocalDateTable_a0f9da98-0219-440f-b1ed-822226686832
+ref table LocalDateTable_5d6e1566-c0aa-421f-b6ad-ccc66db1afa3
+ref table LocalDateTable_7b09f21e-136d-4a27-9cc0-ef6f8c68cc45
+ref table LocalDateTable_541ba679-4b81-4a7c-a396-3d3960f755ee
+ref table LocalDateTable_f6f43e07-f2e4-416f-ab53-93d61abb17dd
+ref table LocalDateTable_6fb95f0e-7790-4434-9704-e538af061ddf
+ref table LocalDateTable_37321891-ffc2-4e5c-aaf2-348082b0eec3
+
+ref cultureInfo en-CA
+
