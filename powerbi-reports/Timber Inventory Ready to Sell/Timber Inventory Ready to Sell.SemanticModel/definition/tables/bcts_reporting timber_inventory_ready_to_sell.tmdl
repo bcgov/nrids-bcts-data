@@ -653,7 +653,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 	column cutb_seq_nbr
 		dataType: int64
 		lineageTag: 7991e81d-2c1f-4331-900b-4db3bc220d5a
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
 
 		changedProperty = DataType

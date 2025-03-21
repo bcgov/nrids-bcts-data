@@ -274,7 +274,7 @@ table 'bcts_reporting annual_developed_volume'
 	column cutb_seq_nbr
 		dataType: double
 		lineageTag: f1654a59-cad8-49ba-9172-f30d23fb326a
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
 
 		annotation SummarizationSetBy = Automatic
@@ -312,6 +312,15 @@ table 'bcts_reporting annual_developed_volume'
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 621804e0-a427-4e09-8817-7214581ac994
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 65ece705-6237-4eac-b0f6-04aee60dbf59

@@ -1,0 +1,32 @@
+cultureInfo en-CA
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "bcts_reporting_timber_inventory_ready_to_develop.inventory_category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting timber_inventory_ready_to_develop",
+			          "ConceptualProperty": "inventory_category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Inventory Category": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+
