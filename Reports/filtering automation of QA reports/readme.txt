@@ -1,0 +1,3 @@
+For the filtering automation, all of them are written in python scripts so I'm not sure how you want to incorporate them into the ODS, and also I'm still working on modifying some of them as requested by Ron, so maybe we can leave that last 
+
+. Right now we are still manually generating the QA reports which are run by sql in access, and with the QA reports (in the formats of excel files), I run the scripts to generate the conformance reports
