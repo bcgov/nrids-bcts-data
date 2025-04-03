@@ -108,7 +108,7 @@ WHERE
     AND ba.CUTB_SEQ_NBR = actb.CUTB_SEQ_NBR
     AND actb.DVC_DONE
         BETWEEN TO_DATE('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of current fiscal
-        AND TO_DATE('2024-09-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+        AND TO_DATE('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
 
 
 ORDER BY

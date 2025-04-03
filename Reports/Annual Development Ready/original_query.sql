@@ -98,7 +98,7 @@ WHERE
     AND ACTB.DR_STATUS = 'D'  -- Development Ready (DR) status is Done (D)
     AND ACTB.DR_STATUS_DATE
         BETWEEN TO_DATE('2024-04-01', 'YYYY-MM-DD')  -- Date: beginning of current fiscal
-        AND TO_DATE('2025-01-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+        AND TO_DATE('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
 ORDER BY
     length(business_area_region) desc,
     business_area_region,
