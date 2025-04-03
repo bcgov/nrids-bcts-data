@@ -1,0 +1,66 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_ready_to_develop","bcts_reporting timber_inventory_ready_to_develop_hist"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting timber_inventory_ready_to_develop'
+ref table DateTableTemplate_4bd4aa9f-569b-42bd-a2b8-84179bedba80
+ref table LocalDateTable_78385d88-3c35-4001-8e41-33f52ce8afaf
+ref table LocalDateTable_b3a97ca3-ef83-4c9a-ba7d-91b2f80e7478
+ref table LocalDateTable_4f0b19f7-3287-4a31-b199-4ff41cc7ff72
+ref table LocalDateTable_ae98ea5a-4101-445e-af85-9f5fb657d052
+ref table LocalDateTable_08aab0de-f76c-4089-87c7-8383a70ed8f0
+ref table LocalDateTable_8fbac508-6073-43c7-9027-15538f4f74b5
+ref table LocalDateTable_d3381ce0-6250-4033-b67d-8e5a79842484
+ref table LocalDateTable_1cdf5a7b-a5a1-43fb-9088-b387c750517f
+ref table LocalDateTable_05d4f8a4-8bff-42a5-8cc5-251a89660e8d
+ref table LocalDateTable_1d87ab19-0f51-4a64-9d47-f74332f94104
+ref table LocalDateTable_ea5bcc73-6731-4d08-ae42-1061802033c5
+ref table LocalDateTable_96463c34-c9d3-402d-94e5-3ed5c64ba4d3
+ref table LocalDateTable_62c11594-57b0-4043-a441-f80e67e9aba6
+ref table LocalDateTable_40d4ac60-7a0a-40e5-8961-05a04fdb9d6b
+ref table LocalDateTable_f00ef25a-d38d-41d3-978a-e5f8d5de80fc
+ref table LocalDateTable_a0f9da98-0219-440f-b1ed-822226686832
+ref table LocalDateTable_5d6e1566-c0aa-421f-b6ad-ccc66db1afa3
+ref table LocalDateTable_7b09f21e-136d-4a27-9cc0-ef6f8c68cc45
+ref table LocalDateTable_541ba679-4b81-4a7c-a396-3d3960f755ee
+ref table LocalDateTable_f6f43e07-f2e4-416f-ab53-93d61abb17dd
+ref table LocalDateTable_6fb95f0e-7790-4434-9704-e538af061ddf
+ref table LocalDateTable_37321891-ffc2-4e5c-aaf2-348082b0eec3
+ref table 'bcts_reporting timber_inventory_ready_to_develop_hist'
+ref table LocalDateTable_6d7cb76c-ef0c-48cd-a146-a1528955b18f
+ref table LocalDateTable_f5608c86-c107-4141-9f35-fb39e549e521
+ref table LocalDateTable_82734290-d0fb-447a-bbb6-295318f29166
+ref table LocalDateTable_1a190a33-c245-4b70-abc5-bd73dbb3c8a7
+ref table LocalDateTable_60391204-ba99-433e-8691-b7577563b5e9
+ref table LocalDateTable_3b1ab735-d887-4be6-8b37-31b498dfc106
+ref table LocalDateTable_21af3b84-188b-49f4-a370-03cf13cd8ac9
+ref table LocalDateTable_fbf4605e-cf8b-4d1d-9950-1b4b17719b9c
+ref table LocalDateTable_2f600264-ee43-451d-80c7-2ae84b071396
+ref table LocalDateTable_1a0976de-dc25-4d24-8720-0bfd11c008f0
+ref table LocalDateTable_c5403b6b-ad98-4932-b99e-c36b528f16bb
+ref table LocalDateTable_5e0564f4-7351-4727-9f74-70ef229780e0
+ref table LocalDateTable_5a275ef3-3672-4f2b-904e-83d79cecbba8
+ref table LocalDateTable_1ae0fb68-fc88-4f71-94d0-338bff00719d
+ref table LocalDateTable_1307da3a-f05e-4759-bc70-9a5472ba71ca
+ref table LocalDateTable_81c92573-04c1-4bb7-ac9d-7c4b0f37e525
+ref table LocalDateTable_faf2aed6-e6f3-4f22-935c-1dcb68168e56
+ref table LocalDateTable_2bd47d21-9517-4c67-92f2-439b035cbc69
+ref table LocalDateTable_99c81eb7-ef72-4b59-9bf4-5a5584abf01f
+ref table LocalDateTable_8b4fac5a-8f91-4990-b189-54df077b3c43
+ref table LocalDateTable_324b7c9c-089b-447a-bb89-1568fb4ba860
+ref table LocalDateTable_4dea68a2-1a6e-4e43-bb2e-196de2a646ef
+
+ref cultureInfo en-CA
+
