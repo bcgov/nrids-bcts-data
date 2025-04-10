@@ -3,7 +3,7 @@ table 'bcts_reporting annual_developed_volume'
 
 	measure 'Fiscal Period Info' = ```
 			
-			"Data shown reflects the DVC done period from " & 
+			"Data shown reflects period from " & 
 			FORMAT(MAX('bcts_reporting annual_developed_volume'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
 			" to " & 
 			FORMAT(MAX('bcts_reporting annual_developed_volume'[report_end_date]), "MMMM DD, YYYY")
@@ -134,12 +134,13 @@ table 'bcts_reporting annual_developed_volume'
 
 	column cruise_volume
 		dataType: double
-		formatString: 0.00
 		lineageTag: ab6ba7e7-5b59-4066-969b-dec2a494bfbe
 		summarizeBy: sum
 		sourceColumn: cruise_volume
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column rw_volume
 		dataType: double
@@ -272,7 +273,7 @@ table 'bcts_reporting annual_developed_volume'
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column cutb_seq_nbr
-		dataType: double
+		dataType: int64
 		lineageTag: f1654a59-cad8-49ba-9172-f30d23fb326a
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr

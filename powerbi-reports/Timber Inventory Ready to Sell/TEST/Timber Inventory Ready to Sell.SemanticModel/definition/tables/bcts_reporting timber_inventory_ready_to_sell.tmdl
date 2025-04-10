@@ -656,8 +656,6 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
 
-		changedProperty = DataType
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -677,6 +675,37 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+	column deferral_category = ```
+			
+			IF(
+			    'bcts_reporting timber_inventory_ready_to_sell'[inventory_category] = "Ready to Sell",
+			    "Available to Sell",
+			    'bcts_reporting timber_inventory_ready_to_sell'[inventory_category]
+			)
+			
+			```
+		lineageTag: eb2eaa5c-cd6b-490c-8824-4e2260f92d48
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a53434d-a0db-4487-9d1a-7147e1de0f6e
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Development Complete Year' = ```
+			'bcts_reporting timber_inventory_ready_to_sell'[dvc_category] 
+			```
+		lineageTag: 0a948170-2254-42f8-9182-87bdfa93a1b7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 373cbcce-83e1-42f3-9a21-8ab0a3ba0161

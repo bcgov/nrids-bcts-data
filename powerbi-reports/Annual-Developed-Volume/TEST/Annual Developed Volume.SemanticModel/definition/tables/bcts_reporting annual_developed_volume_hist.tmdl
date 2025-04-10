@@ -255,7 +255,7 @@ table 'bcts_reporting annual_developed_volume_hist'
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column cutb_seq_nbr
-		dataType: double
+		dataType: int64
 		lineageTag: af381525-cebd-4754-8ea6-e50ec3a2d77b
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr

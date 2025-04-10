@@ -3,7 +3,7 @@ table 'bcts_reporting annual_development_ready'
 
 	measure 'Fiscal Period Info' = ```
 			
-			"Data shown reflects the DR period from " & 
+			"Data shown reflects period from " & 
 			FORMAT(MAX('bcts_reporting annual_development_ready'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
 			" to " & 
 			FORMAT(MAX('bcts_reporting annual_development_ready'[report_end_date]), "MMMM DD, YYYY")
@@ -248,8 +248,6 @@ table 'bcts_reporting annual_development_ready'
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
 
-		changedProperty = DataType
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -285,6 +283,15 @@ table 'bcts_reporting annual_development_ready'
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d3ece66-8276-40a1-a18e-c392949b0506
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: ed4c5ff1-5c57-4d64-8110-5727e58efd49

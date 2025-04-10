@@ -146,13 +146,14 @@ table 'bcts_reporting timber_inventory_ready_to_develop'
 
 	column cruise_vol
 		dataType: double
+		formatString: 0
 		lineageTag: 2f8e87cf-94d6-40f1-b621-5209368d06e8
 		summarizeBy: sum
 		sourceColumn: cruise_vol
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	column rw_vol
 		dataType: double

@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["bcts_reporting annual_developed_volume","bcts_repo
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
+annotation PBIDesktopVersion = 2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788
 
 annotation PBI_ProTooling = ["DevMode"]
 

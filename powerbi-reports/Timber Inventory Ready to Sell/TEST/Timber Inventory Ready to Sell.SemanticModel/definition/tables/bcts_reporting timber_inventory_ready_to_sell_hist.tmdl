@@ -603,7 +603,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 		annotation UnderlyingDateTimeDataType = Date
 
 	column cutb_seq_nbr
-		dataType: double
+		dataType: int64
 		lineageTag: 0d3e6d0c-dd14-4f11-9bcc-b27c17885c75
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr

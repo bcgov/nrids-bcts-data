@@ -1084,7 +1084,9 @@ cultureInfo en-CA
 			            "Weight": 0.99
 			          }
 			        },
-			        {},
+			        {
+			          "": {}
+			        },
 			        {
 			          "licence location": {
 			            "Type": "Noun",
@@ -1482,7 +1484,9 @@ cultureInfo en-CA
 			            "Weight": 0.99
 			          }
 			        },
-			        {},
+			        {
+			          "": {}
+			        },
 			        {
 			          "block location": {
 			            "Type": "Noun",
