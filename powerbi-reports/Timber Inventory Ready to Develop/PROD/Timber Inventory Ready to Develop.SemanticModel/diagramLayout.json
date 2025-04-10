@@ -1,0 +1,48 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "bcts_reporting timber_inventory_ready_to_develop",
+          "nodeLineageTag": "e316adfd-69a1-4f6d-9bf9-541dba2f16ae",
+          "size": {
+            "height": 300,
+            "width": 460
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 625,
+            "y": 0
+          },
+          "nodeIndex": "bcts_reporting timber_inventory_ready_to_develop_hist",
+          "nodeLineageTag": "437a118a-e51c-4278-b014-61755da093e4",
+          "size": {
+            "height": 300,
+            "width": 481
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
