@@ -603,7 +603,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 		annotation UnderlyingDateTimeDataType = Date
 
 	column cutb_seq_nbr
-		dataType: int64
+		dataType: double
 		lineageTag: 0d3e6d0c-dd14-4f11-9bcc-b27c17885c75
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
@@ -627,6 +627,54 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+	column salvage_any_fire_year
+		dataType: string
+		lineageTag: b597fa21-e7c9-4fcb-948a-e617020ba076
+		summarizeBy: none
+		sourceColumn: salvage_any_fire_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_fire_years
+		dataType: string
+		lineageTag: dfaf9a2c-7a5f-4485-9e9a-0d7ba4c9966f
+		summarizeBy: none
+		sourceColumn: salvage_fire_years
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2021_fire
+		dataType: string
+		lineageTag: 1ff908ba-2c19-4c42-8424-a3174f44ecc5
+		summarizeBy: none
+		sourceColumn: salvage_2021_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2022_fire
+		dataType: string
+		lineageTag: 5e272c19-2edf-4673-a6c4-dd219070a76a
+		summarizeBy: none
+		sourceColumn: salvage_2022_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2023_fire
+		dataType: string
+		lineageTag: b7bca8de-620f-4289-9c3a-1b807565e13d
+		summarizeBy: none
+		sourceColumn: salvage_2023_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2024_fire
+		dataType: string
+		lineageTag: 83f46f79-eb02-4083-9772-6288d65a2035
+		summarizeBy: none
+		sourceColumn: salvage_2024_fire
+
+		annotation SummarizationSetBy = Automatic
 
 	partition 'bcts_reporting timber_inventory_ready_to_sell_hist' = m
 		mode: import

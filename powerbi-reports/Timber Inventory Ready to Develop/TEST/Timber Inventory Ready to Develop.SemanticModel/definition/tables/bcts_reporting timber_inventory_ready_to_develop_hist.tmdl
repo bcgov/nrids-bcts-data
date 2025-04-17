@@ -727,7 +727,7 @@ table 'bcts_reporting timber_inventory_ready_to_develop_hist'
 		annotation SummarizationSetBy = Automatic
 
 	column cutb_seq_nbr
-		dataType: double
+		dataType: int64
 		lineageTag: 59ebb1de-a4a8-4647-8079-b693b05c0326
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr

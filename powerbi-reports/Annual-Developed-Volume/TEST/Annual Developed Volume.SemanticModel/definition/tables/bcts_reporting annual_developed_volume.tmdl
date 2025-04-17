@@ -17,6 +17,9 @@ table 'bcts_reporting annual_developed_volume'
 		lineageTag: d4fd69fe-869f-48a9-baa2-aae003a39ce0
 		summarizeBy: none
 		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -323,10 +326,25 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation SummarizationSetBy = Automatic
 
+	column business_area_region_cat_number = ```
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting annual_developed_volume'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 05f72cdd-63f4-48db-b348-80828f6968a0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 65ece705-6237-4eac-b0f6-04aee60dbf59
 
-		level business_area_region_category
+		level 'Business Area'
 			lineageTag: 22b9e532-70b9-47f0-a5cd-2f53a9089d1b
 			column: business_area_region_category
 
@@ -343,9 +361,10 @@ table 'bcts_reporting annual_developed_volume'
 		source =
 				let
 				    Source = PostgreSQL.Database("theory.bcgov:5434", "odstst"),
-				    bcts_reporting_annual_developed_volume = Source{[Schema="bcts_reporting",Item="annual_developed_volume"]}[Data]
+				    bcts_reporting_annual_developed_volume = Source{[Schema="bcts_reporting",Item="annual_developed_volume"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(bcts_reporting_annual_developed_volume,{{"business_area_region_category", "business_area_region_category"}})
 				in
-				    bcts_reporting_annual_developed_volume
+				    #"Renamed Columns"
 
 	annotation PBI_ResultType = Table
 

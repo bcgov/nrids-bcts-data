@@ -13,6 +13,9 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 		lineageTag: 5dbe92f5-dc47-4c4a-98ef-51563dde2412
 		summarizeBy: none
 		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -651,7 +654,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column cutb_seq_nbr
-		dataType: int64
+		dataType: double
 		lineageTag: 7991e81d-2c1f-4331-900b-4db3bc220d5a
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
@@ -700,17 +703,110 @@ table 'bcts_reporting timber_inventory_ready_to_sell'
 		annotation SummarizationSetBy = Automatic
 
 	column 'Development Complete Year' = ```
-			'bcts_reporting timber_inventory_ready_to_sell'[dvc_category] 
+			
+			SWITCH(
+			    'bcts_reporting timber_inventory_ready_to_sell'[dvc_category],
+			    "20/21", "2020-21",
+			    "21/22", "2021-22",
+			    "22/23", "2022-23",
+			    "23/24", "2023-24",
+			    "24/25", "2024-25",
+			    "Before 20/21", "Before 2020-21",
+			    BLANK()
+			)
+			
 			```
 		lineageTag: 0a948170-2254-42f8-9182-87bdfa93a1b7
 		summarizeBy: none
+		sortByColumn: development_complete_year_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting timber_inventory_ready_to_sell'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: f97efc76-1eaf-409c-8ba7-08f1eb62903f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column development_complete_year_order =
+			
+			SWITCH(
+			    'bcts_reporting timber_inventory_ready_to_sell'[dvc_category],
+			    "Before 20/21", 6,
+			    "20/21", 5,
+			    "21/22", 4,
+			    "22/23", 3,
+			    "23/24", 2,
+			    "24/25", 1,
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 8fdff8b8-8fa6-4ec7-9215-e84384922531
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_any_fire_year
+		dataType: string
+		lineageTag: 45451ef7-c35b-4053-8735-7465bd3d087c
+		summarizeBy: none
+		sourceColumn: salvage_any_fire_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_fire_years
+		dataType: string
+		lineageTag: 84060b76-c852-4352-8374-f71322ee38de
+		summarizeBy: none
+		sourceColumn: salvage_fire_years
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2021_fire
+		dataType: string
+		lineageTag: 71b0217f-bc91-4189-bc61-8b9990bf6bcc
+		summarizeBy: none
+		sourceColumn: salvage_2021_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2022_fire
+		dataType: string
+		lineageTag: ae37adb5-b169-4e66-b6a7-23cbe6ade991
+		summarizeBy: none
+		sourceColumn: salvage_2022_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2023_fire
+		dataType: string
+		lineageTag: 50aab949-12cd-4559-a54f-477ffbc1f1a2
+		summarizeBy: none
+		sourceColumn: salvage_2023_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2024_fire
+		dataType: string
+		lineageTag: fb299bf6-4396-48fe-9604-908980f051d1
+		summarizeBy: none
+		sourceColumn: salvage_2024_fire
 
 		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 373cbcce-83e1-42f3-9a21-8ab0a3ba0161
 
-		level business_area_region_category
+		level 'Business Area'
 			lineageTag: 7724c384-3749-4442-b3b2-e3b2a17dae91
 			column: business_area_region_category
 
