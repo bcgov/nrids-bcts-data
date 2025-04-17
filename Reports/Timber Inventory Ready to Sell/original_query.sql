@@ -115,36 +115,37 @@ select distinct
     A_D.OGS_Reactivated_Minor,
     A_D.OGS_Reactivated_Road,
     A_D.OGS_Reactivated_Re_Engineered,
-    -- decode(
-    --     SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr,
-    --     null,
-    --     'N',
-    --     'Y'
-    -- ) SALVAGE_ANY_FIRE_YEAR,
-    -- decode(
-    --     salvage21.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')'
-    -- ) as salvage_2021_fire,
-    -- decode(
-    --     salvage22.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')'
-    -- ) as salvage_2022_fire,
-    -- decode(
-    --     salvage23.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')'
-    -- ) as salvage_2023_fire,
-    -- decode(
-    --     salvage24.actt_key_ind,
-    --     null,
-    --     null,
-    --     salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')'
-    -- ) as salvage_2024_fire,
+    decode(
+        SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr,
+        null,
+        'N',
+        'Y'
+    ) SALVAGE_ANY_FIRE_YEAR,
+    SALVAGE_ANY_FIRE_YEAR.salvage_fire_years,
+    decode(
+        salvage21.actt_key_ind,
+        null,
+        null,
+        salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')'
+    ) as salvage_2021_fire,
+    decode(
+        salvage22.actt_key_ind,
+        null,
+        null,
+        salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')'
+    ) as salvage_2022_fire,
+    decode(
+        salvage23.actt_key_ind,
+        null,
+        null,
+        salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')'
+    ) as salvage_2023_fire,
+    decode(
+        salvage24.actt_key_ind,
+        null,
+        null,
+        salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')'
+    ) as salvage_2024_fire,
     B.CUTB_SEQ_NBR
 
 FROM
@@ -198,7 +199,7 @@ FROM
                             )
                         )
                     ) AND A0.ACTI_STATUS_IND = 'D'  -- Done (D)
-                    AND A0.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
+                    AND A0.ACTIVITY_DATE <= To_Date('2025-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
             )
         Pivot
             (
@@ -251,7 +252,7 @@ FROM
                 'DESI'  -- Deferred - Environmental Stewardship Initiative
             )
             AND A2.ACTI_STATUS_IND = 'D'  -- Done (D)
-            AND A2.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A2.ACTIVITY_DATE <= To_Date('2025-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
 
         GROUP BY
             A2.CUTB_SEQ_NBR
@@ -272,10 +273,11 @@ FROM
                 'RFV',  -- Deferred - Reactivated(OGS-Field Verified)
                 'RMN',  -- Deferred - Reactivated(OGS-Minor)
                 'RRD',  -- Deferred - Reactivated(OGS-Road)
-                'RRE'  -- Deferred - Reactivated(OGS-Re-Engineered)
+                'RRE',  -- Deferred - Reactivated(OGS-Re-Engineered)
+                'DRD'  -- Deferred - Reactivated(non-OGS)  -- DRD Added on 2025-03-15. BD
             )
             AND A4.ACTI_STATUS_IND = 'D'  -- Done (D)
-            AND A4.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A4.ACTIVITY_DATE <= To_Date('2025-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
         GROUP BY
             A4.CUTB_SEQ_NBR,
             A4.ACTI_STATUS_IND
@@ -304,14 +306,22 @@ FROM
         WHERE
             LA2.ACTIVITY_CLASS = 'CML'  -- Corporate Mandatory Licence (CML) activity class
             AND LA2.ACTT_KEY_IND = 'HI'  -- Licence Issued
-            AND LA2.ACTIVITY_DATE <= To_Date('2025-02-28', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND LA2.ACTIVITY_DATE <= To_Date('2025-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
             AND LA2.ACTI_STATUS_IND = 'D'  -- Done
     ) HI,
 
     /* Salvage - Any fire year */
     (
-        select distinct
-            cutb_seq_nbr
+        select
+            cutb_seq_nbr,
+            listagg( distinct
+                substr(
+                    activity_type,
+                    instr(activity_type, '2'),  -- find the first number '2' in the activity description
+                    4  -- take the 4 characters starting with the first 2 in the string to find the four-character fire yera
+                ),
+                ', '
+            ) within group (order by actt_key_ind) as salvage_fire_years
 
         from
             forestview.v_block_activity_all
@@ -319,11 +329,13 @@ FROM
         where
             activity_class = 'CSB'
             and actt_key_ind like 'SFIRE%'
+
+          group by cutb_seq_nbr
     ) SALVAGE_ANY_FIRE_YEAR,
 
     /* Salvage - 2021 Fire (calendar year of fire) */
     (
-        select distinct  -- Stafff can enter multiple CSB SFIRE21 activity for a block; use DISTINCT to include the SFIRE21 activity only once per block.
+        select distinct  -- Staff can enter multiple CSB SFIRE21 activity for a block; use DISTINCT to include the SFIRE21 activity only once per block.
             cutb_seq_nbr,
             activity_class,
             actt_key_ind,
@@ -336,7 +348,6 @@ FROM
             activity_class = 'CSB'
             and actt_key_ind = 'SFIRE21'
     ) SALVAGE21,
-
 
     /* Salvage - 2022 Fire (calendar year of fire) */
     (
@@ -356,7 +367,7 @@ FROM
 
     /* Salvage - 2023 Fire (calendar year of fire) */
     (
-        select distinct   -- Stafff can enter multiple CSB SFIRE23 activity for a block; use DISTINCT to include the SFIRE23 activity only once per block.
+        select distinct   -- Staff can enter multiple CSB SFIRE23 activity for a block; use DISTINCT to include the SFIRE23 activity only once per block.
             cutb_seq_nbr,
             activity_class,
             actt_key_ind,
@@ -372,7 +383,7 @@ FROM
 
     /* Salvage - 2024 Fire (calendar year of fire) */
     (
-        select distinct   -- Stafff can enter multiple CSB SFIRE23 activity for a block; use DISTINCT to include the SFIRE23 activity only once per block.
+        select distinct   -- Staff can enter multiple CSB SFIRE23 activity for a block; use DISTINCT to include the SFIRE23 activity only once per block.
             cutb_seq_nbr,
             activity_class,
             actt_key_ind,

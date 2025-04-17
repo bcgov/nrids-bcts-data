@@ -1,0 +1,340 @@
+table 'bcts_reporting annual_development_ready'
+	lineageTag: 993d82ee-31a4-4059-bfec-6f7ccdcc9f00
+
+	measure 'Fiscal Period Info' = ```
+			
+			"Data shown reflects period from " & 
+			FORMAT(MAX('bcts_reporting annual_development_ready'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
+			" to " & 
+			FORMAT(MAX('bcts_reporting annual_development_ready'[report_end_date]), "MMMM DD, YYYY")
+			```
+		lineageTag: 98b545ce-19be-4fd0-aea5-82c211b225cc
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: c84cbaa0-b2a0-4bbf-9a20-db1c29386210
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 31cfec7c-23da-491a-842f-795283cfec8f
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: 6cdcdf22-70a8-40f9-b6e0-47a076ee743c
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_code
+		dataType: string
+		lineageTag: a6d8b2a4-4fe2-4b21-a608-cfc202d429be
+		summarizeBy: none
+		sourceColumn: business_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column field_team
+		dataType: string
+		lineageTag: 1f434345-eb10-4c18-b28a-67a351f254d0
+		summarizeBy: none
+		sourceColumn: field_team
+
+		annotation SummarizationSetBy = Automatic
+
+	column manu_id
+		dataType: string
+		lineageTag: c129aa4c-34f3-4d89-a4b6-57a19a3f4611
+		summarizeBy: none
+		sourceColumn: manu_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column licence
+		dataType: string
+		lineageTag: d0fc8ea6-7897-41f4-9791-268d0ed9ee42
+		summarizeBy: none
+		sourceColumn: licence
+
+		annotation SummarizationSetBy = Automatic
+
+	column tenure
+		dataType: string
+		lineageTag: ced99117-77de-472c-ae5c-c0cc559fc71b
+		summarizeBy: none
+		sourceColumn: tenure
+
+		annotation SummarizationSetBy = Automatic
+
+	column perm
+		dataType: string
+		lineageTag: 9039d1a5-8ef5-495f-a883-89a4e6b525b8
+		summarizeBy: none
+		sourceColumn: perm
+
+		annotation SummarizationSetBy = Automatic
+
+	column mark
+		dataType: string
+		lineageTag: 04d2f1f8-bd1c-4ba8-a0d4-9ed7f381d5fc
+		summarizeBy: none
+		sourceColumn: mark
+
+		annotation SummarizationSetBy = Automatic
+
+	column block_id
+		dataType: string
+		lineageTag: de9024a1-7971-49d6-aebd-3a99c1e6171a
+		summarizeBy: none
+		sourceColumn: block_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ubi
+		dataType: string
+		lineageTag: d3e6303a-d856-444c-8ea1-9ecdf2a912b4
+		summarizeBy: none
+		sourceColumn: ubi
+
+		annotation SummarizationSetBy = Automatic
+
+	column block_state
+		dataType: string
+		lineageTag: 2a7e8a07-1241-45f4-a959-b674d7dd7bb9
+		summarizeBy: none
+		sourceColumn: block_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column cruise_volume
+		dataType: double
+		lineageTag: e0ed5813-45df-41cb-bb72-71280d81301f
+		summarizeBy: sum
+		sourceColumn: cruise_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rw_volume
+		dataType: double
+		lineageTag: 92a78082-df95-494a-a39e-2c66dff8fe54
+		summarizeBy: sum
+		sourceColumn: rw_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dr_done
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 1fa7e9ef-fa26-4c04-8b92-5703f2121d97
+		summarizeBy: none
+		sourceColumn: dr_done
+
+		variation Variation
+			isDefault
+			relationship: b2cdadde-5d85-4eb3-9de9-8d7be230f539
+			defaultHierarchy: LocalDateTable_e255d906-62d4-4d33-b710-34402dbff976.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column rc_status
+		dataType: string
+		lineageTag: 896d1c09-59b2-4fb0-aa87-713b42ea6a23
+		summarizeBy: none
+		sourceColumn: rc_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column rc_status_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: ecd6fe05-33cf-412a-972a-b6b1cd8cd230
+		summarizeBy: none
+		sourceColumn: rc_status_date
+
+		variation Variation
+			isDefault
+			relationship: 8a563c85-999c-4ef0-b590-ab786354777c
+			defaultHierarchy: LocalDateTable_e24f1366-84ac-4283-8adb-9fe235439f2d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column dvs_status
+		dataType: string
+		lineageTag: 08fa221d-1b48-4c5d-a4bb-c5af281e10fa
+		summarizeBy: none
+		sourceColumn: dvs_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column dvs_status_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e6ad94cb-458b-4ba2-b84b-abcab0e9e4ad
+		summarizeBy: none
+		sourceColumn: dvs_status_date
+
+		variation Variation
+			isDefault
+			relationship: be50566f-7f43-43e4-b14e-64892eeb6500
+			defaultHierarchy: LocalDateTable_584d1101-ba5b-405f-9642-f6f791cfc268.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column dvc_status
+		dataType: string
+		lineageTag: 401fdf95-f62f-4125-aa43-8aaa53bd9d6b
+		summarizeBy: none
+		sourceColumn: dvc_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column dvc_status_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: b4146789-5016-42f3-aeab-958de9a21849
+		summarizeBy: none
+		sourceColumn: dvc_status_date
+
+		variation Variation
+			isDefault
+			relationship: f176025d-c251-45b3-b291-ae85b3c775c3
+			defaultHierarchy: LocalDateTable_a3eb7ccf-1ee4-45e5-8170-6165587eeae9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column licn_seq_nbr
+		dataType: int64
+		lineageTag: 2e03948c-fb87-40d5-9cb0-7c98f77a6378
+		summarizeBy: sum
+		sourceColumn: licn_seq_nbr
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cutb_seq_nbr
+		dataType: int64
+		lineageTag: 09483aa7-b237-4f58-b58d-814bd557ee4e
+		summarizeBy: none
+		sourceColumn: cutb_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fiscal_year_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cc591e03-ec9a-4d77-889c-44f0d154bece
+		summarizeBy: none
+		sourceColumn: fiscal_year_start_date
+
+		variation Variation
+			isDefault
+			relationship: 538db740-7244-4de1-83a4-a1a894f4eb35
+			defaultHierarchy: LocalDateTable_ba1ca989-44d8-41d9-aaa4-73ae2c70b249.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 15bb6b06-2157-48ac-9207-0057e784a11f
+		summarizeBy: none
+		sourceColumn: report_end_date
+
+		variation Variation
+			isDefault
+			relationship: f71639ba-277b-407b-a467-8978cbd23f3f
+			defaultHierarchy: LocalDateTable_a975fd3d-19a5-4c72-9583-3f174d756d62.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d3ece66-8276-40a1-a18e-c392949b0506
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting annual_development_ready'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: 646191f9-9e03-4ed0-8729-c242efa577a4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: ed4c5ff1-5c57-4d64-8110-5727e58efd49
+
+		level 'Business Area'
+			lineageTag: ae28feb3-9f74-4ca5-9720-696c6388aa35
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: fbfea995-a532-4c3a-9480-246d0a9eff3a
+			column: business_area_region
+
+		level business_area
+			lineageTag: 83745851-d41e-4366-97d5-280e7c1f8882
+			column: business_area
+
+	partition 'bcts_reporting annual_development_ready' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_annual_development_ready = Source{[Schema="bcts_reporting",Item="annual_development_ready"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(bcts_reporting_annual_development_ready,{{"business_area_region_category", "business_area_region_category"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
