@@ -233,7 +233,7 @@ table 'bcts_reporting annual_development_ready_hist'
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column cutb_seq_nbr
-		dataType: double
+		dataType: int64
 		lineageTag: 85e9be0d-9f53-4487-b5a0-fd04f24594d8
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
@@ -278,7 +278,7 @@ table 'bcts_reporting annual_development_ready_hist'
 		mode: import
 		source =
 				let
-				    Source = PostgreSQL.Database("theory.bcgov:5434", "odstst"),
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
 				    bcts_reporting_annual_development_ready_hist = Source{[Schema="bcts_reporting",Item="annual_development_ready_hist"]}[Data]
 				in
 				    bcts_reporting_annual_development_ready_hist

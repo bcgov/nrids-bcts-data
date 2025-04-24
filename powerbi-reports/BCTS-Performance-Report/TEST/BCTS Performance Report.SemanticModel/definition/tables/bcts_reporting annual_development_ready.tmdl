@@ -3,7 +3,7 @@ table 'bcts_reporting annual_development_ready'
 
 	measure 'Fiscal Period Info' = ```
 			
-			"Data shown reflects the DR period from " & 
+			"Data shown reflects period from " & 
 			FORMAT(MAX('bcts_reporting annual_development_ready'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
 			" to " & 
 			FORMAT(MAX('bcts_reporting annual_development_ready'[report_end_date]), "MMMM DD, YYYY")
@@ -15,6 +15,9 @@ table 'bcts_reporting annual_development_ready'
 		lineageTag: c84cbaa0-b2a0-4bbf-9a20-db1c29386210
 		summarizeBy: none
 		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -248,8 +251,6 @@ table 'bcts_reporting annual_development_ready'
 		summarizeBy: none
 		sourceColumn: cutb_seq_nbr
 
-		changedProperty = DataType
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -286,10 +287,32 @@ table 'bcts_reporting annual_development_ready'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d3ece66-8276-40a1-a18e-c392949b0506
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting annual_development_ready'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: 646191f9-9e03-4ed0-8729-c242efa577a4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: ed4c5ff1-5c57-4d64-8110-5727e58efd49
 
-		level business_area_region_category
+		level 'Business Area'
 			lineageTag: ae28feb3-9f74-4ca5-9720-696c6388aa35
 			column: business_area_region_category
 
@@ -305,8 +328,13 @@ table 'bcts_reporting annual_development_ready'
 		mode: import
 		source =
 				let
-				    Source = PostgreSQL.Database("theory.bcgov:5434", "odstst"),
-				    bcts_reporting_annual_development_ready = Source{[Schema="bcts_reporting",Item="annual_development_ready"]}[Data]
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_annual_development_ready = Source{[Schema="bcts_reporting",Item="annual_development_ready"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(bcts_reporting_annual_development_ready,{{"business_area_region_category", "business_area_region_category"}})
 				in
-				    bcts_reporting_annual_development_ready
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
 
