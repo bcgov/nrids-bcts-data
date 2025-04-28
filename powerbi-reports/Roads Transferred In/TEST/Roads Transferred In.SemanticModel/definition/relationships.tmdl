@@ -1,0 +1,30 @@
+relationship eee18ca4-7341-45b4-8629-89b83d126735
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in'.transfer_date
+	toColumn: LocalDateTable_6b5479ed-c383-4094-b0d2-8611f45baf15.Date
+
+relationship f0273c50-4e87-437b-9538-709ef91ce7ed
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in'.fiscal_year_start_date
+	toColumn: LocalDateTable_824de542-0de4-4c48-86ca-94cb2b5cb8e4.Date
+
+relationship 5b0db60b-e4c1-4c01-a538-587da909917b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in'.report_end_date
+	toColumn: LocalDateTable_df9dcbcc-4043-4a2b-a063-7945b7c830e9.Date
+
+relationship d25e8679-b775-463f-a67b-6edab8c4cd5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in_hist'.transfer_date
+	toColumn: LocalDateTable_b8629b0f-b2c5-4f6d-9a40-dcc0a8f7e4c3.Date
+
+relationship ccca64eb-7772-4077-bd15-11783aa4690f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in_hist'.fiscal_year_start_date
+	toColumn: LocalDateTable_6e2ceef3-eb4d-4748-9277-c91ceaa0ce4b.Date
+
+relationship 553fc57c-38dd-4d88-82c3-585aa1f676bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_transferred_in_hist'.report_end_date
+	toColumn: LocalDateTable_c3dc3ade-88d8-4170-a988-a07d496f6656.Date
+
