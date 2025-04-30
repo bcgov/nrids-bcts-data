@@ -630,7 +630,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_any_fire_year
 		dataType: string
-		lineageTag: b597fa21-e7c9-4fcb-948a-e617020ba076
+		lineageTag: f2ecb651-5e08-44f7-a041-9e3154d2e8ee
 		summarizeBy: none
 		sourceColumn: salvage_any_fire_year
 
@@ -638,7 +638,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_fire_years
 		dataType: string
-		lineageTag: dfaf9a2c-7a5f-4485-9e9a-0d7ba4c9966f
+		lineageTag: 15b207e9-f09d-4635-9555-a39f6496fe0d
 		summarizeBy: none
 		sourceColumn: salvage_fire_years
 
@@ -646,7 +646,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2021_fire
 		dataType: string
-		lineageTag: 1ff908ba-2c19-4c42-8424-a3174f44ecc5
+		lineageTag: d557be54-895c-4b30-a25c-5f164afdf9fc
 		summarizeBy: none
 		sourceColumn: salvage_2021_fire
 
@@ -654,7 +654,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2022_fire
 		dataType: string
-		lineageTag: 5e272c19-2edf-4673-a6c4-dd219070a76a
+		lineageTag: f6144fe7-1894-4ef4-8613-a518a467fc45
 		summarizeBy: none
 		sourceColumn: salvage_2022_fire
 
@@ -662,7 +662,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2023_fire
 		dataType: string
-		lineageTag: b7bca8de-620f-4289-9c3a-1b807565e13d
+		lineageTag: 4e9cd520-9287-44df-9a6b-73a8888ea7bd
 		summarizeBy: none
 		sourceColumn: salvage_2023_fire
 
@@ -670,7 +670,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2024_fire
 		dataType: string
-		lineageTag: 83f46f79-eb02-4083-9772-6288d65a2035
+		lineageTag: bda2bfd6-3339-46c2-aa66-c6a8403afd60
 		summarizeBy: none
 		sourceColumn: salvage_2024_fire
 
