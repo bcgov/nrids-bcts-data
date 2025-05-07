@@ -630,7 +630,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_any_fire_year
 		dataType: string
-		lineageTag: b597fa21-e7c9-4fcb-948a-e617020ba076
+		lineageTag: 1df13c95-c270-423f-84f3-86592f96f464
 		summarizeBy: none
 		sourceColumn: salvage_any_fire_year
 
@@ -638,7 +638,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_fire_years
 		dataType: string
-		lineageTag: dfaf9a2c-7a5f-4485-9e9a-0d7ba4c9966f
+		lineageTag: 3130feeb-417b-4fc7-9dd5-95648d144782
 		summarizeBy: none
 		sourceColumn: salvage_fire_years
 
@@ -646,7 +646,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2021_fire
 		dataType: string
-		lineageTag: 1ff908ba-2c19-4c42-8424-a3174f44ecc5
+		lineageTag: 4719797d-f5b0-44b6-a509-3b0e6ae04ad8
 		summarizeBy: none
 		sourceColumn: salvage_2021_fire
 
@@ -654,7 +654,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2022_fire
 		dataType: string
-		lineageTag: 5e272c19-2edf-4673-a6c4-dd219070a76a
+		lineageTag: 11d1c775-ff16-4099-a4f2-4c1ff87a18f3
 		summarizeBy: none
 		sourceColumn: salvage_2022_fire
 
@@ -662,7 +662,7 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2023_fire
 		dataType: string
-		lineageTag: b7bca8de-620f-4289-9c3a-1b807565e13d
+		lineageTag: 40f075a0-0b19-473e-a445-3dff0097001b
 		summarizeBy: none
 		sourceColumn: salvage_2023_fire
 
@@ -670,11 +670,51 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 	column salvage_2024_fire
 		dataType: string
-		lineageTag: 83f46f79-eb02-4083-9772-6288d65a2035
+		lineageTag: 6570a73e-c56b-4fc6-ad61-c7015acaf549
 		summarizeBy: none
 		sourceColumn: salvage_2024_fire
 
 		annotation SummarizationSetBy = Automatic
+
+	column deferred_activity
+		dataType: string
+		lineageTag: fe771b81-1de3-460b-a27f-4a78c8de6a41
+		summarizeBy: none
+		sourceColumn: deferred_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_deferral_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cc28249f-0587-4ffe-ba11-c40aaaa6c19a
+		summarizeBy: none
+		sourceColumn: latest_deferral_date
+
+		variation Variation
+			isDefault
+			relationship: 9863dec3-02e1-493f-9c8d-4df1874ad852
+			defaultHierarchy: LocalDateTable_9a78b732-09f5-4099-886d-8e18d3d6f78f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d7aeeb0e-88a2-4234-b0bc-24c904ddb5c9
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: 73969af5-eedc-46e8-b575-bb3a32371cab
+			defaultHierarchy: LocalDateTable_1902b7b7-8dea-4e18-bfd1-3193c08b75e3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	partition 'bcts_reporting timber_inventory_ready_to_sell_hist' = m
 		mode: import

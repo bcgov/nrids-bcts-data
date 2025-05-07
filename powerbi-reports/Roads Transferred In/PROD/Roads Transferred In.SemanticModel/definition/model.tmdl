@@ -1,0 +1,30 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting roads_transferred_in","bcts_reporting roads_transferred_in_hist"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting roads_transferred_in'
+ref table DateTableTemplate_9b3e93ce-5195-485a-b574-d39605c0ba88
+ref table LocalDateTable_6b5479ed-c383-4094-b0d2-8611f45baf15
+ref table LocalDateTable_824de542-0de4-4c48-86ca-94cb2b5cb8e4
+ref table LocalDateTable_df9dcbcc-4043-4a2b-a063-7945b7c830e9
+ref table 'bcts_reporting roads_transferred_in_hist'
+ref table LocalDateTable_b8629b0f-b2c5-4f6d-9a40-dcc0a8f7e4c3
+ref table LocalDateTable_6e2ceef3-eb4d-4748-9277-c91ceaa0ce4b
+ref table LocalDateTable_c3dc3ade-88d8-4170-a988-a07d496f6656
+ref table LocalDateTable_fe7412eb-9c9a-4ef0-b72d-92a6690332b8
+ref table LocalDateTable_a2e86eea-80eb-412b-8a7c-61681d2eebeb
+
+ref cultureInfo en-CA
+
