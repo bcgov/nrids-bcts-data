@@ -57,7 +57,7 @@ WITH A_D AS
                                 'DPC',  -- Deferred - Planning Constraint
                                 'DRB',  -- Deferred - Returned to BCTS
                                 'DSD',  -- Deferred - Stale-dated Fieldwork
-                                'DSI',  -- Deferred - Stakeholder Issue
+                                'DSI',  -- Deferred - Stakeholder Issue160005518
                                 'DESI',  -- Deferred - Environmental Stewardship Initiative
                                 'DRD',  -- Deferred - Reactivated(non-OGS)
                                 'RFH',  -- Deferred - Reactivated(OGS-Forest Health)
@@ -73,6 +73,23 @@ WITH A_D AS
             ) TEMP
 
             GROUP BY CUTB_SEQ_NBR
+    ),
+DF AS
+    /* Deferral Block Activity and Date */
+    (SELECT DISTINCT ON (cutb_seq_nbr) 
+        cutb_seq_nbr,
+        activity_date as Latest_Deferral_Date,
+        activity_type as DEFERRED_ACTIVITY
+    FROM 
+        lrm_replication.v_block_activity_all DA1
+    WHERE  
+        acti_status_ind = 'D' 
+        AND activity_class = 'CSB'
+        AND DA1.ACTT_KEY_IND In ('DCP', 'DFN', 'DLA', 'DOG', 'DOR', 'DPC', 'DRB', 'DSD', 'DSI', 'DESI') 
+        AND DA1.ACTIVITY_DATE <= To_Date('2025-03-31', 'YYYY-MM-DD')  -- Date: end of reporting period
+    ORDER BY 
+        cutb_seq_nbr, 
+        activity_date DESC
     ),
 
 	LDF AS
@@ -339,6 +356,8 @@ select distinct
         ELSE
             'Ready to Sell'
         END AS INVENTORY_CATEGORY,
+    DF.DEFERRED_ACTIVITY,
+    DF.LATEST_DEFERRAL_DATE,
     BS.SPATIAL_FLAG,
     B.CRUISE_VOL,
     B.BLAL_RW_VOL AS RW_VOL,
@@ -405,6 +424,8 @@ FROM
 	ON B.CUTB_SEQ_NBR = LDF.CUTB_SEQ_NBR 
 	LEFT JOIN LRCT
 	ON B.CUTB_SEQ_NBR = LRCT.CUTB_SEQ_NBR 
+	LEFT JOIN DF
+	ON B.CUTB_SEQ_NBR = DF.CUTB_SEQ_NBR
 	LEFT JOIN LRM_REPLICATION.V_BLOCK_SPATIAL BS
 	ON B.CUTB_SEQ_NBR = BS.CUTB_SEQ_NBR 
 	LEFT JOIN LRM_REPLICATION.V_LICENCE L

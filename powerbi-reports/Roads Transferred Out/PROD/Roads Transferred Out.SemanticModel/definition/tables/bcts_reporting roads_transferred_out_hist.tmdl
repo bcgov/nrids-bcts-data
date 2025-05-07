@@ -1,0 +1,200 @@
+table 'bcts_reporting roads_transferred_out_hist'
+	lineageTag: 4414d62e-4117-4cbd-b895-a1a304a88c14
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: e886eadf-8224-45d5-a810-282a4bb52535
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 5c071245-0f68-4009-9b48-189d3cda2292
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: f6a78fb0-b6c0-4c62-a133-56dd3430ca65
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_code
+		dataType: string
+		lineageTag: a550bf13-0976-4eaf-8257-f266937e8d25
+		summarizeBy: none
+		sourceColumn: business_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column road_seq_nbr
+		dataType: double
+		lineageTag: 37a6b4d2-057d-4c74-b96a-4051b558f9dd
+		summarizeBy: sum
+		sourceColumn: road_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column uri
+		dataType: string
+		lineageTag: 08077cdf-ad1a-4a17-bbd1-93aaf3a083a2
+		summarizeBy: none
+		sourceColumn: uri
+
+		annotation SummarizationSetBy = Automatic
+
+	column road_road_name
+		dataType: string
+		lineageTag: d615b09b-2862-4c39-b6f3-61c0e7250bac
+		summarizeBy: none
+		sourceColumn: road_road_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column rcls_accounting_type
+		dataType: string
+		lineageTag: a451bc0d-c9db-4a77-b030-9eb324c24b59
+		summarizeBy: none
+		sourceColumn: rcls_accounting_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column poc
+		dataType: double
+		lineageTag: 900adb76-cd8e-4951-8d3b-881c9d2fd2ef
+		summarizeBy: sum
+		sourceColumn: poc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pot
+		dataType: double
+		lineageTag: 00ea3c3a-f9a1-4931-900e-7082632a8690
+		summarizeBy: sum
+		sourceColumn: pot
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column length
+		dataType: double
+		lineageTag: 2155014d-9a4b-40bc-aadd-ad5a17895567
+		summarizeBy: sum
+		sourceColumn: length
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column transfer_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7a9b0c6a-0d7c-4e4d-be75-9a1d83b81961
+		summarizeBy: none
+		sourceColumn: transfer_date
+
+		variation Variation
+			isDefault
+			relationship: d8b3ffec-bb4d-41c9-a042-2603b71c2435
+			defaultHierarchy: LocalDateTable_d379bc28-749d-4e9f-b1e5-672fa7315a17.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column deac_method_type
+		dataType: string
+		lineageTag: 430c610e-552d-446c-8c1b-7e0c1fe65d53
+		summarizeBy: none
+		sourceColumn: deac_method_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column deac_level_type
+		dataType: string
+		lineageTag: 3974e3d2-64b1-4d2f-93b4-0d50a3fb95c9
+		summarizeBy: none
+		sourceColumn: deac_level_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column rdst_steward_name
+		dataType: string
+		lineageTag: f65714c1-7c49-4b05-8e38-1d1fb7f31938
+		summarizeBy: none
+		sourceColumn: rdst_steward_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscal_year_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c36107a3-531f-4552-964e-39bc16ea81ec
+		summarizeBy: none
+		sourceColumn: fiscal_year_start_date
+
+		variation Variation
+			isDefault
+			relationship: b2a011aa-d7c3-4b3b-a86c-2f40db31eb08
+			defaultHierarchy: LocalDateTable_64c967a5-dd73-4d6c-a128-9300bcee5e3a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: caabeb2e-7738-49a1-a105-0784c830f04e
+		summarizeBy: none
+		sourceColumn: report_end_date
+
+		variation Variation
+			isDefault
+			relationship: 0b077544-2916-4fb3-bbec-80a746c5c267
+			defaultHierarchy: LocalDateTable_e290c399-0794-497e-9109-57b358172a38.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1eaee8e7-f5ba-43ef-a9e1-857b1a4752d5
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: fe60fbb6-6738-4170-9af3-6a2e22461843
+			defaultHierarchy: LocalDateTable_1025749d-5364-4818-9452-d861eea7ebfd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'bcts_reporting roads_transferred_out_hist' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_roads_transferred_out_hist = Source{[Schema="bcts_reporting",Item="roads_transferred_out_hist"]}[Data]
+				in
+				    bcts_reporting_roads_transferred_out_hist
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
