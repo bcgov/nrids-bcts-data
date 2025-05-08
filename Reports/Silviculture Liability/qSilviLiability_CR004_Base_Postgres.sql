@@ -99,7 +99,7 @@ NAR AS
 
     GROUP BY
         SILP.CUTB_SEQ_NBR
-) NAR,
+),
 
 /* Need Planting - ART */
 ART AS
@@ -350,7 +350,7 @@ SAC AS
 (
     SELECT
         SAC0.SILA_SEQ_NBR,
-        NVL(SAC0.PLUN_SEQ_NBR, 0) AS PLUN_SEQ_NBR,
+        COALESCE(SAC0.PLUN_SEQ_NBR, 0) AS PLUN_SEQ_NBR,
         SAC0.ITEM_TOTAL_PLANNED,
         SAC0.ITEM_TOTAL_ACTUAL,
         CI0.CSTI_COST_ITEM_ACCOUNT_CODE AS PLANNED_SERVICE_LINE,
@@ -501,12 +501,10 @@ S AS
                 SAC.ACTUAL_COST_ITEM_ID,
                 SAC.PLANNED_COST_ITEM_ID
             ) AS SILA_RANK,
-        DECODE(
-            SA.PLUN_SEQ_NBR,
-            0,
-            NULL,
-            SA.PLUN_SEQ_NBR
-        ) AS PLUN_SEQ_NBR,
+        CASE
+            WHEN SA.PLUN_SEQ_NBR = 0 THEN NULL
+            ELSE SA.PLUN_SEQ_NBR
+        END AS PLUN_SEQ_NBR,
         SA.SILA_SEQ_NBR,
         SA.SICA_SEQ_NBR,
         SA.CUTB_SEQ_NBR
@@ -616,7 +614,7 @@ SALVAGE24 AS
     where
         activity_class = 'CSB'
         and actt_key_ind = 'SFIRE24'
-)
+),
 
 /* Salvage - 2025 Fire (calendar year of fire) */
 SALVAGE25 AS
@@ -636,6 +634,7 @@ where
 ),
 
 /* Free Growing Met, Done (FG) */
+FG AS
 (
 SELECT
     af.cutb_seq_nbr,
@@ -653,39 +652,19 @@ WHERE
     AND atypef.actt_key_ind = 'FG'  -- Free Growing Met
     AND acf.accl_description = 'CMB'  -- Corporate Mandatory Block (CMB) activity class
     AND af.Acti_status_ind = 'D'  -- Done (D)
-) FG
+) 
 
 SELECT
-    case
-        when
-            FD.DIVI_SHORT_CODE in ('TBA', 'TPL', 'TPG', 'TSK', 'TSN', 'TCC', 'TKA', 'TKO', 'TOC')
-        then
-            'Interior'
-        when
-            FD.DIVI_SHORT_CODE in ('TCH', 'TST', 'TSG')
-        then
-            'Coast'
-        end as BUSINESS_AREA_REGION_CATEGORY,
-    case
-        when
-            FD.DIVI_SHORT_CODE in ('TBA', 'TPL', 'TPG', 'TSK', 'TSN')
-        then
-            'North Interior'
-        when
-            FD.DIVI_SHORT_CODE in ('TCC', 'TKA', 'TKO', 'TOC')
-        then
-            'South Interior'
-        when
-            FD.DIVI_SHORT_CODE in ('TCH', 'TST', 'TSG')
-        then
-            'Coast'
-        end as BUSINESS_AREA_REGION,
-    decode(
-        FD.DIVI_DIVISION_NAME,
-        'Seaward',
-        'Seaward-Tlasta',
-        FD.DIVI_DIVISION_NAME
-    ) || ' (' || FD.DIVI_SHORT_CODE || ')' AS BUSINESS_AREA,
+    CASE
+        WHEN FD.DIVI_SHORT_CODE IN ('TBA', 'TPL', 'TPG', 'TSK', 'TSN', 'TCC', 'TKA', 'TKO', 'TOC') THEN 'Interior'
+        WHEN FD.DIVI_SHORT_CODE IN ('TCH', 'TST', 'TSG') THEN 'Coast'
+    END AS BUSINESS_AREA_REGION_CATEGORY,
+    CASE
+        WHEN FD.DIVI_SHORT_CODE IN ('TBA', 'TPL', 'TPG', 'TSK', 'TSN') THEN 'North Interior'
+        WHEN FD.DIVI_SHORT_CODE IN ('TCC', 'TKA', 'TKO', 'TOC') THEN 'South Interior'
+        WHEN FD.DIVI_SHORT_CODE IN ('TCH', 'TST', 'TSG') THEN 'Coast'
+    END AS BUSINESS_AREA_REGION,
+    COALESCE(NULLIF(FD.DIVI_DIVISION_NAME, 'Seaward'), 'Seaward-Tlasta') || ' (' || FD.DIVI_SHORT_CODE || ')' AS BUSINESS_AREA,
     FD.DIVI_ABBREVIATION_CODE AS BUSINESS_AREA_CODE,
     LKF.COLU_LOOKUP_DESC AS FIELD_TEAM,
     MU.MANU_ID,
@@ -709,9 +688,10 @@ SELECT
     BIO.BIO_VARIANT,
     HV.HVS_STATUS,
     HV.HVS_DATE,
-    EXTRACT(YEAR FROM ADD_MONTHS(HV.HVS_DATE, 9)) AS HVS_FISCAL,
-    HV.HVC_STATUS, HV.HVC_DATE,
-    EXTRACT(YEAR FROM ADD_MONTHS(HV.HVC_DATE, 9)) AS HVC_FISCAL,
+    EXTRACT(YEAR FROM HV.HVS_DATE + INTERVAL '9 MONTH') AS HVS_FISCAL,
+    HV.HVC_STATUS,
+    HV.HVC_DATE,
+    EXTRACT(YEAR FROM HV.HVC_DATE + INTERVAL '9 MONTH') AS HVC_FISCAL,
     S.SILA_TREATMENT_UNIT_ID AS TREATMENT_UNIT,
     CB.FUND_FUNDING_CODE AS BLOCK_FUNDING,
     S.ACTIVITY_FUNDING,
@@ -719,129 +699,87 @@ SELECT
     S.SIAT_TECHNIQUE_CODE AS TECHNIQUE,
     S.SIAM_METHOD_CODE AS METHOD,
     S.SICA_ACTIVITY_NAME AS ACTIVITY,
-    DECODE (
-        S.SILA_STATUS,
-        'P',
-        'PLANNED',
-        'D',
-        'DONE',
-        S.SILA_STATUS
-    ) AS STATUS,
+    CASE
+        WHEN S.SILA_STATUS = 'P' THEN 'PLANNED'
+        WHEN S.SILA_STATUS = 'D' THEN 'DONE'
+        ELSE S.SILA_STATUS
+    END AS STATUS,
     S.SILA_START_DATE AS START_DATE,
-    EXTRACT(YEAR FROM ADD_MONTHS(S.SILA_START_DATE, 9)) AS START_FISCAL,
+    EXTRACT(YEAR FROM S.SILA_START_DATE + INTERVAL '9 MONTH') AS START_FISCAL,
     S.SILA_COMPLETION_DATE AS COMPLETE_DATE,
-    EXTRACT(YEAR FROM ADD_MONTHS(S.SILA_COMPLETION_DATE, 9)) AS COMPLETE_FISCAL,
-    DECODE(
-        SILA_RANK,
-        1,
-        S.SILA_GROSS_HA_AREA,
-        NULL
-    ) AS TREATMENT_AREA,
-    DECODE(
-        SILA_RANK,
-        1,
-        TO_CHAR (ROUND (S.SILA_GROSS_HA_AREA, 1)),
-        NULL
-    ) AS SILA_GROSS_AREA_CHAR,
-    DECODE(
-        SILA_RANK,
-        1,
-        CASE
-            WHEN
-                S.ITEMS_TOTAL_PLANNED > 0
-                AND S.SILA_GROSS_HA_AREA > 0
-            THEN
-                ROUND(S.ITEMS_TOTAL_PLANNED/S.SILA_GROSS_HA_AREA, 2)
-            ELSE
-                S.SILA_COST_PER_HA_PLAN
-            END,
-        NULL
-    ) AS COST_PER_HA_PLAN,
-    DECODE(
-        SILA_RANK,
-        1,
-        CASE
-            WHEN
-                S.ITEMS_TOTAL_ACTUAL > 0
-                AND S.SILA_GROSS_HA_AREA > 0
-            THEN
-                ROUND(S.ITEMS_TOTAL_ACTUAL / S.SILA_GROSS_HA_AREA, 2)
-            ELSE
-                S.SILA_COST_PER_HA
-            END,
-        NULL
-    ) AS COST_PER_HA,
-    DECODE(
-        SILA_RANK,
-        1,
-        ROUND(
-            DECODE(
-                NVL(S.ITEMS_TOTAL_PLANNED, 0),
-                0,
-                S.SILA_COST_PER_HA_PLAN * S.SILA_GROSS_HA_AREA,
-                S.ITEMS_TOTAL_PLANNED
-            ), 2
-        ),
-        NULL
-    ) AS PLANNED_TOTAL_COST,
-    DECODE(
-        SILA_RANK,
-        1,
-        ROUND(S.SILA_GROSS_HA_AREA * S.SILA_COST_PER_HA_PLAN, 2),
-        NULL
-    ) AS COST_PER_HA_PLAN_x_HA,
-    DECODE(
-        SILA_RANK,
-        1,
-        ROUND(
-            DECODE(
-                NVL(S.ITEMS_TOTAL_ACTUAL, 0),
-                0,
-                S.SILA_COST_PER_HA * S.SILA_GROSS_HA_AREA,
-                S.ITEMS_TOTAL_ACTUAL
-            ),
-            2
-        ),
-        NULL
-    ) AS ACTUAL_TOTAL_COST,
-    DECODE(
-        SILA_RANK,
-        1,
-        ROUND(S.SILA_GROSS_HA_AREA * S.SILA_COST_PER_HA, 2),
-        NULL
-    ) AS COST_PER_HA_x_HA,
+    EXTRACT(YEAR FROM S.SILA_COMPLETION_DATE + INTERVAL '9 MONTH') AS COMPLETE_FISCAL,
+    CASE
+        WHEN SILA_RANK = 1 THEN S.SILA_GROSS_HA_AREA
+        ELSE NULL
+    END AS TREATMENT_AREA,
+    CASE
+        WHEN SILA_RANK = 1 THEN ROUND(S.SILA_GROSS_HA_AREA, 1)::TEXT
+        ELSE NULL
+    END AS SILA_GROSS_AREA_CHAR,
+    CASE
+        WHEN SILA_RANK = 1 THEN
+            CASE
+                WHEN S.ITEMS_TOTAL_PLANNED > 0 AND S.SILA_GROSS_HA_AREA > 0 THEN ROUND(S.ITEMS_TOTAL_PLANNED / S.SILA_GROSS_HA_AREA, 2)
+                ELSE S.SILA_COST_PER_HA_PLAN
+            END
+        ELSE NULL
+    END AS COST_PER_HA_PLAN,
+    CASE
+        WHEN SILA_RANK = 1 THEN
+            CASE
+                WHEN S.ITEMS_TOTAL_ACTUAL > 0 AND S.SILA_GROSS_HA_AREA > 0 THEN ROUND(S.ITEMS_TOTAL_ACTUAL / S.SILA_GROSS_HA_AREA, 2)
+                ELSE S.SILA_COST_PER_HA
+            END
+        ELSE NULL
+    END AS COST_PER_HA,
+    CASE
+        WHEN SILA_RANK = 1 THEN ROUND(
+            CASE
+                WHEN COALESCE(S.ITEMS_TOTAL_PLANNED, 0) = 0 THEN S.SILA_COST_PER_HA_PLAN * S.SILA_GROSS_HA_AREA
+                ELSE S.ITEMS_TOTAL_PLANNED
+            END, 2)
+        ELSE NULL
+    END AS PLANNED_TOTAL_COST,
+    CASE
+        WHEN SILA_RANK = 1 THEN ROUND(S.SILA_GROSS_HA_AREA * S.SILA_COST_PER_HA_PLAN, 2)
+        ELSE NULL
+    END AS COST_PER_HA_PLAN_x_HA,
+    CASE
+        WHEN SILA_RANK = 1 THEN ROUND(
+            CASE
+                WHEN COALESCE(S.ITEMS_TOTAL_ACTUAL, 0) = 0 THEN S.SILA_COST_PER_HA * S.SILA_GROSS_HA_AREA
+                ELSE S.ITEMS_TOTAL_ACTUAL
+            END, 2)
+        ELSE NULL
+    END AS ACTUAL_TOTAL_COST,
+    CASE
+        WHEN SILA_RANK = 1 THEN ROUND(S.SILA_GROSS_HA_AREA * S.SILA_COST_PER_HA, 2)
+        ELSE NULL
+    END AS COST_PER_HA_x_HA,
     S.PLANNED_SERVICE_LINE,
     S.PLANNED_SL_DESCRIPTION,
-    DECODE(
-        SILA_RANK,
-        1,
-        S.ITEMS_TOTAL_PLANNED,
-        NULL
-    ) AS ITEMS_PLANNED_TOTAL_COST,
+    CASE
+        WHEN SILA_RANK = 1 THEN S.ITEMS_TOTAL_PLANNED
+        ELSE NULL
+    END AS ITEMS_PLANNED_TOTAL_COST,
     S.ACTUAL_SERVICE_LINE,
     S.ACTUAL_SL_DESCRIPTION,
-    DECODE(
-        SILA_RANK,
-        1,
-        S.ITEMS_TOTAL_ACTUAL,
-        NULL
-    ) AS ITEMS_ACTUAL_TOTAL_COST,
+    CASE
+        WHEN SILA_RANK = 1 THEN S.ITEMS_TOTAL_ACTUAL
+        ELSE NULL
+    END AS ITEMS_ACTUAL_TOTAL_COST,
     S.PLUN_PLANTING_UNIT_ID AS PLANTING_UNIT,
     S.PLUN_DIGITISED_IND,
     S.PLUN_PLANTING_PLAN_COST AS PLUN_PLANNED_TOTAL_COST,
-    DECODE(
-        S.SIAB_BASE_CODE,
-        'PL',
-        S.ITEM_TOTAL_PLANNED,
-        NULL
-    ) AS PLUN_ITEM_PLANNED_TOTAL_COST,
+    CASE
+        WHEN S.SIAB_BASE_CODE = 'PL' THEN S.ITEM_TOTAL_PLANNED
+        ELSE NULL
+    END AS PLUN_ITEM_PLANNED_TOTAL_COST,
     S.PLUN_PLANTING_COST AS PLUN_ACTUAL_TOTAL_COST,
-    DECODE(
-        S.SIAB_BASE_CODE,
-        'PL',
-        S.ITEM_TOTAL_ACTUAL,
-        NULL
-    ) AS PLUN_ITEM_ACTUAL_TOTAL_COST,
+    CASE
+        WHEN S.SIAB_BASE_CODE = 'PL' THEN S.ITEM_TOTAL_ACTUAL
+        ELSE NULL
+    END AS PLUN_ITEM_ACTUAL_TOTAL_COST,
     S.PLUN_HA_AREA,
     S.PLUN_NET_AREA,
     S.PLUN_DENSITY,
@@ -853,55 +791,39 @@ SELECT
     S.PLUN_MODIFIEDUSING,
     S.MODIFIEDBY,
     S.MODIFIEDON,
-    DECODE(
-        SILA_RANK,
-        1,
-        'Y',
-        'N'
-    ) AS PRIMARY_RECORD,
-    Decode(
-        art.cutb_seq_nbr,
-        Null,
-        'N',
-        'Y'
-    ) Need_Planting,
-        decode(
-        SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr,
-        null,
-        'N',
-        'Y'
-    ) SALVAGE_ANY_FIRE_YEAR,
+    CASE
+        WHEN SILA_RANK = 1 THEN 'Y'
+        ELSE 'N'
+    END AS PRIMARY_RECORD,
+    CASE
+        WHEN art.cutb_seq_nbr IS NULL THEN 'N'
+        ELSE 'Y'
+    END AS Need_Planting,
+    CASE
+        WHEN SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr IS NULL THEN 'N'
+        ELSE 'Y'
+    END AS SALVAGE_ANY_FIRE_YEAR,
     SALVAGE_ANY_FIRE_YEAR.salvage_fire_years,
-    decode(
-        salvage21.actt_key_ind,
-        null,
-        null,
-        salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')'
-    ) as salvage_2021_fire,
-    decode(
-        salvage22.actt_key_ind,
-        null,
-        null,
-        salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')'
-    ) as salvage_2022_fire,
-    decode(
-        salvage23.actt_key_ind,
-        null,
-        null,
-        salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')'
-    ) as salvage_2023_fire,
-    decode(
-        salvage24.actt_key_ind,
-        null,
-        null,
-        salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')'
-    ) as salvage_2024_fire,
-    decode(
-        salvage25.actt_key_ind,
-        null,
-        null,
-        salvage25.activity_type || ' (' || salvage25.activity_class || ' - ' || salvage25.actt_key_ind || ')'
-    ) as salvage_2025_fire,
+    CASE
+        WHEN salvage21.actt_key_ind IS NULL THEN NULL
+        ELSE salvage21.activity_type || ' (' || salvage21.activity_class || ' - ' || salvage21.actt_key_ind || ')'
+    END AS salvage_2021_fire,
+    CASE
+        WHEN salvage22.actt_key_ind IS NULL THEN NULL
+        ELSE salvage22.activity_type || ' (' || salvage22.activity_class || ' - ' || salvage22.actt_key_ind || ')'
+    END AS salvage_2022_fire,
+    CASE
+        WHEN salvage23.actt_key_ind IS NULL THEN NULL
+        ELSE salvage23.activity_type || ' (' || salvage23.activity_class || ' - ' || salvage23.actt_key_ind || ')'
+    END AS salvage_2023_fire,
+    CASE
+        WHEN salvage24.actt_key_ind IS NULL THEN NULL
+        ELSE salvage24.activity_type || ' (' || salvage24.activity_class || ' - ' || salvage24.actt_key_ind || ')'
+    END AS salvage_2024_fire,
+    CASE
+        WHEN salvage25.actt_key_ind IS NULL THEN NULL
+        ELSE salvage25.activity_type || ' (' || salvage25.activity_class || ' - ' || salvage25.actt_key_ind || ')'
+    END AS salvage_2025_fire,
     FG.FG_Done,
     S.PLUN_SEQ_NBR,
     S.SILA_SEQ_NBR,
@@ -909,40 +831,51 @@ SELECT
     BLAL.CUTB_SEQ_NBR,
     LICN.LICN_SEQ_NBR
 
-FROM
-    LRM_REPLICATION.DIVISION FD,
-    LRM_REPLICATION.BLOCK_ALLOCATION BLAL,
-    LRM_REPLICATION.MANAGEMENT_UNIT MU,
-    LRM_REPLICATION.CUT_BLOCK CB,
-    LRM_REPLICATION.LICENCE LICN,
-    LRM_REPLICATION.TENURE_TYPE TENT,
-    LRM_REPLICATION.CODE_LOOKUP LKF,
 
-    
-WHERE
-    FD.DIVI_DIV_NBR = BLAL.DIVI_DIV_NBR
-    AND BLAL.MANU_SEQ_NBR = MU.MANU_SEQ_NBR
-    AND BLAL.LICN_SEQ_NBR = LS.LICN_SEQ_NBR
-    AND BLAL.LICN_SEQ_NBR = LICN.LICN_SEQ_NBR(+)
-    AND LICN.TENT_SEQ_NBR = TENT.TENT_SEQ_NBR(+)
-    AND LICN.LICN_FIELD_TEAM_ID = LKF.COLU_LOOKUP_ID(+)
-    AND LKF.COLU_LOOKUP_TYPE(+) = 'FDTM'
-    AND BLAL.CUTB_SEQ_NBR = CB.CUTB_SEQ_NBR
-    AND BLAL.CUTB_SEQ_NBR = HV.CUTB_SEQ_NBR(+)
-    AND BLAL.CUTB_SEQ_NBR = NAR.CUTB_SEQ_NBR(+)
-    AND BLAL.CUTB_SEQ_NBR = ART.CUTB_SEQ_NBR(+)
-    AND BLAL.CUTB_SEQ_NBR = BIO.CUTB_SEQ_NBR(+)
-    AND BLAL.CUTB_SEQ_NBR = S.CUTB_SEQ_NBR
-    and blal.cutb_seq_nbr = SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr (+)
-    and blal.cutb_seq_nbr = salvage21.cutb_seq_nbr (+)
-    and blal.cutb_seq_nbr = salvage22.cutb_seq_nbr (+)
-    and blal.cutb_seq_nbr = salvage23.cutb_seq_nbr (+)
-    and blal.cutb_seq_nbr = salvage24.cutb_seq_nbr (+)
-    and blal.cutb_seq_nbr = salvage25.cutb_seq_nbr (+)
-    AND BLAL.CUTB_SEQ_NBR = FG.CUTB_SEQ_NBR (+)
+FROM
+    LRM_REPLICATION.DIVISION FD
+    INNER JOIN LRM_REPLICATION.BLOCK_ALLOCATION BLAL
+    ON FD.DIVI_DIV_NBR = BLAL.DIVI_DIV_NBR
+    INNER JOIN LRM_REPLICATION.MANAGEMENT_UNIT MU
+    ON BLAL.MANU_SEQ_NBR = MU.MANU_SEQ_NBR
+    INNER JOIN LS
+    ON BLAL.LICN_SEQ_NBR = LS.LICN_SEQ_NBR
+    LEFT JOIN LRM_REPLICATION.LICENCE LICN
+    ON BLAL.LICN_SEQ_NBR = LICN.LICN_SEQ_NBR
+    LEFT JOIN LRM_REPLICATION.TENURE_TYPE TENT
+    ON LICN.TENT_SEQ_NBR = TENT.TENT_SEQ_NBR
+    LEFT JOIN LRM_REPLICATION.CODE_LOOKUP LKF
+    ON LICN.LICN_FIELD_TEAM_ID = LKF.COLU_LOOKUP_ID
+    AND LKF.COLU_LOOKUP_TYPE = 'FDTM'
+    INNER JOIN LRM_REPLICATION.CUT_BLOCK CB
+    ON BLAL.CUTB_SEQ_NBR = CB.CUTB_SEQ_NBR
+    LEFT JOIN HV
+    ON BLAL.CUTB_SEQ_NBR = HV.CUTB_SEQ_NBR
+    LEFT JOIN NAR
+    ON BLAL.CUTB_SEQ_NBR = NAR.CUTB_SEQ_NBR
+    LEFT JOIN ART
+    ON BLAL.CUTB_SEQ_NBR = ART.CUTB_SEQ_NBR
+    LEFT JOIN BIO
+    ON BLAL.CUTB_SEQ_NBR = BIO.CUTB_SEQ_NBR
+    INNER JOIN S
+    ON BLAL.CUTB_SEQ_NBR = S.CUTB_SEQ_NBR
+    LEFT JOIN SALVAGE_ANY_FIRE_YEAR
+    ON blal.cutb_seq_nbr = SALVAGE_ANY_FIRE_YEAR.cutb_seq_nbr
+    LEFT JOIN salvage21
+    ON blal.cutb_seq_nbr = salvage21.cutb_seq_nbr
+    LEFT JOIN salvage22
+    ON blal.cutb_seq_nbr = salvage22.cutb_seq_nbr
+    LEFT JOIN salvage23
+    ON blal.cutb_seq_nbr = salvage23.cutb_seq_nbr
+    LEFT JOIN salvage24
+    ON blal.cutb_seq_nbr = salvage24.cutb_seq_nbr
+    LEFT JOIN salvage25
+    ON blal.cutb_seq_nbr = salvage25.cutb_seq_nbr
+    LEFT JOIN FG
+    ON BLAL.CUTB_SEQ_NBR = FG.CUTB_SEQ_NBR
 
 ORDER BY
-    length(business_area_region) desc,
+    -- length(business_area_region) desc,
     business_area_region,
     business_area,
     MU.MANU_ID,
