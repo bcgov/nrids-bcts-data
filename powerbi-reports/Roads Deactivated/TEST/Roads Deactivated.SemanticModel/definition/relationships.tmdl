@@ -1,0 +1,40 @@
+relationship eb16b0a8-38ab-44e8-9135-71a4f12c07fd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated'.fiscal_year_start_date
+	toColumn: LocalDateTable_91ab8f87-4ed3-473a-a4bf-49076415f8c0.Date
+
+relationship 92fe15e9-3cb7-47c1-8350-5879887a8ca5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated'.report_end_date
+	toColumn: LocalDateTable_7e514422-0492-4672-91ac-c119a890ba4d.Date
+
+relationship fe4b1829-b01d-42bc-9b2f-2a4699cc02c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated'.report_run_date
+	toColumn: LocalDateTable_1cd8af8c-6488-4d22-93f4-a1add3491b1e.Date
+
+relationship a870c6a9-9d8d-4b1d-9b43-139280113970
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated_hist'.fiscal_year_start_date
+	toColumn: LocalDateTable_0e2c6e86-87d9-4584-a30d-5b37cbbdf1f3.Date
+
+relationship 4a986a50-139f-439f-be46-9e1b69892b4f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated_hist'.report_end_date
+	toColumn: LocalDateTable_d78d16e9-499a-4832-b91d-42f4f61687ac.Date
+
+relationship 22ca99dd-0a5f-43a0-9a3a-cc5e134eaf1f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated_hist'.report_run_date
+	toColumn: LocalDateTable_76f0a34a-301a-48a9-85ab-d279f2c8811e.Date
+
+relationship c59a60e7-85a2-41fa-a98c-931a2f76c698
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated'.deac_end_date
+	toColumn: LocalDateTable_5a41c502-8ce9-444d-a045-b621fe38abc9.Date
+
+relationship 1c96b39e-8d29-4cca-9c0a-b1ed17274c47
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_deactivated_hist'.deac_end_date
+	toColumn: LocalDateTable_c3d853b5-180b-460b-8fd2-8bffea259495.Date
+
