@@ -1,0 +1,40 @@
+relationship 9f22675b-95cf-4796-a098-1b339631ccbf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed'.rcom_completion_date
+	toColumn: LocalDateTable_356f91ef-9000-4851-aedb-8370e021dcf7.Date
+
+relationship eb16b0a8-38ab-44e8-9135-71a4f12c07fd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed'.fiscal_year_start_date
+	toColumn: LocalDateTable_91ab8f87-4ed3-473a-a4bf-49076415f8c0.Date
+
+relationship 92fe15e9-3cb7-47c1-8350-5879887a8ca5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed'.report_end_date
+	toColumn: LocalDateTable_7e514422-0492-4672-91ac-c119a890ba4d.Date
+
+relationship fe4b1829-b01d-42bc-9b2f-2a4699cc02c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed'.report_run_date
+	toColumn: LocalDateTable_1cd8af8c-6488-4d22-93f4-a1add3491b1e.Date
+
+relationship ac065f97-7aa4-4cee-ad61-2955da7c78fe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed_hist'.rcom_completion_date
+	toColumn: LocalDateTable_13e4fbcc-07ff-4890-a11d-09937effac9f.Date
+
+relationship a870c6a9-9d8d-4b1d-9b43-139280113970
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed_hist'.fiscal_year_start_date
+	toColumn: LocalDateTable_0e2c6e86-87d9-4584-a30d-5b37cbbdf1f3.Date
+
+relationship 4a986a50-139f-439f-be46-9e1b69892b4f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed_hist'.report_end_date
+	toColumn: LocalDateTable_d78d16e9-499a-4832-b91d-42f4f61687ac.Date
+
+relationship 22ca99dd-0a5f-43a0-9a3a-cc5e134eaf1f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting roads_constructed_hist'.report_run_date
+	toColumn: LocalDateTable_76f0a34a-301a-48a9-85ab-d279f2c8811e.Date
+
