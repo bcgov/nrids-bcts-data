@@ -1,0 +1,30 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting roads_deactivated","bcts_reporting roads_deactivated_hist"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4b1301c75b21
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting roads_deactivated'
+ref table DateTableTemplate_8b5bff52-60b1-4241-bbb8-d78539328e72
+ref table LocalDateTable_91ab8f87-4ed3-473a-a4bf-49076415f8c0
+ref table LocalDateTable_7e514422-0492-4672-91ac-c119a890ba4d
+ref table LocalDateTable_1cd8af8c-6488-4d22-93f4-a1add3491b1e
+ref table 'bcts_reporting roads_deactivated_hist'
+ref table LocalDateTable_0e2c6e86-87d9-4584-a30d-5b37cbbdf1f3
+ref table LocalDateTable_d78d16e9-499a-4832-b91d-42f4f61687ac
+ref table LocalDateTable_76f0a34a-301a-48a9-85ab-d279f2c8811e
+ref table LocalDateTable_5a41c502-8ce9-444d-a045-b621fe38abc9
+ref table LocalDateTable_c3d853b5-180b-460b-8fd2-8bffea259495
+
+ref cultureInfo en-CA
+
