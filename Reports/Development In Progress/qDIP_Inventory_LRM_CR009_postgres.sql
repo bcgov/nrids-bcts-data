@@ -135,7 +135,7 @@ WITH ACTB AS
             A2.ACTIVITY_CLASS='CSB'
             AND A2.ACTT_KEY_IND In ('DCP', 'DFN', 'DLA', 'DOR', 'DPC', 'DRB', 'DSD', 'DSI', 'DESI')
             AND A2.ACTI_STATUS_IND='D'
-            AND A2.ACTIVITY_DATE <= To_Date('2023-11-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A2.ACTIVITY_DATE <= To_Date('2024-04-30', 'YYYY-MM-DD')  -- Date: end of reporting period
         GROUP BY
             A2.CUTB_SEQ_NBR
     ),
@@ -157,7 +157,7 @@ WITH ACTB AS
             A4.ACTIVITY_CLASS='CSB'
             AND A4.ACTT_KEY_IND IN ('RFH', 'RFN', 'RFV', 'RMN', 'RRD', 'RRE')
             AND A4.ACTI_STATUS_IND='D'
-            AND A4.ACTIVITY_DATE <= To_Date('2023-11-30', 'YYYY-MM-DD')  -- Date: end of reporting period
+            AND A4.ACTIVITY_DATE <= To_Date('2024-04-30', 'YYYY-MM-DD')  -- Date: end of reporting period
         GROUP BY A4.CUTB_SEQ_NBR,
             A4.ACTI_STATUS_IND
     ),

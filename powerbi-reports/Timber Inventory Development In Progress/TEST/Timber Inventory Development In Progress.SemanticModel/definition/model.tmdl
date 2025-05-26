@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_ready_to_sell","bcts_reporting timber_inventory_ready_to_sell_hist"]
+annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_development_in_progress","bcts_reporting timber_inventory_development_in_progress_hist"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -14,7 +14,7 @@ annotation PBIDesktopVersion = 2.143.878.0 (25.05)+b20aa3b866ec1b70879135a4e60e4
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table 'bcts_reporting timber_inventory_ready_to_sell'
+ref table 'bcts_reporting timber_inventory_development_in_progress'
 ref table DateTableTemplate_3f554d80-53e6-405c-819a-db106d4e7f9b
 ref table LocalDateTable_ce4d372f-24d8-42b0-ab03-d5d16df7b209
 ref table LocalDateTable_f2439d4d-0514-4dca-83c7-a2d4489d2383
@@ -39,7 +39,7 @@ ref table LocalDateTable_dc442d6d-610b-43c9-ac71-7d8030e8e44d
 ref table LocalDateTable_a1ee62b5-530d-4783-960a-6c475f12aaaa
 ref table LocalDateTable_eae5e07c-21d3-41a9-8723-2e0c839082a3
 ref table LocalDateTable_8ac51d9b-d062-438f-9a75-2665553a61f0
-ref table 'bcts_reporting timber_inventory_ready_to_sell_hist'
+ref table 'bcts_reporting timber_inventory_development_in_progress_hist'
 ref table LocalDateTable_781f9fdd-d306-4060-bbe6-104bd59b7c22
 ref table LocalDateTable_40b7134a-8134-4654-b5f1-d7ee23350d10
 ref table LocalDateTable_582f9290-6850-4511-8aa1-aca0db869711
@@ -63,10 +63,20 @@ ref table LocalDateTable_4daee0a3-59d7-41fb-8603-2c194076cff3
 ref table LocalDateTable_85881110-9409-44f2-ab5e-8c236e652c1d
 ref table LocalDateTable_eb8f797a-9fa1-41ec-999e-1a286309691b
 ref table LocalDateTable_1970c4d1-3d93-43ac-a7d5-18458f09d999
-ref table LocalDateTable_7adf050e-4869-4ab2-a12c-44ad4a4a3324
 ref table LocalDateTable_7489535a-d07d-4275-8e94-1560ff77f2b9
-ref table LocalDateTable_9a78b732-09f5-4099-886d-8e18d3d6f78f
 ref table LocalDateTable_1902b7b7-8dea-4e18-bfd1-3193c08b75e3
+ref table LocalDateTable_a4bca0e3-0bc5-417f-82e5-aa4114e2f334
+ref table LocalDateTable_0bf0fbf7-f2a0-4a38-a707-123aca0abc8f
+ref table LocalDateTable_06942fad-a893-481d-b587-01499ab71b50
+ref table LocalDateTable_c02947f9-2812-4c3f-b38c-ae039e9c154f
+ref table LocalDateTable_858449c3-d17a-426d-aeaf-d1af22c7bb39
+ref table LocalDateTable_d7620c74-9373-4308-83a5-abe7ec98cd0b
+ref table LocalDateTable_ec50e048-40f9-4d9a-a683-05ff9ca43037
+ref table LocalDateTable_2e31c3c5-0263-4bb3-ba14-eef0611ab2d7
+ref table LocalDateTable_1955246f-3e41-46f5-b231-5e08b7cdf74f
+ref table LocalDateTable_4672b7e4-31ac-465a-bd91-9ce279a1270c
+ref table LocalDateTable_968a54cd-5682-4712-82be-402d0cbdbf4b
+ref table LocalDateTable_ca0bf6a8-f3d2-4485-ac40-a906a781f42f
 
 ref cultureInfo en-CA
 
