@@ -868,6 +868,22 @@ table 'bcts_reporting timber_inventory_ready_to_develop'
 
 		annotation SummarizationSetBy = Automatic
 
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d6767ff9-af94-4d75-a80f-1a5adc5fff97
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: ca54a8e9-1d14-45d4-bef6-87b1addd4b81
+			defaultHierarchy: LocalDateTable_6d373894-6b62-4f99-91b5-6e0e309ffcb8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: b30d3dde-d6f2-4fe6-bd44-b1c8e5bee86c
 
