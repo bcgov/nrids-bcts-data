@@ -10,11 +10,11 @@
       "nodes": [
         {
           "location": {
-            "x": 692,
-            "y": 0
+            "x": 50,
+            "y": -12.5
           },
-          "nodeIndex": "bcts_reporting currently_in_market",
-          "nodeLineageTag": "68b87086-3b2e-46f2-9fdc-5bd31b451d14",
+          "nodeIndex": "bcts_reporting licence_issued_advertised_main",
+          "nodeLineageTag": "3369d9ad-6c13-4490-aad6-9de565c9b630",
           "size": {
             "height": 300,
             "width": 234
@@ -23,13 +23,51 @@
         },
         {
           "location": {
-            "x": 50,
-            "y": -50
+            "x": 722,
+            "y": 83.5
           },
-          "nodeIndex": "bcts_reporting licence_issued_advertised_main",
-          "nodeLineageTag": "3369d9ad-6c13-4490-aad6-9de565c9b630",
+          "nodeIndex": "bcts_reporting bcts_performance_report_ytd_all",
+          "nodeLineageTag": "a5587661-2364-4856-aed5-561f3c5af836",
           "size": {
             "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1190,
+            "y": 122
+          },
+          "nodeIndex": "bcts_reporting bcts_volume_summary_chart_2",
+          "nodeLineageTag": "f41d8a73-8a98-4da7-a576-abb1bb3561d3",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1424,
+            "y": 122
+          },
+          "nodeIndex": "bcts_reporting recent_auctions_chart_2",
+          "nodeLineageTag": "83e4cb50-9deb-4c7a-bc48-61df6d0ef11e",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 956,
+            "y": 86
+          },
+          "nodeIndex": "bcts_reporting recent_auction_results",
+          "size": {
+            "height": 224,
             "width": 234
           },
           "zIndex": 0

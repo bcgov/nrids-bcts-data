@@ -1,0 +1,40 @@
+table 'bcts_reporting bcts_volume_summary_chart_2'
+	lineageTag: f41d8a73-8a98-4da7-a576-abb1bb3561d3
+
+	column metric
+		dataType: string
+		lineageTag: 5214b068-2aee-4503-936e-78bae68b8543
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: double
+		lineageTag: 28585fdd-5d92-4453-b8c5-a6aa7d972a93
+		summarizeBy: none
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Value Added'
+		dataType: double
+		lineageTag: 606fe80f-2f0f-4103-8ef7-4594ba206272
+		summarizeBy: sum
+		sourceColumn: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'bcts_reporting bcts_volume_summary_chart_2' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("theory.bcgov:5434", "odstst"),
+				    bcts_reporting_bcts_volume_summary_chart_2 = Source{[Schema="bcts_reporting",Item="bcts_volume_summary_chart_2"]}[Data]
+				in
+				    bcts_reporting_bcts_volume_summary_chart_2
+

@@ -6,21 +6,15 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["bcts_reporting currently_in_market","bcts_reporting licence_issued_advertised_main"]
+annotation PBI_QueryOrder = ["bcts_reporting licence_issued_advertised_main","bcts_reporting bcts_performance_report_ytd_all","bcts_reporting recent_auction_results","bcts_reporting bcts_volume_summary_chart_2","bcts_reporting recent_auctions_chart_2"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.143.1204.0 (25.05)+23c84aace645781dd62b8a26eb0418c7e6a84b72
+annotation PBIDesktopVersion = 2.143.1378.0 (25.05)+4e1de9c957866bc5336e0d250838314aa54ff3a8
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table 'bcts_reporting currently_in_market'
 ref table DateTableTemplate_c5a41e52-a473-4eaa-b724-1edcb5d8b51e
-ref table LocalDateTable_7bcc5d19-bf74-4778-89e2-03aefe026cac
-ref table LocalDateTable_6fab4442-c90c-49aa-bcf5-2a6229e41977
-ref table LocalDateTable_09b56f25-846a-436e-ac72-eed0058b5fa9
-ref table LocalDateTable_2eba8596-4662-42c8-81ba-0dcaeffa9f55
-ref table LocalDateTable_61d7dd88-8dc2-4aef-887a-b7902f4f476d
 ref table 'bcts_reporting licence_issued_advertised_main'
 ref table LocalDateTable_3cee8454-5379-4ba8-89dd-2c09853de34a
 ref table LocalDateTable_505140cd-06ec-42b4-9403-ea199d6fc303
@@ -31,6 +25,10 @@ ref table LocalDateTable_f95186e1-4742-409a-a4f7-a20b84525449
 ref table LocalDateTable_c967cb16-526d-443e-9d76-2e1b77585e35
 ref table LocalDateTable_95ea5816-b0c3-4b53-8197-744007bcb28c
 ref table LocalDateTable_cccfb9d3-f0fa-440d-9449-2f2466cf8e74
+ref table 'bcts_reporting bcts_performance_report_ytd_all'
+ref table 'bcts_reporting recent_auction_results'
+ref table 'bcts_reporting bcts_volume_summary_chart_2'
+ref table 'bcts_reporting recent_auctions_chart_2'
 
 ref cultureInfo en-CA
 

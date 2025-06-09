@@ -1,28 +1,3 @@
-relationship 9df2b8ae-6169-48d7-8ef5-f43db11c05e9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'bcts_reporting currently_in_market'.lrm_tender_posted_done_date
-	toColumn: LocalDateTable_7bcc5d19-bf74-4778-89e2-03aefe026cac.Date
-
-relationship 76b678d6-232e-4266-904e-f59d8ada7c0d
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'bcts_reporting currently_in_market'.lrm_licence_awarded_done_date
-	toColumn: LocalDateTable_6fab4442-c90c-49aa-bcf5-2a6229e41977.Date
-
-relationship 3a665f62-8c19-4a55-8dff-5826b68a83e1
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'bcts_reporting currently_in_market'.lrm_auction_done_date
-	toColumn: LocalDateTable_09b56f25-846a-436e-ac72-eed0058b5fa9.Date
-
-relationship 77998aad-1445-4dbd-ad47-62b6332b42e5
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'bcts_reporting currently_in_market'.report_end_date
-	toColumn: LocalDateTable_2eba8596-4662-42c8-81ba-0dcaeffa9f55.Date
-
-relationship c2418c6f-ef28-488f-928f-294117536cf9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: 'bcts_reporting currently_in_market'.report_run_date
-	toColumn: LocalDateTable_61d7dd88-8dc2-4aef-887a-b7902f4f476d.Date
-
 relationship 4eee3c98-400a-49e5-a7d5-654910e843d3
 	joinOnDateBehavior: datePartOnly
 	fromColumn: 'bcts_reporting licence_issued_advertised_main'.x_axis_date
@@ -67,4 +42,18 @@ relationship 72592b8f-f209-4f6c-be79-c9f775c67f9c
 	joinOnDateBehavior: datePartOnly
 	fromColumn: 'bcts_reporting licence_issued_advertised_main'.semi_monthly_report_start_date
 	toColumn: LocalDateTable_cccfb9d3-f0fa-440d-9449-2f2466cf8e74.Date
+
+relationship AutoDetected_f14cd2b3-5b77-47c8-9e44-550e097a278c
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.business_area
+	toColumn: 'bcts_reporting bcts_performance_report_ytd_all'.business_area
+
+relationship AutoDetected_7a8dfde1-0f2f-43fc-9782-81f6d5bfac16
+	fromColumn: 'bcts_reporting recent_auction_results'.business_area
+	toColumn: 'bcts_reporting bcts_performance_report_ytd_all'.business_area
+
+relationship AutoDetected_f5ca88e5-28a0-4d9a-8997-72028f748eff
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'bcts_reporting recent_auctions_chart_2'.Total
+	toColumn: 'bcts_reporting bcts_volume_summary_chart_2'.Total
 
