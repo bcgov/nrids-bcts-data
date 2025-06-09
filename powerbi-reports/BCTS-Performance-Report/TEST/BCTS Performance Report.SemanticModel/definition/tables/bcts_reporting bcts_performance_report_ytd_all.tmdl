@@ -124,18 +124,22 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		lineageTag: d6a114e4-8d30-4b15-978f-ebf895c94e21
 		summarizeBy: none
 		sourceColumn: business_area
+		sortByColumn: business_area_region_cat_number
 
 		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
-	column business_area_region_cat_number =
+	column business_area_region_cat_number = ```
 			
 			SWITCH(
 			    TRUE(),
-			    'bcts_reporting bcts_performance_report_ytd_all'[business_area_region] IN { "North Interior", "South Interior" }, 1,
-			    2
+			    'bcts_reporting bcts_performance_report_ytd_all'[business_area_region] = "North Interior", 1,
+			    'bcts_reporting bcts_performance_report_ytd_all'[business_area_region] = "South Interior", 2,
+			    3
 			)
+			
+			```
 		formatString: 0
 		lineageTag: 739c0dbf-939e-423a-942a-a968ef8bad88
 		summarizeBy: sum
@@ -208,6 +212,16 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		lineageTag: cd4f0f70-90e4-4394-92ad-197e6a6dd94c
 		summarizeBy: sum
 		sourceColumn: y_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y_max_region
+		dataType: double
+		lineageTag: 1db86f7d-43c7-44f7-96b4-29c3e32786e6
+		summarizeBy: sum
+		sourceColumn: y_max_region
 
 		annotation SummarizationSetBy = Automatic
 
