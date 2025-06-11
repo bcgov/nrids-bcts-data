@@ -17,6 +17,9 @@ table 'bcts_reporting recent_auction_results'
 		lineageTag: 14321c2f-51f3-4cbc-98f9-119d6cbbffaf
 		summarizeBy: none
 		sourceColumn: business_area_region
+		sortByColumn: business_area_region_sort_order
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -106,6 +109,15 @@ table 'bcts_reporting recent_auction_results'
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column business_area_region_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 96261586-1a33-498c-b57b-91f86fd402ec
+		summarizeBy: sum
+		sourceColumn: business_area_region_sort_order
+
+		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: ddcad588-1ae0-41ab-a9cb-94ece50d35ee

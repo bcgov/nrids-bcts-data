@@ -57,3 +57,21 @@ relationship AutoDetected_f5ca88e5-28a0-4d9a-8997-72028f748eff
 	fromColumn: 'bcts_reporting recent_auctions_chart_2'.Total
 	toColumn: 'bcts_reporting bcts_volume_summary_chart_2'.Total
 
+relationship e93c7054-3516-4a3c-a011-a68a268bf4c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting bcts_performance_report_licence_issued_details'.issued
+	toColumn: LocalDateTable_35e4a88d-1bb8-40d5-a936-a686b9be82d0.Date
+
+relationship 325cdf54-c9c5-42b8-813a-65e130800c51
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting bcts_performance_report_not_awarded_details'.auction
+	toColumn: LocalDateTable_36e2e9ab-fd8e-414c-8d9f-a32ba42152b3.Date
+
+relationship AutoDetected_f2a4a5c5-8638-4fd3-902b-4ccc60e5736e
+	fromColumn: 'bcts_reporting bcts_performance_report_licence_issued_details'.'Business Area'
+	toColumn: 'bcts_reporting bcts_performance_report_ytd_all'.business_area
+
+relationship AutoDetected_2448c24e-a3c2-4eda-93d5-7621373cb4be
+	fromColumn: 'bcts_reporting bcts_performance_report_not_awarded_details'.'Business Area'
+	toColumn: 'bcts_reporting bcts_performance_report_ytd_all'.business_area
+

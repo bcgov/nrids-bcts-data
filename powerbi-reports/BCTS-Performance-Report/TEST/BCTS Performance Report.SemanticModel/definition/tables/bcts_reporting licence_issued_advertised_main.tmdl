@@ -660,6 +660,16 @@ table 'bcts_reporting licence_issued_advertised_main'
 
 		annotation SummarizationSetBy = Automatic
 
+	column bidder_count
+		dataType: double
+		lineageTag: ed9fef3b-c871-4d84-a08a-8c89cc24aa16
+		summarizeBy: sum
+		sourceColumn: bidder_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: da09932c-2915-4810-a8c2-f53fdc4c23d1
 

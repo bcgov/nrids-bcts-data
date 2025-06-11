@@ -116,6 +116,9 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		lineageTag: 2c32c79d-d40f-4787-8a06-56b3902f6595
 		summarizeBy: none
 		sourceColumn: business_area_region
+		sortByColumn: business_area_region_sort_order
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -226,6 +229,15 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column business_area_region_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d56b45b-f202-48d2-9ae9-369d4d1f67e2
+		summarizeBy: sum
+		sourceColumn: business_area_region_sort_order
+
+		annotation SummarizationSetBy = Automatic
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 1602fc97-0168-4625-b965-8b10d4d3fd93
