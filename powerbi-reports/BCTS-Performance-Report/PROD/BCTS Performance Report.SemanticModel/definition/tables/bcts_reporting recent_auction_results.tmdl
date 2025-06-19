@@ -1,0 +1,149 @@
+table 'bcts_reporting recent_auction_results'
+	lineageTag: b9bdbeac-3774-4718-909a-d44e9a25c760
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: 193b4225-4beb-4df5-b6ec-147f2ae55f98
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 14321c2f-51f3-4cbc-98f9-119d6cbbffaf
+		summarizeBy: none
+		sourceColumn: business_area_region
+		sortByColumn: business_area_region_sort_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: cc612ed4-09e0-462c-a8ac-e8f0fbaf56a0
+		summarizeBy: none
+		sourceColumn: business_area
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Licence Issued'
+		dataType: double
+		lineageTag: 3bf88e70-7f5c-44ad-92c1-5fbe6bb6655a
+		summarizeBy: sum
+		sourceColumn: Licence Issued
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Licence Issued: Value Added'
+		dataType: double
+		lineageTag: ca096f95-f3fd-4685-b4be-3b6d765f4ecc
+		summarizeBy: sum
+		sourceColumn: Licence Issued: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Not Awarded'
+		dataType: double
+		lineageTag: b67e23d7-a92f-4a5a-a849-c4aaa5c8ce0f
+		summarizeBy: sum
+		sourceColumn: Not Awarded
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Not Awarded: Value Added'
+		dataType: double
+		lineageTag: d9765fbe-43b9-40c6-aa75-9c2ef26d3890
+		summarizeBy: sum
+		sourceColumn: Not Awarded: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column business_area_region_cat_number = ```
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting recent_auction_results'[business_area_region] = "North Interior", 1,
+			    'bcts_reporting recent_auction_results'[business_area_region] = "South Interior", 2,
+			    3
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 79bf3a3c-15ff-4e7b-bec0-334a2387bbc2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column y_max_business_area
+		dataType: double
+		lineageTag: bba0a08f-e023-4d65-a395-9e1beb724b88
+		summarizeBy: sum
+		sourceColumn: y_max_business_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y_max_region
+		dataType: double
+		lineageTag: 5fed4f3b-2d9b-4bad-8c38-ad01a57984ef
+		summarizeBy: sum
+		sourceColumn: y_max_region
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column business_area_region_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 96261586-1a33-498c-b57b-91f86fd402ec
+		summarizeBy: sum
+		sourceColumn: business_area_region_sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: ddcad588-1ae0-41ab-a9cb-94ece50d35ee
+
+		level business_area_region_category
+			lineageTag: 13cce2bc-656a-459a-a55d-925bd6fda728
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: 70eca7f4-6955-44eb-a509-9b2181c21670
+			column: business_area_region
+
+		level business_area
+			lineageTag: 4ee08c6c-ebde-4539-abe3-f7e8b489cbeb
+			column: business_area
+
+	partition 'bcts_reporting recent_auction_results' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_recent_auction_results = Source{[Schema="bcts_reporting",Item="recent_auction_results"]}[Data]
+				in
+				    bcts_reporting_recent_auction_results
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

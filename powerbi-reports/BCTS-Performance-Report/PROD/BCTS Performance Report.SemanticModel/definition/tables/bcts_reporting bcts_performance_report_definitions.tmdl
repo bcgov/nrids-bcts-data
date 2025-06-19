@@ -1,0 +1,44 @@
+table 'bcts_reporting bcts_performance_report_definitions'
+	lineageTag: 9e8e2915-d58a-49aa-834f-10901a9bd376
+
+	column term
+		dataType: string
+		lineageTag: 94885ca5-d22a-441c-a3f6-5991b1d755b8
+		summarizeBy: none
+		sourceColumn: term
+		sortByColumn: id
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column definition
+		dataType: string
+		lineageTag: 5d884e0d-c625-43e6-9dfc-54fd13645782
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6537c5ca-8da0-4b14-8e45-e87eaac99ea8
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'bcts_reporting bcts_performance_report_definitions' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_bcts_performance_report_definitions = Source{[Schema="bcts_reporting",Item="bcts_performance_report_definitions"]}[Data]
+				in
+				    bcts_reporting_bcts_performance_report_definitions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

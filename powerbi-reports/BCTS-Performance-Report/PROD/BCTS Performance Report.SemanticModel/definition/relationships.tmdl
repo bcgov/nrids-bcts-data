@@ -1,0 +1,55 @@
+relationship 4eee3c98-400a-49e5-a7d5-654910e843d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.x_axis_date
+	toColumn: LocalDateTable_3cee8454-5379-4ba8-89dd-2c09853de34a.Date
+
+relationship 790384b1-ecbe-4fb8-bd9a-67c4c6c5ff9d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.first_auction_date
+	toColumn: LocalDateTable_505140cd-06ec-42b4-9403-ea199d6fc303.Date
+
+relationship 8b46f1aa-f741-4e94-ba63-e7f26d490777
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.last_auction_date
+	toColumn: LocalDateTable_72837866-46a1-49cd-9762-b60d8c69d7d3.Date
+
+relationship 2005c49c-1573-4d3c-8489-3939a81f417c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.issued_licence_legal_effective_date
+	toColumn: LocalDateTable_4c221fda-95c3-46d0-ad6d-a9d53e10bf7e.Date
+
+relationship c41a5026-3aa9-4913-a39c-9954fa7427aa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.fta_file_status_date
+	toColumn: LocalDateTable_58c993eb-5474-42cc-9d84-6a8a251f59f9.Date
+
+relationship e7d985cf-0d75-4de2-819f-7b30fb03243a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.report_start_date
+	toColumn: LocalDateTable_f95186e1-4742-409a-a4f7-a20b84525449.Date
+
+relationship 1e77e26f-b16e-4421-91b7-eded9c811c5d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.report_end_date
+	toColumn: LocalDateTable_c967cb16-526d-443e-9d76-2e1b77585e35.Date
+
+relationship 3cad17e4-adec-43a5-ba4f-a944a5a44581
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.report_run_date
+	toColumn: LocalDateTable_95ea5816-b0c3-4b53-8197-744007bcb28c.Date
+
+relationship 72592b8f-f209-4f6c-be79-c9f775c67f9c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting licence_issued_advertised_main'.semi_monthly_report_start_date
+	toColumn: LocalDateTable_cccfb9d3-f0fa-440d-9449-2f2466cf8e74.Date
+
+relationship e93c7054-3516-4a3c-a011-a68a268bf4c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting bcts_performance_report_licence_issued_details'.issued
+	toColumn: LocalDateTable_35e4a88d-1bb8-40d5-a936-a686b9be82d0.Date
+
+relationship 325cdf54-c9c5-42b8-813a-65e130800c51
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting bcts_performance_report_not_awarded_details'.auction
+	toColumn: LocalDateTable_36e2e9ab-fd8e-414c-8d9f-a32ba42152b3.Date
+

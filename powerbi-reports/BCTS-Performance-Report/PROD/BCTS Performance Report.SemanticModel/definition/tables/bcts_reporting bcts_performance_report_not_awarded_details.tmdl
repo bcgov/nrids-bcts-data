@@ -1,0 +1,94 @@
+table 'bcts_reporting bcts_performance_report_not_awarded_details'
+	lineageTag: f61ad142-b21c-4121-ae04-6eb02f5cfbc9
+
+	column 'Business Area'
+		dataType: string
+		lineageTag: 8bd58ca1-91b7-4012-861a-48b0ff8394d9
+		summarizeBy: none
+		sourceColumn: Business Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column licence
+		dataType: string
+		lineageTag: 4f9d0ea0-cf9c-4dc5-a32d-467f683bdbca
+		summarizeBy: none
+		sourceColumn: licence
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Value Added'
+		dataType: string
+		lineageTag: c0a0855e-a2ea-4815-8803-daccb6b1feea
+		summarizeBy: none
+		sourceColumn: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Includes Fire Salvage'
+		dataType: string
+		lineageTag: fb43635a-85b4-47a4-94c6-4a820186dc09
+		summarizeBy: none
+		sourceColumn: Includes Fire Salvage
+
+		annotation SummarizationSetBy = Automatic
+
+	column auction
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 20f1102e-08df-4e91-b55a-6fdb3eb133b0
+		summarizeBy: none
+		sourceColumn: auction
+
+		variation Variation
+			isDefault
+			relationship: 325cdf54-c9c5-42b8-813a-65e130800c51
+			defaultHierarchy: LocalDateTable_36e2e9ab-fd8e-414c-8d9f-a32ba42152b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Volume (cubic metres)'
+		dataType: string
+		lineageTag: 170fa028-0ff5-4ba7-9cbb-e220d7e0711c
+		summarizeBy: none
+		sourceColumn: Volume (cubic metres)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'No Sale Rationale'
+		dataType: string
+		lineageTag: 3b726233-d50f-4834-ba67-185b6f1a2c35
+		summarizeBy: none
+		sourceColumn: No Sale Rationale
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Area Region'
+		dataType: string
+		lineageTag: 64794738-4ea7-46d3-a42b-35bd4a8cf47b
+		summarizeBy: none
+		sourceColumn: Business Area Region
+		sortByColumn: business_area_region_sort_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d49ce54-b5bc-4909-a6c9-e02b4574f719
+		summarizeBy: sum
+		sourceColumn: business_area_region_sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'bcts_reporting bcts_performance_report_not_awarded_details' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_bcts_performance_report_not_awarded_details = Source{[Schema="bcts_reporting",Item="bcts_performance_report_not_awarded_details"]}[Data]
+				in
+				    bcts_reporting_bcts_performance_report_not_awarded_details
+

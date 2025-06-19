@@ -1,0 +1,50 @@
+table 'bcts_reporting recent_auctions_chart_2'
+	lineageTag: 83e4cb50-9deb-4c7a-bc48-61df6d0ef11e
+
+	column metric
+		dataType: string
+		lineageTag: 2ae46652-763d-47fc-a3d3-ae4fc4da7dac
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Value Added'
+		dataType: double
+		lineageTag: a894ae56-abc8-47af-b68d-d0856896de1f
+		summarizeBy: sum
+		sourceColumn: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Excluding Value Added'
+		dataType: double
+		lineageTag: 3aaa9442-b738-4efc-a51d-2495b9751cc0
+		summarizeBy: sum
+		sourceColumn: Total Excluding Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Total
+		dataType: double
+		lineageTag: 137a93a3-1751-46d8-b61d-1bf9aa033b8c
+		summarizeBy: sum
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'bcts_reporting recent_auctions_chart_2' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_recent_auctions_chart_2 = Source{[Schema="bcts_reporting",Item="recent_auctions_chart_2"]}[Data]
+				in
+				    bcts_reporting_recent_auctions_chart_2
+

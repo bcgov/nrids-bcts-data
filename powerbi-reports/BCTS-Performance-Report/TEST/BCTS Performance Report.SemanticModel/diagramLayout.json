@@ -36,8 +36,8 @@
         },
         {
           "location": {
-            "x": 1190,
-            "y": 122
+            "x": 1149,
+            "y": 495
           },
           "nodeIndex": "bcts_reporting bcts_volume_summary_chart_2",
           "nodeLineageTag": "f41d8a73-8a98-4da7-a576-abb1bb3561d3",
@@ -49,8 +49,8 @@
         },
         {
           "location": {
-            "x": 1424,
-            "y": 122
+            "x": 1420,
+            "y": 370
           },
           "nodeIndex": "bcts_reporting recent_auctions_chart_2",
           "nodeLineageTag": "83e4cb50-9deb-4c7a-bc48-61df6d0ef11e",
@@ -62,10 +62,11 @@
         },
         {
           "location": {
-            "x": 956,
-            "y": 86
+            "x": 1005,
+            "y": 12
           },
           "nodeIndex": "bcts_reporting recent_auction_results",
+          "nodeLineageTag": "b9bdbeac-3774-4718-909a-d44e9a25c760",
           "size": {
             "height": 224,
             "width": 234
@@ -74,8 +75,8 @@
         },
         {
           "location": {
-            "x": 1658,
-            "y": 134
+            "x": 1485,
+            "y": 0
           },
           "nodeIndex": "bcts_reporting bcts_performance_report_definitions",
           "nodeLineageTag": "9e8e2915-d58a-49aa-834f-10901a9bd376",

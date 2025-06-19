@@ -12,7 +12,7 @@ table 'bcts_reporting bcts_volume_summary_chart_2'
 	column Total
 		dataType: double
 		lineageTag: 28585fdd-5d92-4453-b8c5-a6aa7d972a93
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Total
 
 		annotation SummarizationSetBy = Automatic

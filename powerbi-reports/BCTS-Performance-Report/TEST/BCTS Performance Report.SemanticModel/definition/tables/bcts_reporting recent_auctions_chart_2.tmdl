@@ -32,7 +32,7 @@ table 'bcts_reporting recent_auctions_chart_2'
 	column Total
 		dataType: double
 		lineageTag: 137a93a3-1751-46d8-b61d-1bf9aa033b8c
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Total
 
 		annotation SummarizationSetBy = Automatic

@@ -716,6 +716,60 @@ table 'bcts_reporting timber_inventory_ready_to_sell_hist'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column ancient
+		dataType: string
+		lineageTag: 12c7ed3d-df97-493b-8af4-d897a6aa0722
+		summarizeBy: none
+		sourceColumn: ancient
+
+		annotation SummarizationSetBy = Automatic
+
+	column remnant
+		dataType: string
+		lineageTag: 27619bef-1e38-4ad9-acc4-914e3cedcc6b
+		summarizeBy: none
+		sourceColumn: remnant
+
+		annotation SummarizationSetBy = Automatic
+
+	column big_treed
+		dataType: string
+		lineageTag: 8d2b7ee1-26ac-4bf5-b048-4873615532d8
+		summarizeBy: none
+		sourceColumn: big_treed
+
+		annotation SummarizationSetBy = Automatic
+
+	column ancient_volume
+		dataType: double
+		lineageTag: 14f93ab0-81c8-4dcb-a538-8bd538e004d7
+		summarizeBy: sum
+		sourceColumn: ancient_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column remnant_volume
+		dataType: double
+		lineageTag: 4525365e-0df4-44a2-9fa6-b1fb276216c3
+		summarizeBy: sum
+		sourceColumn: remnant_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column big_treed_volume
+		dataType: double
+		lineageTag: cd5fd345-57d7-4921-a372-013b421765f1
+		summarizeBy: sum
+		sourceColumn: big_treed_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'bcts_reporting timber_inventory_ready_to_sell_hist' = m
 		mode: import
 		source =
