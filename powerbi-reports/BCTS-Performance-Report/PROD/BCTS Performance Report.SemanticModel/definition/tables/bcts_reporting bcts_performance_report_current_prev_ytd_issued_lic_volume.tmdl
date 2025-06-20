@@ -1,0 +1,98 @@
+table 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume'
+	lineageTag: f021f7d2-7107-440d-bb6c-5a368df6d012
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: eab5883a-07a9-42e0-8963-c0fee9cece88
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 2140d66f-71b5-4efb-a8db-96e74b6683da
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: 967b013b-0be3-4c2f-891c-804cc93eeeac
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current YTD Licence Issued'
+		dataType: double
+		lineageTag: 57d86d5d-3397-46a6-94ff-8da2ea922de0
+		summarizeBy: sum
+		sourceColumn: Current YTD Licence Issued
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current YTD Licence Issued: Value Added'
+		dataType: double
+		lineageTag: c3f8f554-93f5-46ee-822f-8d529bb141b3
+		summarizeBy: sum
+		sourceColumn: Current YTD Licence Issued: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Previous YTD Licence Issued'
+		dataType: double
+		lineageTag: 76357424-0ba7-43ad-8ca9-7872e2a72002
+		summarizeBy: sum
+		sourceColumn: Previous YTD Licence Issued
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Previous YTD Licence Issued: Value Added'
+		dataType: double
+		lineageTag: f620f504-e828-4393-93c9-27f50140d9ec
+		summarizeBy: sum
+		sourceColumn: Previous YTD Licence Issued: Value Added
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current YTD Licence Issued: Other'
+		dataType: double
+		lineageTag: b8d459b9-1a5d-45c8-9291-78b7d43ab866
+		summarizeBy: sum
+		sourceColumn: Current YTD Licence Issued: Other
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Previous YTD Licence Issued: Other'
+		dataType: double
+		lineageTag: de1bcb94-ae9c-440f-8562-b8766f7bf1fc
+		summarizeBy: sum
+		sourceColumn: Previous YTD Licence Issued: Other
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume = Source{[Schema="bcts_reporting",Item="bcts_performance_report_current_prev_ytd_issued_lic_volume"]}[Data]
+				in
+				    bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume
+

@@ -53,3 +53,15 @@ relationship 325cdf54-c9c5-42b8-813a-65e130800c51
 	fromColumn: 'bcts_reporting bcts_performance_report_not_awarded_details'.auction
 	toColumn: LocalDateTable_36e2e9ab-fd8e-414c-8d9f-a32ba42152b3.Date
 
+relationship AutoDetected_bc3c6b3e-dbf7-4bac-8a1f-b6b588d3178d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume'.business_area
+	toColumn: 'bcts_reporting bcts_performance_report_ytd_all'.business_area
+
+relationship AutoDetected_bb0b2b93-9160-4b44-b110-32ae8516b2b3
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume'.business_area
+	toColumn: 'bcts_reporting recent_auction_results'.business_area
+

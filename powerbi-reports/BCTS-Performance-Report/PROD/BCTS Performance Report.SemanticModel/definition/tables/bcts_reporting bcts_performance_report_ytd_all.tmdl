@@ -154,7 +154,7 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		lineageTag: 3d74caf2-fb2a-40c7-b705-de9a4f6a47bc
 		summarizeBy: none
 		sourceColumn: business_area_region_category
-		sortByColumn: business_area_region_cat_number
+		sortByColumn: business_area_region_category_sort_order
 
 		changedProperty = SortByColumn
 
@@ -239,19 +239,28 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 
 		annotation SummarizationSetBy = Automatic
 
+	column business_area_region_category_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ed7f2ff-9751-4180-a5c3-58a43cffec72
+		summarizeBy: sum
+		sourceColumn: business_area_region_category_sort_order
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'business_area_region_category Hierarchy'
-		lineageTag: 1602fc97-0168-4625-b965-8b10d4d3fd93
+		lineageTag: 1b0796ea-8ffa-4b31-b370-1395156d707a
 
 		level business_area_region_category
-			lineageTag: 57e4b5a2-18c8-43fc-8517-a007700c810b
+			lineageTag: 026c4a68-bd8c-4bbf-be6b-b2401d4bee6b
 			column: business_area_region_category
 
 		level business_area_region
-			lineageTag: 0bd5e6af-0c94-4852-b28e-c485513b3872
+			lineageTag: 5bdc53a8-e9d9-446f-8cbd-8e79d7358e7e
 			column: business_area_region
 
 		level business_area
-			lineageTag: e76863ce-5330-4a9e-8b5d-56cfed5a85c0
+			lineageTag: 8c1e346d-cac9-4435-90f0-caed8ae9989e
 			column: business_area
 
 	partition 'bcts_reporting bcts_performance_report_ytd_all' = m

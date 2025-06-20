@@ -7,6 +7,8 @@ table 'bcts_reporting recent_auctions_chart_2'
 		summarizeBy: none
 		sourceColumn: metric
 
+		changedProperty = SortByColumn
+
 		annotation SummarizationSetBy = Automatic
 
 	column 'Value Added'

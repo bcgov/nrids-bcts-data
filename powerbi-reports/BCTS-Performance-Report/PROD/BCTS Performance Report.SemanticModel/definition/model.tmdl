@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["bcts_reporting licence_issued_advertised_main","bcts_reporting bcts_performance_report_ytd_all","bcts_reporting recent_auction_results","bcts_reporting bcts_volume_summary_chart_2","bcts_reporting recent_auctions_chart_2","bcts_reporting bcts_performance_report_definitions","bcts_reporting bcts_performance_report_licence_issued_details","bcts_reporting bcts_performance_report_not_awarded_details"]
+annotation PBI_QueryOrder = ["bcts_reporting licence_issued_advertised_main","bcts_reporting bcts_performance_report_ytd_all","bcts_reporting recent_auction_results","bcts_reporting bcts_volume_summary_chart_2","bcts_reporting recent_auctions_chart_2","bcts_reporting bcts_performance_report_definitions","bcts_reporting bcts_performance_report_licence_issued_details","bcts_reporting bcts_performance_report_not_awarded_details","bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -34,6 +34,7 @@ ref table 'bcts_reporting bcts_performance_report_licence_issued_details'
 ref table LocalDateTable_35e4a88d-1bb8-40d5-a936-a686b9be82d0
 ref table 'bcts_reporting bcts_performance_report_not_awarded_details'
 ref table LocalDateTable_36e2e9ab-fd8e-414c-8d9f-a32ba42152b3
+ref table 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume'
 
 ref cultureInfo en-CA
 
