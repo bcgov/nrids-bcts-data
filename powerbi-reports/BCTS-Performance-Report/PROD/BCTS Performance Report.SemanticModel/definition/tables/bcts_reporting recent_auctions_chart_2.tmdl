@@ -1,6 +1,9 @@
 table 'bcts_reporting recent_auctions_chart_2'
 	lineageTag: 83e4cb50-9deb-4c7a-bc48-61df6d0ef11e
 
+	measure Measure
+		lineageTag: 6593e265-4622-475e-9456-44667ffc6183
+
 	column metric
 		dataType: string
 		lineageTag: 2ae46652-763d-47fc-a3d3-ae4fc4da7dac
@@ -36,6 +39,14 @@ table 'bcts_reporting recent_auctions_chart_2'
 		lineageTag: 137a93a3-1751-46d8-b61d-1bf9aa033b8c
 		summarizeBy: sum
 		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_ymax = 'bcts_reporting recent_auctions_chart_2'[Total] * 1.1
+		lineageTag: 8c6fe385-d76a-449d-9d0d-d611872b3ae6
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

@@ -210,16 +210,6 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column y_max
-		dataType: double
-		lineageTag: cd4f0f70-90e4-4394-92ad-197e6a6dd94c
-		summarizeBy: sum
-		sourceColumn: y_max
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column y_max_region
 		dataType: double
 		lineageTag: 1db86f7d-43c7-44f7-96b4-29c3e32786e6
@@ -247,6 +237,26 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 		sourceColumn: business_area_region_category_sort_order
 
 		annotation SummarizationSetBy = Automatic
+
+	column y_max_business_area
+		dataType: double
+		lineageTag: aefe2810-4abd-4fa4-847e-615c171694f8
+		summarizeBy: sum
+		sourceColumn: y_max_business_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column y_max_province
+		dataType: double
+		lineageTag: ca813ffc-014d-463a-b017-c87d6e3d4356
+		summarizeBy: sum
+		sourceColumn: y_max_province
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 1b0796ea-8ffa-4b31-b370-1395156d707a

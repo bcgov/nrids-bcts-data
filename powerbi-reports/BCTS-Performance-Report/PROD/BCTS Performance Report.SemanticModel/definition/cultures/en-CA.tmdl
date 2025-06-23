@@ -14504,39 +14504,6 @@ cultureInfo en-CA
 			        }
 			      ]
 			    },
-			    "bcts_reporting_bcts_performance_report_ytd_all.y_max": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "bcts_reporting bcts_performance_report_ytd_all",
-			          "ConceptualProperty": "y_max"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "y max": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "y_max": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "y maximum": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
-			          }
-			        }
-			      ]
-			    },
 			    "bcts_reporting_bcts_performance_report_ytd_all.y_max_region": {
 			      "Definition": {
 			        "Binding": {
