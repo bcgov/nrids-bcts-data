@@ -251,7 +251,7 @@ table 'bcts_reporting bcts_performance_report_ytd_all'
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 1b0796ea-8ffa-4b31-b370-1395156d707a
 
-		level business_area_region_category
+		level 'Business Area'
 			lineageTag: 026c4a68-bd8c-4bbf-be6b-b2401d4bee6b
 			column: business_area_region_category
 
