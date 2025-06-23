@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 327.14285714285688,
+        "x": 411.14285714285688,
         "y": 0
       },
       "nodes": [
@@ -106,6 +106,19 @@
           },
           "nodeIndex": "bcts_reporting bcts_performance_report_not_awarded_details",
           "nodeLineageTag": "f61ad142-b21c-4121-ae04-6eb02f5cfbc9",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2410,
+            "y": 205.75
+          },
+          "nodeIndex": "bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume",
+          "nodeLineageTag": "f021f7d2-7107-440d-bb6c-5a368df6d012",
           "size": {
             "height": 248,
             "width": 234

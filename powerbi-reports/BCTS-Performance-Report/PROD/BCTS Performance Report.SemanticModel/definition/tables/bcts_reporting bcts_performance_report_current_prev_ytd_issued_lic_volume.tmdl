@@ -6,6 +6,9 @@ table 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume
 		lineageTag: eab5883a-07a9-42e0-8963-c0fee9cece88
 		summarizeBy: none
 		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -86,6 +89,34 @@ table 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: 9fec8286-39a8-4596-96dc-2ba5862c4339
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: 513b1ab7-b875-44f2-a896-e03d520b35c1
+
+		level 'Business Area'
+			lineageTag: 4928ba37-318b-4f6c-8baf-d5d1765829ee
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: 2527685f-b8b9-433b-aad4-886da82fb7f3
+			column: business_area_region
+
+		level business_area
+			lineageTag: bb63fe7f-4506-4b58-9dc2-daf31e9bdfda
+			column: business_area
 
 	partition 'bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume' = m
 		mode: import
