@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["bcts_reporting timber_inventory_ready_to_sell","bc
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.144.679.0 (25.06)+ef40146207b86a826d1c72a7727a743ee37450e9
+annotation PBIDesktopVersion = 2.144.878.0 (25.06)+9cca29236de5114792f4d7188221f91ad4a5cc50
 
 annotation PBI_ProTooling = ["DevMode"]
 

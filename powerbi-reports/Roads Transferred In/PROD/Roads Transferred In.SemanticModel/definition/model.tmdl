@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["bcts_reporting roads_transferred_in","bcts_reporti
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+annotation PBIDesktopVersion = 2.144.878.0 (25.06)+9cca29236de5114792f4d7188221f91ad4a5cc50
 
 annotation PBI_ProTooling = ["DevMode"]
 

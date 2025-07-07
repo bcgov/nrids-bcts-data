@@ -18308,7 +18308,7 @@ cultureInfo en-CA
 			          }
 			        },
 			        {
-			          "Volume (m3)": {
+			          "Volume (m³)": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -19453,7 +19453,7 @@ cultureInfo en-CA
 			          }
 			        },
 			        {
-			          "Volume (m3)": {
+			          "Volume (m³)": {
 			            "State": "Suggested",
 			            "Source": {
 			              "Type": "External",
@@ -21565,42 +21565,144 @@ cultureInfo en-CA
 			          }
 			        }
 			      ]
+			    },
+			    "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume.y_max_business_area": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume",
+			          "ConceptualProperty": "y_max_business_area"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "y max business area": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "y_max_business_area": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "area": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "max business area": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "y max business region": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "y max business locale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "y max business locality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "y max business neighbourhood": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "max business region": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "max business locale": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "max business locality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "max business neighbourhood": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "y max business district": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "y max business continent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
-			    "bcts_reporting_bcts_performance_report_licence_issued_detail_issued_has_date_hierarchy": {
-			      "Binding": {
-			        "ConceptualEntity": "bcts_reporting bcts_performance_report_licence_issued_details"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "bcts_reporting_bcts_performance_report_licence_issued_detail.issued": {
-			          "Target": {
-			            "Entity": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued"
-			          }
-			        },
-			        "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy": {
-			          "Target": {
-			            "Entity": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued"
-			            },
-			            "Object": {
-			              "Role": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "issued_have_issued_date_hierarchies"
-			        }
-			      ]
-			    },
 			    "bcts_reporting_recent_auction_result_business_area_region_category_hierarchy_business_area_region_has_bcts_reporting_recent_auction_result_business_area_region_category_hierarchy_business_area": {
 			      "Binding": {
 			        "ConceptualEntity": "bcts_reporting recent_auction_results"
@@ -23908,6 +24010,71 @@ cultureInfo en-CA
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "bcts_reporting_bcts_performance_report_ytd_alls_have_bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volumes"
+			        }
+			      ]
+			    },
+			    "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume_has_y_max_business_area": {
+			      "Binding": {
+			        "ConceptualEntity": "bcts_reporting bcts_performance_report_current_prev_ytd_issued_lic_volume"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume": {
+			          "Target": {
+			            "Entity": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume"
+			          }
+			        },
+			        "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume.y_max_business_area": {
+			          "Target": {
+			            "Entity": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume.y_max_business_area"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume"
+			            },
+			            "Object": {
+			              "Role": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume.y_max_business_area"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volumes_have_y_max_business_areas"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume"
+			            },
+			            "Adjectives": [
+			              {
+			                "large": {
+			                  "State": "Generated"
+			                }
+			              },
+			              {
+			                "big": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "small": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volume.y_max_business_area"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "y_max_business_area_indicates_how_large_bcts_reporting_bcts_performance_report_current_prev_ytd_issued_lic_volumes_are"
 			        }
 			      ]
 			    },
@@ -30904,6 +31071,39 @@ cultureInfo en-CA
 			          "State": "Generated",
 			          "Weight": 0.9,
 			          "ID": "bcts_reporting_licence_issued_advertised_mains_are_auctioned_on_first_auction_dates"
+			        }
+			      ]
+			    },
+			    "bcts_reporting_bcts_performance_report_licence_issued_detail_issued_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "bcts_reporting bcts_performance_report_licence_issued_details"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "bcts_reporting_bcts_performance_report_licence_issued_detail.issued": {
+			          "Target": {
+			            "Entity": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued"
+			          }
+			        },
+			        "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy": {
+			          "Target": {
+			            "Entity": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued"
+			            },
+			            "Object": {
+			              "Role": "bcts_reporting_bcts_performance_report_licence_issued_detail.issued.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "issued_have_issued_date_hierarchies"
 			        }
 			      ]
 			    },
