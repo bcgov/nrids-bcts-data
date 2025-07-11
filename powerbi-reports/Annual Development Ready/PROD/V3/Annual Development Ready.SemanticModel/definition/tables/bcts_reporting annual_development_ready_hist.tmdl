@@ -274,6 +274,22 @@ table 'bcts_reporting annual_development_ready_hist'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a40c2b23-71fa-4e11-ae5f-37d6ccc5c92e
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: aa0be329-e206-432f-8954-c1445f10f58c
+			defaultHierarchy: LocalDateTable_689e3edd-7f51-4676-87e6-9d9903f0c52b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition 'bcts_reporting annual_development_ready_hist' = m
 		mode: import
 		source =

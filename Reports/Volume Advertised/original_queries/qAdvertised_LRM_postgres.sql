@@ -8,7 +8,7 @@ WITH LV AS
             Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME,
             Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME
         FROM
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B
+            LRM_REPLICATION.V_BLOCK B
         GROUP BY
             B.LICN_SEQ_NBR
         ORDER BY
@@ -21,7 +21,7 @@ AUC AS
             A.ACTIVITY_DATE AS Auction,
             A.ACTI_STATUS_IND AS Auction_Status
         FROM
-            BCTS_STAGING.FORESTVIEW_V_LICENCE_ACTIVITY_ALL A
+            LRM_REPLICATION.V_LICENCE_ACTIVITY_ALL A
         WHERE
             A.ACTIVITY_CLASS='CML'
             AND A.ACTT_KEY_IND='AUC'
@@ -44,7 +44,7 @@ salvage_all_fire_year AS
                 Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_ALL_FIRE_YEARS,
                 Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_ALL_FIRE_YEARS
         from
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B,
+            LRM_REPLICATION.V_BLOCK B,
             (
                 /*
                 This distinct clause ensures each block is only counted once
@@ -54,7 +54,7 @@ salvage_all_fire_year AS
                     cutb_seq_nbr
 
                 from
-                    BCTS_STAGING.FORESTVIEW_v_block_activity_all
+                    LRM_REPLICATION.v_block_activity_all
 
                 where
                     activity_class = 'CSB'
@@ -81,7 +81,7 @@ salvage_all_fire_year AS
             Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_2021_FIRE,
             Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_2021_FIRE
         FROM
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B,
+            LRM_REPLICATION.V_BLOCK B,
             (
                 /*
                 The SFIRE21 activity can be entered multiple times for the same
@@ -96,7 +96,7 @@ salvage_all_fire_year AS
                 select distinct
                     cutb_seq_nbr
                 from
-                    BCTS_STAGING.FORESTVIEW_v_block_activity_all
+                    LRM_REPLICATION.v_block_activity_all
                 where
                     activity_class = 'CSB'
                     and actt_key_ind = 'SFIRE21'
@@ -122,7 +122,7 @@ salvage22fire AS
             Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_2022_FIRE,
             Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_2022_FIRE
         FROM
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B,
+            LRM_REPLICATION.V_BLOCK B,
             (
                 /*
                 The SFIRE22 activity can be entered multiple times for the same
@@ -137,7 +137,7 @@ salvage22fire AS
                 select distinct
                     cutb_seq_nbr
                 from
-                    BCTS_STAGING.FORESTVIEW_v_block_activity_all
+                    LRM_REPLICATION.v_block_activity_all
                 where
                     activity_class = 'CSB'
                     and actt_key_ind = 'SFIRE22'
@@ -162,7 +162,7 @@ salvage23fire AS
             Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_2023_FIRE,
             Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_2023_FIRE
         FROM
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B,
+            LRM_REPLICATION.V_BLOCK B,
             (
                 /*
                 The SFIRE23 activity can be entered multiple times for the same
@@ -177,7 +177,7 @@ salvage23fire AS
                 select distinct
                     cutb_seq_nbr
                 from
-                    BCTS_STAGING.FORESTVIEW_v_block_activity_all
+                    LRM_REPLICATION.v_block_activity_all
                 where
                     activity_class = 'CSB'
                     and actt_key_ind = 'SFIRE23'
@@ -205,7 +205,7 @@ salvage23fire AS
             Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_2024_FIRE,
             Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_2024_FIRE
         FROM
-            BCTS_STAGING.FORESTVIEW_V_BLOCK B,
+            LRM_REPLICATION.V_BLOCK B,
             (
                 /*
                 The SFIRE24 activity can be entered multiple times for the same
@@ -220,13 +220,52 @@ salvage23fire AS
                 select distinct
                     cutb_seq_nbr
                 from
-                    BCTS_STAGING.FORESTVIEW_v_block_activity_all
+                    LRM_REPLICATION.v_block_activity_all
                 where
                     activity_class = 'CSB'
                     and actt_key_ind = 'SFIRE24'
             ) block_with_sfire24
         where
             b.cutb_seq_nbr = block_with_sfire24.cutb_seq_nbr
+        GROUP BY
+            B.LICN_SEQ_NBR
+    ),
+    salvage25fire AS
+    /*
+    salvage25fire
+
+    Volume within licence that is salvage from a 2025 fire.
+    Only blocks with SFIRE25 activity are included.
+    */
+    (
+        SELECT
+            B.LICN_SEQ_NBR,
+            Sum(B.BLAL_RW_VOL) AS LRM_RW_VOLUME_SALVAGE_2025_FIRE,
+            Sum(B.CRUISE_VOL) AS LRM_CRUISE_VOLUME_SALVAGE_2025_FIRE,
+            Sum(COALESCE(CRUISE_VOL,0) + COALESCE(BLAL_RW_VOL,0)) AS LRM_TOTAL_VOLUME_SALVAGE_2025_FIRE
+        FROM
+            LRM_REPLICATION.V_BLOCK B,
+            (
+                /*
+                The SFIRE25 activity can be entered multiple times for the same
+                block. The SFIRE25 activity is meant to be present for
+                blocks that are salvage from 2025 fires, and absent for those
+                that are not. Multiple entries of the activity on one block are
+                meaningless. For the purposes of this query, we assume that
+                multiple entries are intended to indicate the block is salvage.
+                This DISTINCT query ensures we only count the block volume once
+                for each SFIRE25 activity on the block.
+                */
+                select distinct
+                    cutb_seq_nbr
+                from
+                    LRM_REPLICATION.v_block_activity_all
+                where
+                    activity_class = 'CSB'
+                    and actt_key_ind = 'SFIRE25'
+            ) block_with_sfire25
+        where
+            b.cutb_seq_nbr = block_with_sfire25.cutb_seq_nbr
         GROUP BY
             B.LICN_SEQ_NBR
     )
@@ -248,11 +287,12 @@ SELECT
     LRM_TOTAL_VOLUME_SALVAGE_2021_FIRE,
     LRM_TOTAL_VOLUME_SALVAGE_2022_FIRE,
     LRM_TOTAL_VOLUME_SALVAGE_2023_FIRE,
+    LRM_TOTAL_VOLUME_SALVAGE_2024_FIRE,
     LRM_TOTAL_VOLUME_SALVAGE_2024_FIRE
 
 FROM
-    BCTS_STAGING.FORESTVIEW_V_LICENCE L
-    LEFT JOIN BCTS_STAGING.FORESTVIEW_V_CP CP
+    LRM_REPLICATION.V_LICENCE L
+    LEFT JOIN LRM_REPLICATION.V_CP CP
     ON L.LICN_SEQ_NBR = CP.LICN_SEQ_NBR
     LEFT JOIN LV
     ON L.LICN_SEQ_NBR = LV.LICN_SEQ_NBR
@@ -268,6 +308,8 @@ FROM
     ON L.LICN_SEQ_NBR = salvage23fire.LICN_SEQ_NBR
     LEFT JOIN salvage24fire
     ON L.LICN_SEQ_NBR = salvage24fire.LICN_SEQ_NBR
+    LEFT JOIN salvage25fire
+    ON L.LICN_SEQ_NBR = salvage25fire.LICN_SEQ_NBR
 
 ORDER BY
     L.LICENCE_ID
