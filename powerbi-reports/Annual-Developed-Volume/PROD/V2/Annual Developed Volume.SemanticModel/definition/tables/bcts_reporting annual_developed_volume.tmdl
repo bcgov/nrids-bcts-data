@@ -341,6 +341,22 @@ table 'bcts_reporting annual_developed_volume'
 
 		annotation SummarizationSetBy = Automatic
 
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 25f27f38-442d-493f-8cdd-43ede330bbb5
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: 2bbec1cc-4871-4324-88e6-4d8d6330db32
+			defaultHierarchy: LocalDateTable_4474cb75-be81-42a8-9f67-63f64f4e58d1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 65ece705-6237-4eac-b0f6-04aee60dbf59
 

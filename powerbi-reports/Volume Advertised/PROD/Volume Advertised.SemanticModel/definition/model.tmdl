@@ -1,0 +1,36 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting volume_advertised_main","bcts_reporting volume_advertised_main_hist"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.145.1105.0 (25.07)+decbc46fce458c5b8d5109d6f32a743f2ac949c8
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting volume_advertised_main'
+ref table DateTableTemplate_ae10ed3f-9c55-4e8d-9c8c-be07568655d0
+ref table LocalDateTable_57fb30b4-c462-43f2-9845-2822e7f5e92e
+ref table LocalDateTable_f4ef98c6-bfca-4ff6-a897-ca33232ff32a
+ref table LocalDateTable_6f9ba6c1-ba82-45fd-b056-1721f61fe170
+ref table LocalDateTable_f0d71a62-0ec1-49d2-b611-ba5616cfd495
+ref table LocalDateTable_df520b90-3207-4ffe-a0e3-22e2ed1a1eab
+ref table LocalDateTable_c553528a-d1ed-4f66-9cd6-f52467c6c7f5
+ref table LocalDateTable_cec5332b-e614-4293-8bbd-f837ccc8a79b
+ref table 'bcts_reporting volume_advertised_main_hist'
+ref table LocalDateTable_cb3a15a0-2059-4a7c-82bd-054b0c22f4fd
+ref table LocalDateTable_735638ab-b4ec-4f4b-b39f-6e567784e51b
+ref table LocalDateTable_c9cf5864-6f59-4c7b-97d1-8622ce200bda
+ref table LocalDateTable_cf8a8284-7790-468c-87a2-9ef64b9ce08c
+ref table LocalDateTable_442e3ede-d30b-470a-a864-8b819c8a2900
+ref table LocalDateTable_318170a9-4262-48b2-ba79-67ed617e0df1
+ref table LocalDateTable_8f734d3e-02a8-42a9-b6d0-7646c56790d7
+
+ref cultureInfo en-CA
+

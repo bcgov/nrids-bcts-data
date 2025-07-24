@@ -1,0 +1,70 @@
+relationship 84a61481-cdd6-4e25-955a-00be3773e0da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.auction_date
+	toColumn: LocalDateTable_57fb30b4-c462-43f2-9845-2822e7f5e92e.Date
+
+relationship bf9afb13-f696-413d-8bd7-cfef941dcba5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.lrm_auction_date
+	toColumn: LocalDateTable_f4ef98c6-bfca-4ff6-a897-ca33232ff32a.Date
+
+relationship a03e8e3c-d353-4aec-91b0-897fb5a4d764
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.first_auction_date
+	toColumn: LocalDateTable_6f9ba6c1-ba82-45fd-b056-1721f61fe170.Date
+
+relationship 2cbfbfaa-23d3-451b-b957-c42428d7a792
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.last_auction_date
+	toColumn: LocalDateTable_f0d71a62-0ec1-49d2-b611-ba5616cfd495.Date
+
+relationship b4349798-fcfb-42a4-b310-7a698227a809
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.report_start_date
+	toColumn: LocalDateTable_df520b90-3207-4ffe-a0e3-22e2ed1a1eab.Date
+
+relationship 25f99bb8-bcbf-41b9-a42b-f9dcd37fb578
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.report_end_date
+	toColumn: LocalDateTable_c553528a-d1ed-4f66-9cd6-f52467c6c7f5.Date
+
+relationship 9cd7aa0a-5443-4fb6-8271-db6f7a3339d4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main'.report_run_date
+	toColumn: LocalDateTable_cec5332b-e614-4293-8bbd-f837ccc8a79b.Date
+
+relationship a80c7b5c-7965-4268-a8ad-3f9b9dd97a75
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.auction_date
+	toColumn: LocalDateTable_cb3a15a0-2059-4a7c-82bd-054b0c22f4fd.Date
+
+relationship 296ea57c-129b-4717-a0ca-7229f102835e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.lrm_auction_date
+	toColumn: LocalDateTable_735638ab-b4ec-4f4b-b39f-6e567784e51b.Date
+
+relationship 5d4df492-e33f-42eb-aa6b-e5ca0ab7fc20
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.first_auction_date
+	toColumn: LocalDateTable_c9cf5864-6f59-4c7b-97d1-8622ce200bda.Date
+
+relationship 3849b5a1-5704-486d-aab5-5e5c82a1531d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.last_auction_date
+	toColumn: LocalDateTable_cf8a8284-7790-468c-87a2-9ef64b9ce08c.Date
+
+relationship 02b5588b-7a21-42d4-bb2c-5a928ec9fe15
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.report_start_date
+	toColumn: LocalDateTable_442e3ede-d30b-470a-a864-8b819c8a2900.Date
+
+relationship 077072ca-e2d4-4a68-8e5f-f471af51abf2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.report_end_date
+	toColumn: LocalDateTable_318170a9-4262-48b2-ba79-67ed617e0df1.Date
+
+relationship 243e29de-8e62-4f50-a289-0f5b1172140e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting volume_advertised_main_hist'.report_run_date
+	toColumn: LocalDateTable_8f734d3e-02a8-42a9-b6d0-7646c56790d7.Date
+

@@ -1,0 +1,545 @@
+table 'bcts_reporting volume_advertised_main'
+	lineageTag: 16bed22a-be37-4c7d-b4c0-31b51dabf9e1
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: 3ca7e740-ae75-4ffc-8ae7-cd3dbfc8088b
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 24422c13-8648-413f-a9f3-473d77108c1b
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: f8dae001-a1df-4c26-9f2d-11d4231944fc
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_code
+		dataType: string
+		lineageTag: ca1f5a00-c46d-480f-bdfe-d396ba4e9eaa
+		summarizeBy: none
+		sourceColumn: business_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column mgmt_unit_type
+		dataType: string
+		lineageTag: 8234ac1c-5ba1-44ea-b3c1-7ebb290eab1b
+		summarizeBy: none
+		sourceColumn: mgmt_unit_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column mgmt_unit_id
+		dataType: string
+		lineageTag: 4373fedd-f25e-4526-8e03-050c0060a80f
+		summarizeBy: none
+		sourceColumn: mgmt_unit_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nav_name
+		dataType: string
+		lineageTag: 1033efbb-14ba-487b-adc9-8bd71644d4b5
+		summarizeBy: none
+		sourceColumn: nav_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column district_name
+		dataType: string
+		lineageTag: 86549fd1-3544-4aa4-b1fd-0fc19a97c6a6
+		summarizeBy: none
+		sourceColumn: district_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column field_team
+		dataType: string
+		lineageTag: 3fc0ffdb-d7a4-4b4c-bf87-a064006cb521
+		summarizeBy: none
+		sourceColumn: field_team
+
+		annotation SummarizationSetBy = Automatic
+
+	column geographiclocation
+		dataType: string
+		lineageTag: 164cb6c0-f872-4170-8d7a-26c5e04382d6
+		summarizeBy: none
+		sourceColumn: geographiclocation
+
+		annotation SummarizationSetBy = Automatic
+
+	column operatingarea
+		dataType: string
+		lineageTag: 26b485bc-76ba-4d49-bc96-e8e5da39a624
+		summarizeBy: none
+		sourceColumn: operatingarea
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 02520d17-b66c-49cf-8c37-be9afdbbaf4d
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column forest_file_id
+		dataType: string
+		lineageTag: 58367bc2-353a-4a3e-9ca3-84004c7148ab
+		summarizeBy: none
+		sourceColumn: forest_file_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column bcts_category_code
+		dataType: string
+		lineageTag: fe12a101-6f7d-445a-ae93-ce0a13539ce3
+		summarizeBy: none
+		sourceColumn: bcts_category_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 3552433e-9b23-400d-aa0d-018bc010c165
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column auction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3c963ab9-f44a-4eb8-884b-00a28722110c
+		summarizeBy: none
+		sourceColumn: auction_date
+
+		variation Variation
+			isDefault
+			relationship: 84a61481-cdd6-4e25-955a-00be3773e0da
+			defaultHierarchy: LocalDateTable_57fb30b4-c462-43f2-9845-2822e7f5e92e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column auction_date_fiscal
+		dataType: double
+		lineageTag: fd5f3f7c-0df6-407c-93b0-997454914f5e
+		summarizeBy: sum
+		sourceColumn: auction_date_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column auction_date_quarter
+		dataType: string
+		lineageTag: 2e71c66a-5c5e-4dcc-8170-15754f57b179
+		summarizeBy: none
+		sourceColumn: auction_date_quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column lrm_auction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 326fe89f-bc10-4bb9-8196-350bfa36d8de
+		summarizeBy: none
+		sourceColumn: lrm_auction_date
+
+		variation Variation
+			isDefault
+			relationship: bf9afb13-f696-413d-8bd7-cfef941dcba5
+			defaultHierarchy: LocalDateTable_f4ef98c6-bfca-4ff6-a897-ca33232ff32a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column lrm_auction_status
+		dataType: string
+		lineageTag: 986dd8b8-611d-4202-8a85-ac72f9cda15f
+		summarizeBy: none
+		sourceColumn: lrm_auction_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column sale_volume
+		dataType: double
+		lineageTag: 27e582e7-1eb9-49ab-ba19-5056209ce129
+		summarizeBy: sum
+		sourceColumn: sale_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fta_volume
+		dataType: double
+		lineageTag: 3474f541-4399-40e0-a777-f2fce5c1c7b6
+		summarizeBy: sum
+		sourceColumn: fta_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume
+		dataType: double
+		lineageTag: e95c5457-cbe4-4b7a-a3c3-dfd6c24382aa
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_cruise_volume
+		dataType: double
+		lineageTag: 6a4866c2-3c17-4a0e-80ef-8828e68f87b4
+		summarizeBy: sum
+		sourceColumn: lrm_cruise_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_rw_volume
+		dataType: double
+		lineageTag: 25dad129-cffb-484f-a26c-9d37e6f231a4
+		summarizeBy: sum
+		sourceColumn: lrm_rw_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_all_fire_years
+		dataType: double
+		lineageTag: 541498cb-9d72-4c7c-bd17-f9b9b5a2faff
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_all_fire_years
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_2021_fire
+		dataType: double
+		lineageTag: 98e763b6-9a5b-403d-9a38-e932618168ab
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_2021_fire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_2022_fire
+		dataType: double
+		lineageTag: 182d9dc5-5413-4f77-904f-8341c7547a9d
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_2022_fire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_2023_fire
+		dataType: double
+		lineageTag: 91c63c44-3d55-4c53-9b07-5c93cbedbb84
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_2023_fire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_2024_fire
+		dataType: double
+		lineageTag: 9db8ab64-7c50-4dcf-b9a4-2511e6250841
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_2024_fire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_total_volume_salvage_2025_fire
+		dataType: double
+		lineageTag: 89ac25ff-77a2-4230-b121-62fb510c7e65
+		summarizeBy: sum
+		sourceColumn: lrm_total_volume_salvage_2025_fire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column client_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 47b86a80-7775-4ba6-94ae-4a5f143750b6
+		summarizeBy: sum
+		sourceColumn: client_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column eligible_client_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ede75eb-bb0b-4c6c-bfc7-3f44bf49d87b
+		summarizeBy: sum
+		sourceColumn: eligible_client_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column ineligible_client_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 452bb102-5d17-4c16-a320-6052cfb2c354
+		summarizeBy: sum
+		sourceColumn: ineligible_client_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_count_eligibility_indicator_missing
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bc410c8-6563-48e1-9662-bb5451307c3d
+		summarizeBy: sum
+		sourceColumn: client_count_eligibility_indicator_missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column file_status_st
+		dataType: string
+		lineageTag: cf17c999-398d-47b2-b526-9eae1810c46f
+		summarizeBy: none
+		sourceColumn: file_status_st
+
+		annotation SummarizationSetBy = Automatic
+
+	column awarded_ind
+		dataType: string
+		lineageTag: d74ddb39-f4dc-4b17-9ea5-b8a7be14787f
+		summarizeBy: none
+		sourceColumn: awarded_ind
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_sale_rationale_code
+		dataType: string
+		lineageTag: 2cbd0e6e-9943-4af3-9aa7-3b7e24933582
+		summarizeBy: none
+		sourceColumn: no_sale_rationale_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_sale_rationale
+		dataType: string
+		lineageTag: c6f2405b-7ee7-45d2-bbcc-ad1f6541d7df
+		summarizeBy: none
+		sourceColumn: no_sale_rationale
+
+		annotation SummarizationSetBy = Automatic
+
+	column lrm_auc_fiscal
+		dataType: double
+		lineageTag: 5a1d2d68-eead-458e-8d84-72f5331b0544
+		summarizeBy: sum
+		sourceColumn: lrm_auc_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lrm_auc_quarter
+		dataType: string
+		lineageTag: 20118d10-a4d7-4955-aba3-c4d7facaf214
+		summarizeBy: none
+		sourceColumn: lrm_auc_quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_auction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b137286-034d-4ee6-bee9-4c60af695b1c
+		summarizeBy: none
+		sourceColumn: first_auction_date
+
+		variation Variation
+			isDefault
+			relationship: a03e8e3c-d353-4aec-91b0-897fb5a4d764
+			defaultHierarchy: LocalDateTable_6f9ba6c1-ba82-45fd-b056-1721f61fe170.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_auction_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9a11e157-b1a5-4870-bef1-cff09bc6c3bc
+		summarizeBy: none
+		sourceColumn: last_auction_date
+
+		variation Variation
+			isDefault
+			relationship: 2cbfbfaa-23d3-451b-b957-c42428d7a792
+			defaultHierarchy: LocalDateTable_f0d71a62-0ec1-49d2-b611-ba5616cfd495.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column auction_count
+		dataType: int64
+		formatString: 0
+		lineageTag: c0ee8320-b9bb-4aa0-a5ab-368037712600
+		summarizeBy: sum
+		sourceColumn: auction_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_auction
+		dataType: string
+		lineageTag: 4e46aece-b962-446d-b2d2-384abfe28d05
+		summarizeBy: none
+		sourceColumn: first_auction
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_auction
+		dataType: string
+		lineageTag: c64bb15c-147d-418e-b162-14abcee2c741
+		summarizeBy: none
+		sourceColumn: last_auction
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_auction_no_sale
+		dataType: string
+		lineageTag: eca7df62-c7b5-4ffa-8d50-0ee7167ae536
+		summarizeBy: none
+		sourceColumn: last_auction_no_sale
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 06dfc761-03a5-4a77-97e4-5bf13045aa48
+		summarizeBy: none
+		sourceColumn: report_start_date
+
+		variation Variation
+			isDefault
+			relationship: b4349798-fcfb-42a4-b310-7a698227a809
+			defaultHierarchy: LocalDateTable_df520b90-3207-4ffe-a0e3-22e2ed1a1eab.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bdd44565-81a4-4c10-b630-542727909ba8
+		summarizeBy: none
+		sourceColumn: report_end_date
+
+		variation Variation
+			isDefault
+			relationship: 25f99bb8-bcbf-41b9-a42b-f9dcd37fb578
+			defaultHierarchy: LocalDateTable_c553528a-d1ed-4f66-9cd6-f52467c6c7f5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fiscal_year
+		dataType: double
+		lineageTag: c60c1d96-30f8-4dea-9d31-015e0b5dbac8
+		summarizeBy: sum
+		sourceColumn: fiscal_year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7c039ef2-dc01-480e-af9a-9ac913ad0dc9
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: 9cd7aa0a-5443-4fb6-8271-db6f7a3339d4
+			defaultHierarchy: LocalDateTable_cec5332b-e614-4293-8bbd-f837ccc8a79b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Fiscal Period Info' = ```
+			
+			"Data shown reflects period from " & 
+			FORMAT(MAX('bcts_reporting volume_advertised_main'[report_start_date]), "MMMM DD, YYYY") & 
+			" to " & 
+			FORMAT(MAX('bcts_reporting volume_advertised_main'[report_end_date]), "MMMM DD, YYYY")
+			
+			```
+		lineageTag: c6d7b293-9d80-40cd-9a17-45f8afdb6983
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting volume_advertised_main'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: f10f7be6-13c8-44a3-950f-a1c832dff7c7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: e579ae31-201c-4ef7-9eed-e94cd2eab39b
+
+		level business_area_region_category
+			lineageTag: d6f50948-0244-459e-8bd3-c9a31fdc33ae
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: 9316ca91-38a5-457e-8d6d-ffdf065ce2c7
+			column: business_area_region
+
+		level business_area
+			lineageTag: 80d73700-bb8b-4ff8-baf3-f07ebcf662cd
+			column: business_area
+
+	partition 'bcts_reporting volume_advertised_main' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_volume_advertised_main = Source{[Schema="bcts_reporting",Item="volume_advertised_main"]}[Data]
+				in
+				    bcts_reporting_volume_advertised_main
+

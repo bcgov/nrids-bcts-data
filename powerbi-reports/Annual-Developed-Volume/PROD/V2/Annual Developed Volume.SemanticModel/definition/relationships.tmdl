@@ -62,3 +62,13 @@ relationship 8d10a282-b5ba-0040-116c-bed96477f8aa
 	fromColumn: 'bcts_reporting annual_developed_volume_hist'.cutb_seq_nbr
 	toColumn: 'bcts_reporting annual_developed_volume'.cutb_seq_nbr
 
+relationship 2bbec1cc-4871-4324-88e6-4d8d6330db32
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume'.report_run_date
+	toColumn: LocalDateTable_4474cb75-be81-42a8-9f67-63f64f4e58d1.Date
+
+relationship bae7b790-e67d-457a-b0f4-8890c7ddd48a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting annual_developed_volume_hist'.report_run_date
+	toColumn: LocalDateTable_87a6cc1b-29be-4912-92f9-951899eab970.Date
+

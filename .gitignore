@@ -8,3 +8,9 @@ __pycache__/
 
 **/*.xlsx
 **/*.pdf
+**/*.docx
+**/*.doc
+**/*.pptx
+**/*.ppt
+**/*.txt
+
