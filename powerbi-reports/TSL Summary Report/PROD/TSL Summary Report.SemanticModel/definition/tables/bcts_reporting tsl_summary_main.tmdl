@@ -1,0 +1,249 @@
+table 'bcts_reporting tsl_summary_main'
+	lineageTag: a727a8e0-c4cc-4467-9023-ca7b24ede657
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: 03e565ab-468d-45b4-9da9-b0e5b761acf5
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 1160d8d6-61f5-49c1-b23b-05721075e70a
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_code
+		dataType: string
+		lineageTag: 7108ba29-bdd7-4414-9e1b-bcad73a6e310
+		summarizeBy: none
+		sourceColumn: business_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: 3ded94b9-0d72-4bf6-8fb9-624752ea3fef
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column licence_number
+		dataType: string
+		lineageTag: 19c58867-1a1c-42f8-8eb3-fa7ffeccf886
+		summarizeBy: none
+		sourceColumn: licence_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column geographic_location
+		dataType: string
+		lineageTag: a9095ffb-5446-4041-8b50-b6e4bc3702c8
+		summarizeBy: none
+		sourceColumn: geographic_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column field_team
+		dataType: string
+		lineageTag: c7b57c26-a83f-4231-b354-4fd552d19b66
+		summarizeBy: none
+		sourceColumn: field_team
+
+		annotation SummarizationSetBy = Automatic
+
+	column species
+		dataType: string
+		lineageTag: e511e9d6-6842-4482-bf84-3730be2835d4
+		summarizeBy: none
+		sourceColumn: species
+
+		annotation SummarizationSetBy = Automatic
+
+	column volume_advertised_m3
+		dataType: double
+		lineageTag: 092377ec-4811-45c1-ade0-48316fa4750e
+		summarizeBy: sum
+		sourceColumn: volume_advertised_m3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column volume_readvertised_m3
+		dataType: double
+		lineageTag: 8161b05b-7c4e-41cd-95bb-5d7933896b00
+		summarizeBy: sum
+		sourceColumn: volume_readvertised_m3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column auctioned_bcts_category_code
+		dataType: string
+		lineageTag: 8aa3119e-b16f-41b1-a683-8616b0bf9fdf
+		summarizeBy: none
+		sourceColumn: auctioned_bcts_category_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_auction_count
+		dataType: int64
+		formatString: 0
+		lineageTag: c71152c4-7249-4d39-9a33-f99afe2046bc
+		summarizeBy: sum
+		sourceColumn: total_auction_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column readvertised_auction
+		dataType: string
+		lineageTag: 5c32ce4e-1177-46c5-a760-94e0b3702199
+		summarizeBy: none
+		sourceColumn: readvertised_auction
+
+		annotation SummarizationSetBy = Automatic
+
+	column auction_closing_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 24fd45ff-c5db-40df-b238-d1b95f22240f
+		summarizeBy: none
+		sourceColumn: auction_closing_date
+
+		variation Variation
+			isDefault
+			relationship: 1d10f4a7-1a67-4a71-acec-1bdb89f4bed2
+			defaultHierarchy: LocalDateTable_1b31c76a-282c-4205-93f6-3b6293f0fa9d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column number_of_bidders
+		dataType: string
+		lineageTag: ccfaa5e8-3d6e-469c-ae48-03cd5634edab
+		summarizeBy: none
+		sourceColumn: number_of_bidders
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_bid
+		dataType: string
+		lineageTag: fc7b2b2e-75d6-4557-a925-8c6c118ff905
+		summarizeBy: none
+		sourceColumn: no_bid
+
+		annotation SummarizationSetBy = Automatic
+
+	column upset_rate_or_upset_value
+		dataType: double
+		lineageTag: d73295d5-c74e-4cbe-bd9d-4b16cc2f389c
+		summarizeBy: sum
+		sourceColumn: upset_rate_or_upset_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column bonus_bid_or_bonus_value
+		dataType: double
+		lineageTag: a5cf9c5f-2cfb-49a2-8b8e-95c77f73c2b1
+		summarizeBy: sum
+		sourceColumn: bonus_bid_or_bonus_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_stumpage_or_total_stumpage_value
+		dataType: double
+		lineageTag: d0e66cd5-a4f0-4f77-ae9c-36633551bd80
+		summarizeBy: sum
+		sourceColumn: total_stumpage_or_total_stumpage_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column no_bid_info
+		dataType: string
+		lineageTag: ac329728-f85b-4ff5-ae56-8267b70cb4b3
+		summarizeBy: none
+		sourceColumn: no_bid_info
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6848e059-871a-4961-8bc3-191e0d8f6788
+		summarizeBy: none
+		sourceColumn: report_start_date
+
+		variation Variation
+			isDefault
+			relationship: e0c23fcf-3eb6-4dd5-8cb6-1f38ead8640a
+			defaultHierarchy: LocalDateTable_221228b8-2772-4933-937b-d2d6f999417a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7a53c912-7bca-430f-9f1b-37086d977005
+		summarizeBy: none
+		sourceColumn: report_end_date
+
+		variation Variation
+			isDefault
+			relationship: e1ea097c-8a78-4a61-8bd8-393d8dcc9767
+			defaultHierarchy: LocalDateTable_4982a84c-b273-4498-96bd-fba3ec34067f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c15c867f-9e86-4be8-8a66-f43991b24e5a
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: 07caf407-84b3-4368-99c7-0c9ae2d84b22
+			defaultHierarchy: LocalDateTable_380a1a1b-ef31-404c-bce1-d67f97c4e1a8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Fiscal Period Info' = ```
+			
+			"Data shown reflects period from " & 
+			FORMAT(MAX('bcts_reporting tsl_summary_main'[report_start_date]), "MMMM DD, YYYY") & 
+			" to " & 
+			FORMAT(MAX('bcts_reporting tsl_summary_main'[report_end_date]), "MMMM DD, YYYY")
+			```
+		lineageTag: 2f48e404-980c-41f5-a994-d07af41e7e2d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'bcts_reporting tsl_summary_main' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_tsl_summary_main = Source{[Schema="bcts_reporting",Item="tsl_summary_main"]}[Data]
+				in
+				    bcts_reporting_tsl_summary_main
+

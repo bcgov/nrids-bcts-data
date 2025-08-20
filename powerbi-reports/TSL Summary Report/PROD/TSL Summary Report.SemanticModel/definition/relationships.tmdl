@@ -1,0 +1,24 @@
+relationship 1d10f4a7-1a67-4a71-acec-1bdb89f4bed2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting tsl_summary_main'.auction_closing_date
+	toColumn: LocalDateTable_1b31c76a-282c-4205-93f6-3b6293f0fa9d.Date
+
+relationship e0c23fcf-3eb6-4dd5-8cb6-1f38ead8640a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting tsl_summary_main'.report_start_date
+	toColumn: LocalDateTable_221228b8-2772-4933-937b-d2d6f999417a.Date
+
+relationship e1ea097c-8a78-4a61-8bd8-393d8dcc9767
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting tsl_summary_main'.report_end_date
+	toColumn: LocalDateTable_4982a84c-b273-4498-96bd-fba3ec34067f.Date
+
+relationship 07caf407-84b3-4368-99c7-0c9ae2d84b22
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting tsl_summary_main'.report_run_date
+	toColumn: LocalDateTable_380a1a1b-ef31-404c-bce1-d67f97c4e1a8.Date
+
+relationship AutoDetected_07e3aae1-f040-4392-91d4-88788978efd1
+	fromColumn: 'bcts_reporting tsl_summary_main'.business_area_region
+	toColumn: 'bcts_reporting v_tsl_summary'.business_area_region
+

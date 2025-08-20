@@ -1,0 +1,26 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting v_tsl_summary","bcts_reporting tsl_summary_main"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.705.0 (25.08)+b71502aff0a01340c88f384884ef42771068f115
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'bcts_reporting v_tsl_summary'
+ref table 'bcts_reporting tsl_summary_main'
+ref table DateTableTemplate_b3e485d4-e4a4-4985-82a6-cd1710a37a72
+ref table LocalDateTable_1b31c76a-282c-4205-93f6-3b6293f0fa9d
+ref table LocalDateTable_221228b8-2772-4933-937b-d2d6f999417a
+ref table LocalDateTable_4982a84c-b273-4498-96bd-fba3ec34067f
+ref table LocalDateTable_380a1a1b-ef31-404c-bce1-d67f97c4e1a8
+
+ref cultureInfo en-CA
+

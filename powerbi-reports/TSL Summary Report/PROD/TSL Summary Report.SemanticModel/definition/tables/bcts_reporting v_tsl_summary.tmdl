@@ -1,0 +1,107 @@
+table 'bcts_reporting v_tsl_summary'
+	lineageTag: 14e61060-e8e0-4569-9f61-de6fedebf952
+
+	column business_area_region
+		dataType: string
+		lineageTag: df56a712-6778-4622-a37e-d03ddd6c3710
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Volume Auctioned (Including Re-auctions)'
+		dataType: double
+		lineageTag: 563afab2-c9ea-47f8-a27f-b7f148f81647
+		summarizeBy: none
+		sourceColumn: Total Volume Auctioned (Including Re-auctions)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Volume Auctioned (First Auction Only)'
+		dataType: double
+		lineageTag: f961d389-df9c-4ba8-a445-8adc4c833770
+		summarizeBy: none
+		sourceColumn: Volume Auctioned (First Auction Only)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Volume Re-auctioned'
+		dataType: double
+		lineageTag: 8390b1a8-c2fd-4095-b028-f0cf09da39fa
+		summarizeBy: none
+		sourceColumn: Volume Re-auctioned
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Licence Issued'
+		dataType: double
+		lineageTag: 616be662-7faf-4588-b86a-369661ed2386
+		summarizeBy: none
+		sourceColumn: Licence Issued
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Volume Not Awarded'
+		dataType: double
+		lineageTag: 7cab8c30-5dc1-4f20-bbfc-beb46e25fe19
+		summarizeBy: none
+		sourceColumn: Volume Not Awarded
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Number of Licence Not Awarded'
+		dataType: int64
+		formatString: 0
+		lineageTag: ed09e84c-2c58-421c-85fc-5074dde06f16
+		summarizeBy: none
+		sourceColumn: Number of Licence Not Awarded
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Volume of Value Added (Category 4) Auctioned'
+		dataType: double
+		lineageTag: 0aae8d19-ba7c-4d16-9c1b-a96233ab5a1f
+		summarizeBy: none
+		sourceColumn: Volume of Value Added (Category 4) Auctioned
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Number of Value Added (Category 4) Licence Auctioned'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ef50d9c-339c-4593-9c08-3ca81aab4969
+		summarizeBy: none
+		sourceColumn: Number of Value Added (Category 4) Licence Auctioned
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Licence Issued'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f538f13-dfd7-4ede-be1c-f8c0d8215c53
+		summarizeBy: none
+		sourceColumn: Number of Licence Issued
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'bcts_reporting v_tsl_summary' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_v_tsl_summary = Source{[Schema="bcts_reporting",Item="v_tsl_summary"]}[Data]
+				in
+				    bcts_reporting_v_tsl_summary
+
