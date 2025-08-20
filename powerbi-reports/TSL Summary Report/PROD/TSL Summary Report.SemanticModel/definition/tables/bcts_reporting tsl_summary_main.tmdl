@@ -238,6 +238,21 @@ table 'bcts_reporting tsl_summary_main'
 
 		annotation SummarizationSetBy = Automatic
 
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: 5caac078-ab6f-4518-810d-2d0003e90d3c
+
+		level business_area_region_category
+			lineageTag: f483d4a4-9bc5-40e9-b63d-356abe33fa19
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: b3b965cf-3b1a-4d37-9a35-d524b26be1bf
+			column: business_area_region
+
+		level business_area
+			lineageTag: 277e38b9-b7c0-48f9-8fac-91cb56517b2e
+			column: business_area
+
 	partition 'bcts_reporting tsl_summary_main' = m
 		mode: import
 		source =

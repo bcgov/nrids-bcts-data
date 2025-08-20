@@ -6,6 +6,9 @@ table 'bcts_reporting v_tsl_summary'
 		lineageTag: df56a712-6778-4622-a37e-d03ddd6c3710
 		summarizeBy: none
 		sourceColumn: business_area_region
+		sortByColumn: business_area_region_sort_order
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -95,6 +98,62 @@ table 'bcts_reporting v_tsl_summary'
 		sourceColumn: Number of Licence Issued
 
 		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: fc47cafd-9c69-49c6-beb5-99f0b42f1494
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+		sortByColumn: business_area_region_cat_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: 819e6843-0737-46ae-aa63-bca8061ae74a
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_cat_number =
+			
+			SWITCH(
+			    TRUE(),
+			    'bcts_reporting v_tsl_summary'[business_area_region] IN { "North Interior", "South Interior" }, 1,
+			    2
+			)
+		formatString: 0
+		lineageTag: 9f48e7f9-9074-4590-b8e8-05f69b9bbc96
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region_sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f5d3205-2e14-454d-aa58-d74935ee9900
+		summarizeBy: none
+		sourceColumn: business_area_region_sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: cf6f3e25-14a7-4500-a157-82545b5660e6
+
+		level business_area_region_category
+			lineageTag: a1f9cd22-ba52-45a8-9a99-9793a770e901
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: fa3130ae-13c6-455a-9e53-051b675fbab8
+			column: business_area_region
+
+		level business_area
+			lineageTag: 7ebd7bd3-853b-4488-a501-d9e63d25de39
+			column: business_area
 
 	partition 'bcts_reporting v_tsl_summary' = m
 		mode: import

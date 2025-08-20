@@ -18,7 +18,7 @@ relationship 07caf407-84b3-4368-99c7-0c9ae2d84b22
 	fromColumn: 'bcts_reporting tsl_summary_main'.report_run_date
 	toColumn: LocalDateTable_380a1a1b-ef31-404c-bce1-d67f97c4e1a8.Date
 
-relationship AutoDetected_07e3aae1-f040-4392-91d4-88788978efd1
-	fromColumn: 'bcts_reporting tsl_summary_main'.business_area_region
-	toColumn: 'bcts_reporting v_tsl_summary'.business_area_region
+relationship AutoDetected_1747f8ac-af93-4850-a602-8e3511b1f080
+	fromColumn: 'bcts_reporting tsl_summary_main'.business_area
+	toColumn: 'bcts_reporting v_tsl_summary'.business_area
 
