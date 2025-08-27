@@ -1,0 +1,146 @@
+cultureInfo en-CA
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "bcts_reporting_timber_inventory_ready_to_develop.inventory_category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting timber_inventory_ready_to_develop",
+			          "ConceptualProperty": "inventory_category"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "bcts_reporting_write_off_forms.field_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "field_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Field Name": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bcts_reporting_write_off_forms.expected_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "expected_value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Expected Value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bcts_reporting_write_off_forms.filled_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "filled_value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Filled Value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bcts_reporting_write_off_forms.match": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "match"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Match": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bcts_reporting_write_off_forms.validated_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "validated_date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Validated Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "bcts_reporting_write_off_forms.form": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "bcts_reporting write_off_forms",
+			          "ConceptualProperty": "form"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Form": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

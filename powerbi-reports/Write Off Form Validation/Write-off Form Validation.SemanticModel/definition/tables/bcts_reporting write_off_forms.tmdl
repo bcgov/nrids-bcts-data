@@ -1,0 +1,71 @@
+table 'bcts_reporting write_off_forms'
+	lineageTag: 62a710f1-bab4-4eb7-824d-c31ea4a44b1c
+
+	column field_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: b9fd2683-d2a9-45c9-b623-38d04b8d5243
+		summarizeBy: none
+		sourceColumn: field_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected_value
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 04e19a7a-ab89-434d-9d7a-2e10d513e5f2
+		summarizeBy: none
+		sourceColumn: expected_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column filled_value
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a020b22b-3240-4817-8183-0584565ce94a
+		summarizeBy: none
+		sourceColumn: filled_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column match
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 71095958-ef31-4114-9fc9-563464434490
+		summarizeBy: none
+		sourceColumn: match
+
+		annotation SummarizationSetBy = Automatic
+
+	column form
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(max)
+		lineageTag: c2235374-d811-422c-b57f-3e5c28cb6283
+		summarizeBy: none
+		sourceColumn: form
+
+		annotation SummarizationSetBy = Automatic
+
+	column validated_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 6444ce2d-0ecf-48cf-ba40-5e2ca7a1e9fb
+		summarizeBy: none
+		sourceColumn: validated_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'bcts_reporting write_off_forms' = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_write_off_forms = Source{[Schema="bcts_reporting",Item="write_off_forms"]}[Data]
+				in
+				    bcts_reporting_write_off_forms
+
