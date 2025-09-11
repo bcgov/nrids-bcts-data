@@ -1,0 +1,33 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["bcts_reporting vw_silviliability_main","bcts_reporting vw_silviliability_main_pbi"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.146.1454.0 (25.08)+901d6c338d1dea81ac3e53073ffb10469f0f37b8
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_ae10ed3f-9c55-4e8d-9c8c-be07568655d0
+ref table 'bcts_reporting vw_silviliability_main'
+ref table LocalDateTable_8562ca0f-a507-4eb3-9184-ce0cbb61be37
+ref table LocalDateTable_186db518-0b8a-405d-8b3c-c673e76fbcd5
+ref table LocalDateTable_1f9ed9d4-9ef7-41ea-9037-1712962818a5
+ref table LocalDateTable_1888d57e-fdca-4e4c-90d3-0f5a7abc79ae
+ref table LocalDateTable_6a6755b4-116e-40c6-9029-e66f6fbb3757
+ref table LocalDateTable_440c6aa5-7aa0-4c7a-83b1-850affd6b6be
+ref table LocalDateTable_00d2aace-62ec-4242-b1b0-86c83fa22c50
+ref table LocalDateTable_c1df51ce-9487-4df9-8d88-86c9ab3a9b4d
+ref table LocalDateTable_db87946e-e0d9-46fc-bdbe-c1d887abdaf6
+ref table LocalDateTable_a61d5587-421a-4bb7-9082-50b3e1dcc237
+ref table LocalDateTable_07bb4098-4380-46b1-87e2-b0c72ac5f870
+ref table 'bcts_reporting vw_silviliability_main_pbi'
+
+ref cultureInfo en-CA
+

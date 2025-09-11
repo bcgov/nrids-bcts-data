@@ -1,0 +1,59 @@
+relationship 3d1e7fd9-f7d7-453b-8ce2-b46f5474f98b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.hbs_first_billing
+	toColumn: LocalDateTable_8562ca0f-a507-4eb3-9184-ce0cbb61be37.Date
+
+relationship a2e0c91c-e6e6-4757-831a-a7c720b1efbf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.fg_done
+	toColumn: LocalDateTable_186db518-0b8a-405d-8b3c-c673e76fbcd5.Date
+
+relationship cba631c6-d891-4789-bb12-7332f5a061da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.results_fg_declared
+	toColumn: LocalDateTable_1f9ed9d4-9ef7-41ea-9037-1712962818a5.Date
+
+relationship 51e3033b-9791-499e-ae7e-2ff017fe2316
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.hvs_date
+	toColumn: LocalDateTable_1888d57e-fdca-4e4c-90d3-0f5a7abc79ae.Date
+
+relationship ac7f99aa-9105-408a-9740-cd79ac6d1578
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.hvc_date
+	toColumn: LocalDateTable_6a6755b4-116e-40c6-9029-e66f6fbb3757.Date
+
+relationship b48336ac-95b3-44b6-bbe9-3dee8ff3475c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.start_date
+	toColumn: LocalDateTable_440c6aa5-7aa0-4c7a-83b1-850affd6b6be.Date
+
+relationship 812451cb-25a0-4d78-8e9d-1b4854cd9453
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.complete_date
+	toColumn: LocalDateTable_00d2aace-62ec-4242-b1b0-86c83fa22c50.Date
+
+relationship ba6c0a52-6497-4939-8e0f-2ea047f4b87e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.plun_modifiedon
+	toColumn: LocalDateTable_c1df51ce-9487-4df9-8d88-86c9ab3a9b4d.Date
+
+relationship 446d0a8b-c84d-4b8a-b2a0-bca573a355cd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.modifiedon
+	toColumn: LocalDateTable_db87946e-e0d9-46fc-bdbe-c1d887abdaf6.Date
+
+relationship 7f99de2d-237c-407c-9ca4-08c5ce43947c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.report_run_date
+	toColumn: LocalDateTable_a61d5587-421a-4bb7-9082-50b3e1dcc237.Date
+
+relationship e73bac68-8d49-44e1-b937-2b825c656e24
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'bcts_reporting vw_silviliability_main'.fiscal_year_start_date
+	toColumn: LocalDateTable_07bb4098-4380-46b1-87e2-b0c72ac5f870.Date
+
+relationship AutoDetected_5f022439-acc6-4afc-b640-3dad1dc8424b
+	fromColumn: 'bcts_reporting vw_silviliability_main'.business_area
+	toColumn: 'bcts_reporting vw_silviliability_main_pbi'.business_area
+

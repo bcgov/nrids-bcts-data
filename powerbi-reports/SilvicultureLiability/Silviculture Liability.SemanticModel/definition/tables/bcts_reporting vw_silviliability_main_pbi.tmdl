@@ -1,0 +1,160 @@
+table 'bcts_reporting vw_silviliability_main_pbi'
+	lineageTag: 81d49811-1289-4d5a-bc77-4d1cc63a4798
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: 6a5cc96a-07eb-4584-9787-092d299b149d
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: fdcb0c9b-cb90-4459-b1cc-adeb1da35ed3
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: 0ae2687b-60cf-4649-9064-f9a3bbd9b37b
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Blocks'
+		dataType: int64
+		formatString: 0
+		lineageTag: 415dfde6-3890-4d9d-9135-9fb77702df48
+		summarizeBy: none
+		sourceColumn: Number of Blocks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Net Area to be Reforested'
+		dataType: double
+		lineageTag: 5d5bd44a-73db-4399-99f1-5d3fac61057e
+		summarizeBy: none
+		sourceColumn: Total Net Area to be Reforested
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Trees Planted'
+		dataType: double
+		lineageTag: bad9c940-0ff2-4a0e-ae5d-bd1a15509a7c
+		summarizeBy: none
+		sourceColumn: Total Trees Planted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total trees planted per ha of NAR'
+		dataType: double
+		lineageTag: c0bb38b7-a97e-4243-8e37-ffaabca5d78f
+		summarizeBy: none
+		sourceColumn: Total trees planted per ha of NAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average years to free growing'
+		dataType: double
+		lineageTag: b60d3817-16c6-4aa7-92ac-735fbb56fa1e
+		summarizeBy: none
+		sourceColumn: Average years to free growing
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average days to free growing per ha of NAR'
+		dataType: double
+		lineageTag: 83602682-4853-47b0-b372-9e581638091c
+		summarizeBy: none
+		sourceColumn: Average days to free growing per ha of NAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average duration of harvesting in days'
+		dataType: double
+		lineageTag: 98d8290f-fe63-4395-be8e-ca1d97cbf98f
+		summarizeBy: none
+		sourceColumn: Average duration of harvesting in days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average planned total cost per ha of NAR'
+		dataType: double
+		lineageTag: 92ba8e0b-e043-439f-a1bc-2a68061752ea
+		summarizeBy: none
+		sourceColumn: Average planned total cost per ha of NAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Average actual total cost per ha of NAR'
+		dataType: double
+		lineageTag: 1f5ecb49-2ad0-4ce9-b0a6-1f922783d6d1
+		summarizeBy: none
+		sourceColumn: Average actual total cost per ha of NAR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned total cost'
+		dataType: double
+		lineageTag: d9a42a39-adf6-4496-b7cf-59344c9074c6
+		summarizeBy: none
+		sourceColumn: Planned total cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Actual total cost'
+		dataType: double
+		lineageTag: 75798711-55ff-449d-abe0-c0de5e1a1e36
+		summarizeBy: none
+		sourceColumn: Actual total cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	hierarchy 'business_area_region_category Hierarchy'
+		lineageTag: 421a36bb-e92e-4de7-a5f1-61759141b40d
+
+		level business_area_region_category
+			lineageTag: 78f738a8-9d97-4b64-9be2-3e88bc2dfcfe
+			column: business_area_region_category
+
+		level business_area_region
+			lineageTag: ff047626-9f8f-4afd-9d0a-a8bad1157124
+			column: business_area_region
+
+		level business_area
+			lineageTag: 7ca8bbc0-f1cd-4564-b1ca-a8e7c213741b
+			column: business_area
+
+	partition 'bcts_reporting vw_silviliability_main_pbi' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_vw_silviliability_main_pbi = Source{[Schema="bcts_reporting",Item="vw_silviliability_main_pbi"]}[Data]
+				in
+				    bcts_reporting_vw_silviliability_main_pbi
+

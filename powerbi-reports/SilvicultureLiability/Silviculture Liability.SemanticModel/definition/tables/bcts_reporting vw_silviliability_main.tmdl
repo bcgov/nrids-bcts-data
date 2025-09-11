@@ -1,0 +1,882 @@
+table 'bcts_reporting vw_silviliability_main'
+	lineageTag: c61c3815-a035-413f-8d9b-866f23aae6ee
+
+	column business_area_region_category
+		dataType: string
+		lineageTag: 4cb11d5f-ba41-4fb7-b0be-45b5648af48f
+		summarizeBy: none
+		sourceColumn: business_area_region_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_region
+		dataType: string
+		lineageTag: 992e9945-3d63-42cb-a474-cf22dd75217c
+		summarizeBy: none
+		sourceColumn: business_area_region
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area
+		dataType: string
+		lineageTag: f8d0de5d-ca3e-43c5-9c97-bbc8eef6fb47
+		summarizeBy: none
+		sourceColumn: business_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_area_code
+		dataType: string
+		lineageTag: 99479622-6b9d-4e4f-ae73-5837f58d6803
+		summarizeBy: none
+		sourceColumn: business_area_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column field_team
+		dataType: string
+		lineageTag: 9dcb2a74-f62b-4dca-9ed8-10980b495f65
+		summarizeBy: none
+		sourceColumn: field_team
+
+		annotation SummarizationSetBy = Automatic
+
+	column manu_id
+		dataType: string
+		lineageTag: addb9986-f68e-4f08-a700-f1017aeb00e1
+		summarizeBy: none
+		sourceColumn: manu_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tenure
+		dataType: string
+		lineageTag: c65106ac-411a-46b7-92e5-c6d21dc75337
+		summarizeBy: none
+		sourceColumn: tenure
+
+		annotation SummarizationSetBy = Automatic
+
+	column licence
+		dataType: string
+		lineageTag: 13a9ca6b-5666-4d19-928f-45c923a4e670
+		summarizeBy: none
+		sourceColumn: licence
+
+		annotation SummarizationSetBy = Automatic
+
+	column hbs_first_billing
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1b4f1424-5ce8-4348-b854-ea34c85b902e
+		summarizeBy: none
+		sourceColumn: hbs_first_billing
+
+		variation Variation
+			isDefault
+			relationship: 3d1e7fd9-f7d7-453b-8ce2-b46f5474f98b
+			defaultHierarchy: LocalDateTable_8562ca0f-a507-4eb3-9184-ce0cbb61be37.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hbs_volume_billed
+		dataType: double
+		lineageTag: ce1e5e15-a2a2-4a6e-9009-e66ef5221d21
+		summarizeBy: sum
+		sourceColumn: hbs_volume_billed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column block_id
+		dataType: string
+		lineageTag: 65e86bca-7805-4633-8733-25969bc866dc
+		summarizeBy: none
+		sourceColumn: block_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column block_nbr
+		dataType: string
+		lineageTag: a509a0db-b7c0-420f-a47e-7ad31ac59374
+		summarizeBy: none
+		sourceColumn: block_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+	column ubi
+		dataType: string
+		lineageTag: 0f5983df-3af7-4ae4-bcd5-0ecb4e507fa3
+		summarizeBy: none
+		sourceColumn: ubi
+
+		annotation SummarizationSetBy = Automatic
+
+	column block_state
+		dataType: string
+		lineageTag: 8787a397-18d1-4dbb-879d-05df546109ca
+		summarizeBy: none
+		sourceColumn: block_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column fg_done
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f6245906-3e47-49e7-94af-b6186e6348e0
+		summarizeBy: none
+		sourceColumn: fg_done
+
+		variation Variation
+			isDefault
+			relationship: a2e0c91c-e6e6-4757-831a-a7c720b1efbf
+			defaultHierarchy: LocalDateTable_186db518-0b8a-405d-8b3c-c673e76fbcd5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column results_fg_declared
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8fe8ca5e-2905-48a6-8be1-60a181ab2520
+		summarizeBy: none
+		sourceColumn: results_fg_declared
+
+		variation Variation
+			isDefault
+			relationship: cba631c6-d891-4789-bb12-7332f5a061da
+			defaultHierarchy: LocalDateTable_1f9ed9d4-9ef7-41ea-9037-1712962818a5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column cutb_opening
+		dataType: string
+		lineageTag: 8e72d792-d276-4f38-9704-193c02fc0f4d
+		summarizeBy: none
+		sourceColumn: cutb_opening
+
+		annotation SummarizationSetBy = Automatic
+
+	column sp_exempt
+		dataType: string
+		lineageTag: c9ae89c3-52c3-4497-a015-e06468c118b8
+		summarizeBy: none
+		sourceColumn: sp_exempt
+
+		annotation SummarizationSetBy = Automatic
+
+	column cruise_volume
+		dataType: double
+		lineageTag: 9caacfb1-b24f-4a11-8841-c0caa6902866
+		summarizeBy: sum
+		sourceColumn: cruise_volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nar_area
+		dataType: double
+		lineageTag: 6ca3a278-2175-4dae-9e9f-0b412e1c1420
+		summarizeBy: sum
+		sourceColumn: nar_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column largest_eco_area
+		dataType: double
+		lineageTag: 6a6b69b3-92c8-4ed5-8c66-bd3b374284ca
+		summarizeBy: sum
+		sourceColumn: largest_eco_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column count_bec_with_largest_eco_area
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d661b52-fb16-42fb-a188-2e411206bc33
+		summarizeBy: sum
+		sourceColumn: count_bec_with_largest_eco_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column bec
+		dataType: string
+		lineageTag: ce031ab9-b5ab-48be-921c-ff1d17fcc339
+		summarizeBy: none
+		sourceColumn: bec
+
+		annotation SummarizationSetBy = Automatic
+
+	column bio_zone
+		dataType: string
+		lineageTag: df61a3c4-1bef-4460-8a40-ed1e54550a8e
+		summarizeBy: none
+		sourceColumn: bio_zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column bio_subzone
+		dataType: string
+		lineageTag: 792f2bc6-31dd-4bf0-8738-e86fe6a7d703
+		summarizeBy: none
+		sourceColumn: bio_subzone
+
+		annotation SummarizationSetBy = Automatic
+
+	column bio_variant
+		dataType: string
+		lineageTag: 6b2c16b9-c169-4fcd-96bd-c2fc5cfc0112
+		summarizeBy: none
+		sourceColumn: bio_variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column hvs_status
+		dataType: string
+		lineageTag: 70764343-cf98-40f1-b89e-b50e1d98c742
+		summarizeBy: none
+		sourceColumn: hvs_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column hvs_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 279ef665-97a0-4008-bf17-c2196344240e
+		summarizeBy: none
+		sourceColumn: hvs_date
+
+		variation Variation
+			isDefault
+			relationship: 51e3033b-9791-499e-ae7e-2ff017fe2316
+			defaultHierarchy: LocalDateTable_1888d57e-fdca-4e4c-90d3-0f5a7abc79ae.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hvs_fiscal
+		dataType: double
+		lineageTag: c109ebeb-6dc9-4af7-b296-d9b9d89709d0
+		summarizeBy: sum
+		sourceColumn: hvs_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hvc_status
+		dataType: string
+		lineageTag: 74ac5012-3869-470d-bf26-3a17c9dc083e
+		summarizeBy: none
+		sourceColumn: hvc_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column hvc_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6d8028b4-1f1e-4264-9747-c6633ab2d0d2
+		summarizeBy: none
+		sourceColumn: hvc_date
+
+		variation Variation
+			isDefault
+			relationship: ac7f99aa-9105-408a-9740-cd79ac6d1578
+			defaultHierarchy: LocalDateTable_6a6755b4-116e-40c6-9029-e66f6fbb3757.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hvc_fiscal
+		dataType: double
+		lineageTag: 53935d17-fba3-482b-adfd-66f771cac6dd
+		summarizeBy: sum
+		sourceColumn: hvc_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column treatment_unit
+		dataType: string
+		lineageTag: 8d0c26f9-7d53-4ded-b93c-8a8b0adbd577
+		summarizeBy: none
+		sourceColumn: treatment_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column block_funding
+		dataType: string
+		lineageTag: 8f845f6c-1c2c-4e0e-9c47-fdd831cff729
+		summarizeBy: none
+		sourceColumn: block_funding
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_funding
+		dataType: string
+		lineageTag: d7b63683-9b1b-4edf-896d-c4ffee43181a
+		summarizeBy: none
+		sourceColumn: activity_funding
+
+		annotation SummarizationSetBy = Automatic
+
+	column base
+		dataType: string
+		lineageTag: 3ca5373b-3ca2-46de-a8d3-409033055c15
+		summarizeBy: none
+		sourceColumn: base
+
+		annotation SummarizationSetBy = Automatic
+
+	column technique
+		dataType: string
+		lineageTag: 2310a856-d83b-4999-b3bd-a930ad3fcb99
+		summarizeBy: none
+		sourceColumn: technique
+
+		annotation SummarizationSetBy = Automatic
+
+	column method
+		dataType: string
+		lineageTag: 6bc4b2e8-c70e-48d9-93cc-d3c16f73a075
+		summarizeBy: none
+		sourceColumn: method
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity
+		dataType: string
+		lineageTag: cae3ac6a-87ba-4ae5-9df6-ff9cfdeb83be
+		summarizeBy: none
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 2f73f422-8f13-4da3-a33d-5e616c11583a
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 52d01304-74df-4b58-a08a-0c3f8a1e16af
+		summarizeBy: none
+		sourceColumn: start_date
+
+		variation Variation
+			isDefault
+			relationship: b48336ac-95b3-44b6-bbe9-3dee8ff3475c
+			defaultHierarchy: LocalDateTable_440c6aa5-7aa0-4c7a-83b1-850affd6b6be.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_fiscal
+		dataType: double
+		lineageTag: ff597c89-f656-4607-8e5a-e56a38c97c6d
+		summarizeBy: sum
+		sourceColumn: start_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column complete_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4ebcb135-99de-40c7-beac-8fcfbd1999f0
+		summarizeBy: none
+		sourceColumn: complete_date
+
+		variation Variation
+			isDefault
+			relationship: 812451cb-25a0-4d78-8e9d-1b4854cd9453
+			defaultHierarchy: LocalDateTable_00d2aace-62ec-4242-b1b0-86c83fa22c50.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column complete_fiscal
+		dataType: double
+		lineageTag: e24dc6ea-8879-4aa4-8af1-d6192e6e8ff0
+		summarizeBy: sum
+		sourceColumn: complete_fiscal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column treatment_area
+		dataType: double
+		lineageTag: 3804b354-a86e-4c81-a121-ff523d0ee502
+		summarizeBy: sum
+		sourceColumn: treatment_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sila_gross_area_char
+		dataType: string
+		lineageTag: 9b39e03b-4ebb-4a6c-bf59-8c1090ab0edd
+		summarizeBy: none
+		sourceColumn: sila_gross_area_char
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_per_ha_plan
+		dataType: double
+		lineageTag: 440bb697-bf81-4b91-9e1f-02e1d7d31804
+		summarizeBy: sum
+		sourceColumn: cost_per_ha_plan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cost_per_ha
+		dataType: double
+		lineageTag: 8764a74d-8885-4ffc-8108-12a9f15d3096
+		summarizeBy: sum
+		sourceColumn: cost_per_ha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column planned_total_cost
+		dataType: double
+		lineageTag: f226efda-84ad-41ff-be8d-6fc4ab635911
+		summarizeBy: sum
+		sourceColumn: planned_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cost_per_ha_plan_x_ha
+		dataType: double
+		lineageTag: 3e63d09c-c750-42eb-bbf0-001d2df1ddc1
+		summarizeBy: sum
+		sourceColumn: cost_per_ha_plan_x_ha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_total_cost
+		dataType: double
+		lineageTag: 4b01aa37-042f-45ad-a12b-0103607c1fe8
+		summarizeBy: sum
+		sourceColumn: actual_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cost_per_ha_x_ha
+		dataType: double
+		lineageTag: 8398ab10-2b57-4b92-94a5-efdf2bca5b9d
+		summarizeBy: sum
+		sourceColumn: cost_per_ha_x_ha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column planned_service_line
+		dataType: string
+		lineageTag: 50fb3b1e-72b6-4fd7-86f2-541229791f63
+		summarizeBy: none
+		sourceColumn: planned_service_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_sl_description
+		dataType: string
+		lineageTag: ac516f42-7325-4813-a3a3-b2cfd016058f
+		summarizeBy: none
+		sourceColumn: planned_sl_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column items_planned_total_cost
+		dataType: double
+		lineageTag: ea50d71f-f3cb-4a8e-8afe-5ced8f906d85
+		summarizeBy: sum
+		sourceColumn: items_planned_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_service_line
+		dataType: string
+		lineageTag: 48d52e9d-982a-4ca7-acdf-46dd142ddeee
+		summarizeBy: none
+		sourceColumn: actual_service_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_sl_description
+		dataType: string
+		lineageTag: 86409309-b487-4c2b-aeee-2b9910c63fb4
+		summarizeBy: none
+		sourceColumn: actual_sl_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column items_actual_total_cost
+		dataType: double
+		lineageTag: 704029d0-4e0c-4e4b-a971-c2f3aa4cda84
+		summarizeBy: sum
+		sourceColumn: items_actual_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column planting_unit
+		dataType: double
+		lineageTag: 019f204c-6c47-4d92-964b-ca899df842f5
+		summarizeBy: sum
+		sourceColumn: planting_unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_digitised_ind
+		dataType: string
+		lineageTag: 8e34207a-37b3-43c0-8851-0346b2e435ce
+		summarizeBy: none
+		sourceColumn: plun_digitised_ind
+
+		annotation SummarizationSetBy = Automatic
+
+	column plun_planned_total_cost
+		dataType: double
+		lineageTag: 4d660444-96d9-4c06-b2f0-52ce969c6522
+		summarizeBy: sum
+		sourceColumn: plun_planned_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_item_planned_total_cost
+		dataType: double
+		lineageTag: 421ccf60-0702-45a1-9255-8f5eb84b76b5
+		summarizeBy: sum
+		sourceColumn: plun_item_planned_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_actual_total_cost
+		dataType: double
+		lineageTag: cc098d29-b01b-4583-be8d-47c219b8b14c
+		summarizeBy: sum
+		sourceColumn: plun_actual_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_item_actual_total_cost
+		dataType: double
+		lineageTag: d6c90877-d87f-43f2-882c-a8b09a8e2754
+		summarizeBy: sum
+		sourceColumn: plun_item_actual_total_cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_ha_area
+		dataType: double
+		lineageTag: d3cea5e5-1bac-44f2-82cb-3f15d0d04492
+		summarizeBy: sum
+		sourceColumn: plun_ha_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_net_area
+		dataType: double
+		lineageTag: cc094a1f-6762-4dbb-8340-598e9d33d2e4
+		summarizeBy: sum
+		sourceColumn: plun_net_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plun_density
+		dataType: double
+		lineageTag: a49deab6-fb0b-40d2-8b1f-889975de45e0
+		summarizeBy: sum
+		sourceColumn: plun_density
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_trees
+		dataType: double
+		lineageTag: 24207441-f052-4020-a4a9-938cf85ed00e
+		summarizeBy: sum
+		sourceColumn: total_trees
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column seedling_request
+		dataType: string
+		lineageTag: 98f98ddc-9862-44cc-9375-524b54d803c5
+		summarizeBy: none
+		sourceColumn: seedling_request
+
+		annotation SummarizationSetBy = Automatic
+
+	column sica_key_ind
+		dataType: string
+		lineageTag: 782fcdf9-5eb1-4fae-9cda-86ac644d61d5
+		summarizeBy: none
+		sourceColumn: sica_key_ind
+
+		annotation SummarizationSetBy = Automatic
+
+	column plun_modifiedby
+		dataType: string
+		lineageTag: 927c899a-ce02-4a7e-828f-6e87a3130f0c
+		summarizeBy: none
+		sourceColumn: plun_modifiedby
+
+		annotation SummarizationSetBy = Automatic
+
+	column plun_modifiedon
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6da3bc41-1255-4b2a-9c30-97cff80b6842
+		summarizeBy: none
+		sourceColumn: plun_modifiedon
+
+		variation Variation
+			isDefault
+			relationship: ba6c0a52-6497-4939-8e0f-2ea047f4b87e
+			defaultHierarchy: LocalDateTable_c1df51ce-9487-4df9-8d88-86c9ab3a9b4d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column plun_modifiedusing
+		dataType: string
+		lineageTag: e3e59d91-4fa6-4fdd-bf94-ab012fbbd76d
+		summarizeBy: none
+		sourceColumn: plun_modifiedusing
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedby
+		dataType: string
+		lineageTag: 047817e6-8915-43da-82f1-610735a1aa86
+		summarizeBy: none
+		sourceColumn: modifiedby
+
+		annotation SummarizationSetBy = Automatic
+
+	column modifiedon
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 92d9651a-6d1e-44f9-abe4-9cfbc0461f64
+		summarizeBy: none
+		sourceColumn: modifiedon
+
+		variation Variation
+			isDefault
+			relationship: 446d0a8b-c84d-4b8a-b2a0-bca573a355cd
+			defaultHierarchy: LocalDateTable_db87946e-e0d9-46fc-bdbe-c1d887abdaf6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column primary_record
+		dataType: string
+		lineageTag: 5c6e6090-226e-460c-b677-0e937c2f2f81
+		summarizeBy: none
+		sourceColumn: primary_record
+
+		annotation SummarizationSetBy = Automatic
+
+	column need_planting
+		dataType: string
+		lineageTag: 8492aa39-a8ab-4d20-bc02-68d3b19c653d
+		summarizeBy: none
+		sourceColumn: need_planting
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_any_fire_year
+		dataType: string
+		lineageTag: 90f86e26-6036-45b2-b6ba-482ff4565911
+		summarizeBy: none
+		sourceColumn: salvage_any_fire_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_fire_years
+		dataType: string
+		lineageTag: 429a9baa-31e6-46b1-ad70-72fddcacf8f8
+		summarizeBy: none
+		sourceColumn: salvage_fire_years
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2021_fire
+		dataType: string
+		lineageTag: de00a8fb-be4c-4d1f-977d-42bf88172457
+		summarizeBy: none
+		sourceColumn: salvage_2021_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2022_fire
+		dataType: string
+		lineageTag: 17ecb209-71d9-4765-9070-0c3b4430aa15
+		summarizeBy: none
+		sourceColumn: salvage_2022_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2023_fire
+		dataType: string
+		lineageTag: 21207847-61df-4d05-8ca9-72527b2bec3f
+		summarizeBy: none
+		sourceColumn: salvage_2023_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2024_fire
+		dataType: string
+		lineageTag: 38f55543-3d5c-4d3c-8d78-cbf87d8d9db2
+		summarizeBy: none
+		sourceColumn: salvage_2024_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column salvage_2025_fire
+		dataType: string
+		lineageTag: c56e94cd-d398-4a27-b47f-619f42f9f7f4
+		summarizeBy: none
+		sourceColumn: salvage_2025_fire
+
+		annotation SummarizationSetBy = Automatic
+
+	column plun_seq_nbr
+		dataType: double
+		lineageTag: 2e939d7f-6992-4ba2-80c6-5b795afe80fe
+		summarizeBy: sum
+		sourceColumn: plun_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sila_seq_nbr
+		dataType: double
+		lineageTag: 773dd8ab-ea6d-478e-8ba2-4fd630c3b4c6
+		summarizeBy: sum
+		sourceColumn: sila_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sica_seq_nbr
+		dataType: double
+		lineageTag: 77302a08-d5bd-4029-a17c-3443a264b1f4
+		summarizeBy: sum
+		sourceColumn: sica_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cutb_seq_nbr
+		dataType: int64
+		formatString: 0
+		lineageTag: 81e747d7-534d-45be-be17-4916e07c39d5
+		summarizeBy: sum
+		sourceColumn: cutb_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+	column licn_seq_nbr
+		dataType: int64
+		formatString: 0
+		lineageTag: 97daa0df-5991-488d-911f-50a2c42e6990
+		summarizeBy: sum
+		sourceColumn: licn_seq_nbr
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_run_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 001ebc87-da79-4edb-b368-b8ecf2cd9ae2
+		summarizeBy: none
+		sourceColumn: report_run_date
+
+		variation Variation
+			isDefault
+			relationship: 7f99de2d-237c-407c-9ca4-08c5ce43947c
+			defaultHierarchy: LocalDateTable_a61d5587-421a-4bb7-9082-50b3e1dcc237.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fiscal_year_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9e35e22f-853b-4339-a4e3-34c1b4d767f6
+		summarizeBy: none
+		sourceColumn: fiscal_year_start_date
+
+		variation Variation
+			isDefault
+			relationship: e73bac68-8d49-44e1-b937-2b825c656e24
+			defaultHierarchy: LocalDateTable_07bb4098-4380-46b1-87e2-b0c72ac5f870.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period Info' = ```
+			
+			"Data shown reflects period from " & 
+			FORMAT(MAX('bcts_reporting vw_silviliability_main'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
+			" to " & 
+			FORMAT(MAX('bcts_reporting vw_silviliability_main'[report_run_date]), "MMMM DD, YYYY")
+			
+			```
+		lineageTag: bd463fd9-651e-4d69-a225-c6828f997def
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'bcts_reporting vw_silviliability_main' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("existence.bcgov:5435", "odsprd"),
+				    bcts_reporting_vw_silviliability_main = Source{[Schema="bcts_reporting",Item="vw_silviliability_main"]}[Data]
+				in
+				    bcts_reporting_vw_silviliability_main
+
