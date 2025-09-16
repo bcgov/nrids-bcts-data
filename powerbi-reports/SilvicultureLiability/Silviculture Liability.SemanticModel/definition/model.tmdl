@@ -10,8 +10,6 @@ annotation PBI_QueryOrder = ["bcts_reporting vw_silviliability_main","bcts_repor
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.146.1454.0 (25.08)+901d6c338d1dea81ac3e53073ffb10469f0f37b8
-
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table DateTableTemplate_ae10ed3f-9c55-4e8d-9c8c-be07568655d0

@@ -860,9 +860,9 @@ table 'bcts_reporting vw_silviliability_main'
 
 	column 'Fiscal Period Info' = ```
 			
-			"Data shown reflects period from " & 
+			"All charts in this dashboard use data for which FG Done falls within  " & 
 			FORMAT(MAX('bcts_reporting vw_silviliability_main'[fiscal_year_start_date]), "MMMM DD, YYYY") & 
-			" to " & 
+			" and " & 
 			FORMAT(MAX('bcts_reporting vw_silviliability_main'[report_run_date]), "MMMM DD, YYYY")
 			
 			```
