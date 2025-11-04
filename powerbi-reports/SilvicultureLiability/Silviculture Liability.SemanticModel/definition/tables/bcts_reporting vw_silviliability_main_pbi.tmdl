@@ -114,21 +114,21 @@ table 'bcts_reporting vw_silviliability_main_pbi'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Planned total cost'
+	column 'Average planned total cost'
 		dataType: double
-		lineageTag: d9a42a39-adf6-4496-b7cf-59344c9074c6
+		lineageTag: a7c93e80-a486-466a-a092-4a5feb1e94b2
 		summarizeBy: none
-		sourceColumn: Planned total cost
+		sourceColumn: Average planned total cost
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Actual total cost'
+	column 'Average actual total cost'
 		dataType: double
-		lineageTag: 75798711-55ff-449d-abe0-c0de5e1a1e36
+		lineageTag: 721eaae6-7cf9-4f55-9b44-1e62928e31e6
 		summarizeBy: none
-		sourceColumn: Actual total cost
+		sourceColumn: Average actual total cost
 
 		annotation SummarizationSetBy = Automatic
 
