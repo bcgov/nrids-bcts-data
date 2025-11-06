@@ -6,9 +6,12 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException
+import requests
 
 # Config
 START_URL = "https://intranet.gov.bc.ca/csnr/csnr-services/procurement-contract-management-support/learning-tools-and-resources/a-z-index"
+# START_URL = "https://www2.gov.bc.ca/gov/content/bc-procurement-resources/buy-for-government/solicitation-processes-and-templates?keyword=templates"
+# START_URL = "https://intranet.fin.gov.bc.ca/program/insurance-program-types"
 MAX_DEPTH = 2
 OUTPUT_FILE = "intranet_full_crawl.txt"
 HIERARCHY_FILE = "intranet_url_tree.txt"
@@ -21,17 +24,27 @@ os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 # Configure Chrome options
 chrome_options = Options()
 prefs = {
-    "download.default_directory": os.path.abspath(DOWNLOAD_FOLDER),
-    "download.prompt_for_download": False,
-    "download.directory_upgrade": True,
-    "safebrowsing.enabled": True,
-    "plugins.always_open_pdf_externally": True  # force download instead of viewing PDFs
+    "download.default_directory": os.path.abspath(DOWNLOAD_FOLDER),  # folder to save downloads
+    "download.prompt_for_download": False,                            # disable "Save As" dialogs
+    "download.directory_upgrade": True,                               # overwrite folder if exists
+    "safebrowsing.enabled": True,                                     # avoid Chrome blocking files
+    "plugins.always_open_pdf_externally": True,                       # force PDFs to download
+    "profile.default_content_settings.popups": 0                       # block popups for all file types
 }
+
+# prefs = {
+#     "download.default_directory": os.path.abspath(DOWNLOAD_FOLDER),
+#     "download.prompt_for_download": False,
+#     "download.directory_upgrade": True,
+#     "safebrowsing.enabled": True,
+#     "plugins.always_open_pdf_externally": True  # force download instead of viewing PDFs
+# }
 chrome_options.add_experimental_option("prefs", prefs)
 
 # Start WebDriver
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(START_URL)
+
 
 input("🔐 Log in via IDIR (if needed), then press Enter to start crawling...")
 
@@ -111,6 +124,54 @@ def download_file_in_browser(file_url, indent):
     except Exception as e:
         print(f"❌ Failed to download {file_url}: {e}")
 
+from requests.adapters import HTTPAdapter, Retry
+
+def download_file_with_requests(file_url, indent, max_retries=2):
+    try:
+        print(f"📥 Triggering download: {file_url}")
+
+        # Get cookies from Selenium
+        cookies = {c['name']: c['value'] for c in driver.get_cookies()}
+
+        # Setup session with retries
+        session = requests.Session()
+        retries = Retry(
+            total=max_retries,
+            backoff_factor=2,             # exponential backoff
+            status_forcelist=[500, 502, 503, 504],
+            allowed_methods=["GET"]
+        )
+        adapter = HTTPAdapter(max_retries=retries)
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+
+        # Stream download
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/117.0.0.0 Safari/537.36"
+        }
+        r = session.get(file_url, cookies=cookies, headers=headers, stream=True, verify=False, timeout=10)
+        r.raise_for_status()
+
+        # Determine filename
+        filename = os.path.basename(file_url.split("?")[0])
+        filepath = os.path.join(DOWNLOAD_FOLDER, filename)
+
+        # Save file in chunks
+        with open(filepath, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+
+        print("✅ Download completed")
+
+        with open(HIERARCHY_FILE, "a", encoding="utf-8") as f:
+            f.write(f"{'    ' * indent}📎 Downloaded: {file_url}\n")
+
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Failed to download {file_url}: {e}")
+
 def wait_for_login_if_needed():
     page_text = driver.page_source.lower()
     if "idir" in page_text or "password" in page_text:
@@ -179,7 +240,7 @@ def crawl(url, depth):
             # Handle downloadable files
             if is_downloadable_file(link) and full_url not in visited:
                 print("Downloadable")
-                download_file_in_browser(full_url, depth + 1)
+                download_file_with_requests(full_url, depth + 1)
                 visited.add(full_url)
 
             # Handle internal crawlable links
