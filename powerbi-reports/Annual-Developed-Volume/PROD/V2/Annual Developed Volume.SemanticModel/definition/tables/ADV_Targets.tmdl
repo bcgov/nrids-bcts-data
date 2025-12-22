@@ -43,7 +43,5 @@ table ADV_Targets
 				in
 				    Source
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
 

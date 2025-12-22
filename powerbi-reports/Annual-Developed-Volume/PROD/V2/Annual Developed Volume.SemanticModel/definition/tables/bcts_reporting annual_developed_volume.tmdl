@@ -359,13 +359,14 @@ table 'bcts_reporting annual_developed_volume'
 
 	column adv_target_m3
 		dataType: double
+		formatString: #,0
 		lineageTag: 58ce16f8-21ed-4fd0-aca0-da562b43ca0d
 		summarizeBy: sum
 		sourceColumn: adv_target_m3
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	hierarchy 'business_area_region_category Hierarchy'
 		lineageTag: 65ece705-6237-4eac-b0f6-04aee60dbf59
